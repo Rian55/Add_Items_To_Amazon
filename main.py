@@ -1,7 +1,11 @@
+import json
 from configparser import ConfigParser
 from sp_api.base import Marketplaces
 from sp_api.api import Feeds
-import xml.dom.minidom as minidom
+from sp_api.api import ListingsItems
+from sp_api.api import ProductTypeDefinitions
+from sp_api.api import Notifications
+from xml.dom.minidom import parseString
 import xml.etree.ElementTree as ET
 from time import sleep
 
@@ -9,6 +13,25 @@ config = ConfigParser()
 config.read(".config.txt")
 credentials = dict(config['default'])
 feed = Feeds(credentials=credentials, marketplace=Marketplaces.PL)
+listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.UK)
+types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.UK)
+notifications = Notifications(credentials=credentials, marketplace=Marketplaces.UK)
+
+# shoes = types.get_definitions_product_type(productType="SHOES", marketplaceIds=['A1F83G8C2ARO7P'])
+# print(shoes)
+
+xdd = notifications.get_destinations()
+print(xdd)
+
+# file = open('test2.json', "r+")
+# body = json.load(file)
+# resp = listing.put_listings_item(sellerId='A2YSV8HF6GQ3SP', sku='TR-TE5T-5WO9', body=body,
+#                                  marketplaceIds=['A1F83G8C2ARO7P'])
+# file.close()
+# print(resp)
+
+
+
 
 
 def create_product_xml():
@@ -45,12 +68,12 @@ def create_product_xml():
     #if zone == ... ET.SubElement(description_data, "RecommendedBrowseNode")
     product_data = ET.SubElement(product, "ProductData")
 
-    xmlstr = minidom.parseString(ET.tostring(root)).toprettyxml(indent="\t")
+    xmlstr = parseString(ET.tostring(root)).toprettyxml(indent="\t")
     with open("product_feed.xml", "w+") as f:
         f.write(xmlstr)
 
 
-create_product_xml()
+#create_product_xml()
     # file = open("test.xml", "r+")
 # response1, response2 = feed.submit_feed(feed_type='POST_PRODUCT_DATA', file=file, AWS_ENV="SANDBOX")
 # file.close()
