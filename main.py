@@ -12,7 +12,7 @@ listing_us = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
 types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.UK)
 # notifications = Notifications(credentials=credentials, marketplace=Marketplaces.UK)
 
-# xdxd = types.get_definitions_product_type(productType="SHOES", marketplaceIds=['A1F83G8C2ARO7P'])
+# xdxd = types.get_definitions_product_type(productType="PERSONALBODYCARE", marketplaceIds=['A1F83G8C2ARO7P'])
 # print(xdxd)
 # xd = types.search_definitions_product_types(marketplaceIds=['A1F83G8C2ARO7P'])
 # print(xd)
@@ -39,29 +39,59 @@ def add_item_us():
 def patch_uk(sku):
     text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
                                      marketplaceIds=['A1F83G8C2ARO7P']).payload['summaries'][0]['itemName']
-    text = text.replace("eworldpartner Oguzhan Shoes ", "")
-    if "(" in text:
-        text = text.replace("(", "- Oguzhan Shoes (")
-    else:
-        text += " - Oguzhan Shoes"
+    ##############Edit Title###################
+    text = text + " - Doxa"
+    ###########################################
 
+    ##############Create Keywords##############
+    keywords = ""
+    if "Men" in text:
+        keywords = "shampoo, men shampoo, haircare, suitable for all hair types, bath, shower, " \
+                   "man shampoo, haircare products"
+        text = text.replace("eworldpartner Doxa", "Men Shampoo")
+    elif "Shower Gel" in text:
+        keywords = "shower gel, personal care, unisex, women, men, bath, shower, cherry milk, mango milk, blackberry " \
+                   "milk, avocado milk, fresh, summer edition"
+        text = text.replace("eworldpartner Doxa", "Shower Gel")
+    elif "Liquid Soap" in text:
+        keywords = "vegan liquid soap, organic liquid soap, vegan, organic, liquid soap, personal care, suitable all " \
+                   "skin types, unisex, vegan products, organic products"
+        text = text.replace("eworldpartner Doxa", "Liquid Soap")
+    elif "Baby" in text:
+        keywords = "baby, baby soap, baby shampoo, bath time, baby cleaning, bath, mother, shower, new, " \
+                   "most purchased, girls, boys, unisex baby soap, solid soap bar, baby soap"
+        text = text.replace("eworldpartner Doxa", "Baby Shampoo")
+    elif "Beauty Soap" in text:
+        keywords = "personal care, women, men, bodycare, soap bar, soap, bar, new, most purchased, set, soap set, " \
+                   "fragrance"
+        text = text.replace("eworldpartner Doxa", "Soap Bar")
+    elif "Vegan Shampoo" in text:
+        keywords = "vegan shampoo, organic shampoo, vegan, organic, skincare, bath, shower, argan oil, lemon oil, " \
+                   "keratine, olive oil, argan oil shampoo, olive oil shampoo, lemon oil " \
+                   "shampoo, women shampoo, haircare products"
+        text = text.replace("eworldpartner Doxa", "Vegan Shampoo")
+
+    keywords = keywords.replace(",", ";")
     print(text)
-    with open('new.json', 'r') as file:
+    print(keywords)
+    ###########################################
+    with open('patch_demo.json', 'r') as file:
         data = file.readlines()
-    with open('new.json', 'w') as file:
+    with open('patch_demo.json', 'w') as file:
         data[8] = f'\t\t  "value": "{text}",\n'
+        data[50] = f'\t\t  "value": "{keywords}",\n'
         file.writelines(data)
 
-    file = open('new.json', "r+")
+    file = open('patch_demo.json', "r+")
     body = json.load(file)
-    print(body)
+    # print(body)
     resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
                                        marketplaceIds=['A1F83G8C2ARO7P'])
     print(resp)
     file.close()
 
 
-sku_file = open("skus.txt", "r+")
+sku_file = open("uk_personalbodycare.txt", "r+")
 skus = sku_file.read().splitlines()
 sku_file.close()
 

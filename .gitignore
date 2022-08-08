@@ -1,7 +1,6 @@
-/.config.txt
 *.xml
 *.json
-/skus.txt
+*.txt
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
