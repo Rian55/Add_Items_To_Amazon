@@ -42,92 +42,74 @@ def patch_uk(sku):
     text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
                                      marketplaceIds=['A1F83G8C2ARO7P']).payload['summaries'][0]['itemName']
     ##############Edit Title###################
-    text = text.replace("eWorldPartner ", "")
-    text = text.replace("eworldpartner ", "")
-    text = text.replace("EWP ", "")
-    text = text.replace("Ewp ", "")
-    if "Suds Enjoy" in text:
-        text = text.replace("Suds Enjoy ", "")
-        text += " - Suds Enjoy"
-    elif "Dermokil" in text:
-        text = text.replace("Dermokil ", "")
-        text += " - Dermokil"
-    elif "Ruel Design" in text:
-        text = text.replace("Ruel Design ", "")
-        text += " - Ruel Design"
-    elif "Akinalbella" in text:
-        text = text.replace("Akinalbella ", "")
-        text += " - Akinalbella"
-    elif "Muslin & Towel" in text:
-        text = text.replace("Muslin & Towel ", "")
-        text += " - Muslin & Towel"
-    elif "Latife" in text:
-        text = text.replace("Latife ", "")
-        text += " - Latife"
-    elif "Halil Onat" in text:
-        text = text.replace("Halil Onat ", "")
-        text += " - Halil Onat"
-    elif "Homm Life" in text:
-        text = text.replace("Homm Life ", "")
-        text += " - Homm Life"
-    elif "Iva Natura" in text:
-        text = text.replace("Iva Natura ", "")
-        text += " - Iva Natura"
-    elif "Kutahya Porcelain" in text:
-        text = text.replace("Kutahya Porcelain ", "")
-        text += " - Kutahya Porcelain"
-    elif "Sakin Leather Goods" in text:
-        text = text.replace("Sakin Leather Goods ", "")
-        text += " - Sakin Leather Goods"
+    # text = text.replace("eWorldPartner ", "")
+    text = text.replace("eworldpartner", "")
+    # text = text.replace("EWP ", "")
+    # text = text.replace("Ewp ", "")
+
     ###########################################
 
     ##############Create Keywords##############
-    # keywords = ""
-    # attrib = ""
-    # if "Kids" in text:
-    #     keywords = "Kids Carpet, Natural Carpet, Natural Rug, Kids Rug, For Kids, Polyamide Rug, Polyamide Carpet, " \
-    #                "Carpet, Rug, Aesthetic, Home Decoration, Decorative Carpet, Decorative Rug"
-    #     if text.find("Border") < text.find("Kids") and "Border" in text:
-    #         attrib = text[0:text.find(" Border")]
-    #     else:
-    #         attrib = text[0:text.find(" Kids")]
-    #
-    #     if "Baby Set" in attrib:
-    #         attrib = attrib[9:len(attrib)]
-    # else:
-    #     keywords = "Decorative Carpet, Natural Carpet, Natural Rug, Decorative Rug, Decoration, Polyamide Rug, " \
-    #                "Polyamide Carpet, Carpet, Rug, Aesthetic, Home Decoration"
-    #     if "Florida" in text:
-    #         if "Border" in text:
-    #             attrib = text[8:text.find(" Border")]
-    #         else:
-    #             attrib = text[8:text.find(" Decorative")]
-    #     elif "Colorado" in text:
-    #         attrib = text[9:text.find(" Border")]
-    #     else:
-    #         attrib = text[0:text.find(" Decorative")]
-    #
-    # if attrib != " ":
-    #     keywords += ", " + attrib + " Rug, " + attrib + " Carpet"
-    # keywords = keywords.replace(",", "")
-    # keywords = keywords.lower()
+    keywords = ""
+    if "Suds Enjoy" in text:
+        if "Bath Bomb" in text:
+            keywords = "bath care, bath bomb, bath bomb set, personal care, fragrances, bath ball, bathroom, bodycare, natural, natural oil"
+    elif "Ruel Design" in text:
+        keywords = "ruel design, designer, silver, accessory, ruby, emerald, gold, ring, luxury, jewelry, diamond, gemstone, sapphire, women, lux, fashion, rich lifestyle"
+    elif "Akinalbella" in text:
+        keywords = "slippers, sandalets, summer shoes, beach shoes, summer season, women shoes, anatomical, comfortable shoes"
+    elif "Muslin & Towel" in text:
+        keywords = "kid, baby, toddler, poncho, bath, beach, organic, cotton, muslin, fabric, towel, organic fabric, baby clothes"
+    elif "Latife" in text:
+        if "Brush" in text:
+            keywords = "personal care, daily, natural, brush, health, skin, skincare, body, bodycare"
+        elif "Cream" in text:
+            keywords = "personal care, daily, natural, cream, argan oil, natural, moisturizer, health, skin, skincare, body, bodycare"
+        elif "Soap" in text:
+            keywords = "latife, natural, rice, handmade, soap, organic, body, daily, personal care"
+    elif "Ethnic Pattern" in text:
+        keywords = "zipper closure, cotton, beach, summer season, women accessories, mother, baby, beach bag"
+    elif "Halil Onat" in text:
+        keywords = "handmade, ceramic, vase, decoration, home, flowers, home accessory"
+    elif "Homm Life" in text:
+        keywords = "homm life, daily, organic, face, body, moisturizing, cream, skincare, scrub, oil, personal care, skin, acne"
+    elif "Iva Natura" in text:
+        if "Tonic" in text:
+            keywords = "iva natura, daily, organic, vegan, face, tonic, refreshing, skincare, personal care, skin"
+        elif "Cream" in text:
+            keywords = "iva natura, daily, organic, vegan, face, antiaging, cream, skincare, personal care, skin, body, hands, moisturizing"
+    elif "Kutahya Porcelain" in text:
+        keywords = "dinnerware, set, dishes, kutahya porcelain, porcelain, ceramic, plate, decorative, dinner service, dinner, supper, lunch, breakfast"
+    elif "Sakin Leather Goods" in text:
+        keywords = "leather, purse, wallet, man wallet, men accessories, vegan leather, natural leather, cardholder"
+    elif "No Installation Required Battery Led Flut" in text:
+        keywords = "lamp, illumination, decoration, home, garden, office, elegant design, daylight, led, flut sconce"
+    elif "Men's" in text:
+        keywords = "men outfit, men clothes, tshirt, daily tshirt, cotton, round collar, basic, tshirt set"
+    elif "City" in text:
+        keywords = "wine cooler, cocktail shaker, bartender, pub, bar, drink, wine, alcohol"
+    keywords = keywords.replace(",", ";")
+    keywords = keywords.lower()
     print(text)
-    # print(keywords)
+    print(keywords)
     ###########################################
-    with open('patch_demo.json', 'r') as file:
-        data = file.readlines()
-    with open('patch_demo.json', 'w') as file:
-        data[8] = f'\t\t  "value": "{text}",\n'
-        # data[50] = f'\t\t  "value": "{keywords}",\n'
-        file.writelines(data)
 
-    file = open('patch_demo.json', "r+")
-    body = json.load(file)
-    # print(body)
-    resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
-                                       marketplaceIds=['A1F83G8C2ARO7P'])
-    print(resp)
-    file.close()
+    ###############Send Request################
+    # with open('patch_demo.json', 'r') as file:
+    #     data = file.readlines()
+    # with open('patch_demo.json', 'w') as file:
+    #     data[8] = f'\t\t  "value": "{text}",\n'
+    #     data[18] = f'\t\t  "value": "{keywords}",\n'
+    #     file.writelines(data)
+    #
+    # file = open('patch_demo.json', "r+")
+    # body = json.load(file)
+    # # print(body)
+    # resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
+    #                                    marketplaceIds=['A1F83G8C2ARO7P'])
+    # print(resp)
+    # file.close()
+    ###########################################
 
 
 sku_file = open("uk_mixed.txt", "r+")
@@ -187,16 +169,5 @@ for sku in skus:
 #         }
 #       ]
 #     },
-#     {
-#       "op":"replace",
-#       "path":"/attributes/generic_keyword",
-#       "value":[
-#         {
-# 		  "value": "decorative carpet natural carpet natural rug decorative rug decoration polyamide rug polyamide carpet carpet rug aesthetic home decoration  rug  carpet",
-#           "language_tag": "en_GB",
-#           "marketplace_id": "A1F83G8C2ARO7P"
-#         }
-#       ]
-#     }
 #   ]
 # }
