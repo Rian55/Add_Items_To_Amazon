@@ -40,40 +40,42 @@ def patch_uk(sku):
     text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
                                      marketplaceIds=['A1F83G8C2ARO7P']).payload['summaries'][0]['itemName']
     ##############Edit Title###################
-    text = text + " - Doxa"
+    # text = text.replace("Confetti ", "")
+    # text += " - Confetti"
     ###########################################
 
     ##############Create Keywords##############
     keywords = ""
-    if "Men" in text:
-        keywords = "shampoo, men shampoo, haircare, suitable for all hair types, bath, shower, " \
-                   "man shampoo, haircare products"
-        text = text.replace("eworldpartner Doxa", "Men Shampoo")
-    elif "Shower Gel" in text:
-        keywords = "shower gel, personal care, unisex, women, men, bath, shower, cherry milk, mango milk, blackberry " \
-                   "milk, avocado milk, fresh, summer edition"
-        text = text.replace("eworldpartner Doxa", "Shower Gel")
-    elif "Liquid Soap" in text:
-        keywords = "vegan liquid soap, organic liquid soap, vegan, organic, liquid soap, personal care, suitable all " \
-                   "skin types, unisex, vegan products, organic products"
-        text = text.replace("eworldpartner Doxa", "Liquid Soap")
-    elif "Baby" in text:
-        keywords = "baby, baby soap, baby shampoo, bath time, baby cleaning, bath, mother, shower, new, " \
-                   "most purchased, girls, boys, unisex baby soap, solid soap bar, baby soap"
-        text = text.replace("eworldpartner Doxa", "Baby Shampoo")
-    elif "Beauty Soap" in text:
-        keywords = "personal care, women, men, bodycare, soap bar, soap, bar, new, most purchased, set, soap set, " \
-                   "fragrance"
-        text = text.replace("eworldpartner Doxa", "Soap Bar")
-    elif "Vegan Shampoo" in text:
-        keywords = "vegan shampoo, organic shampoo, vegan, organic, skincare, bath, shower, argan oil, lemon oil, " \
-                   "keratine, olive oil, argan oil shampoo, olive oil shampoo, lemon oil " \
-                   "shampoo, women shampoo, haircare products"
-        text = text.replace("eworldpartner Doxa", "Vegan Shampoo")
+    attrib = ""
+    if "Kids" in text:
+        keywords = "Kids Carpet, Natural Carpet, Natural Rug, Kids Rug, For Kids, Polyamide Rug, Polyamide Carpet, " \
+                   "Carpet, Rug, Aesthetic, Home Decoration, Decorative Carpet, Decorative Rug"
+        if text.find("Border") < text.find("Kids") and "Border" in text:
+            attrib = text[0:text.find(" Border")]
+        else:
+            attrib = text[0:text.find(" Kids")]
 
-    keywords = keywords.replace(",", ";")
+        if "Baby Set" in attrib:
+            attrib = attrib[9:len(attrib)]
+    else:
+        keywords = "Decorative Carpet, Natural Carpet, Natural Rug, Decorative Rug, Decoration, Polyamide Rug, " \
+                   "Polyamide Carpet, Carpet, Rug, Aesthetic, Home Decoration"
+        if "Florida" in text:
+            if "Border" in text:
+                attrib = text[8:text.find(" Border")]
+            else:
+                attrib = text[8:text.find(" Decorative")]
+        elif "Colorado" in text:
+            attrib = text[9:text.find(" Border")]
+        else:
+            attrib = text[0:text.find(" Decorative")]
+
+    if attrib != " ":
+        keywords += ", " + attrib + " Rug, " + attrib + " Carpet"
+    keywords = keywords.replace(",", "")
+    keywords = keywords.lower()
     print(text)
-    print(keywords)
+    # print(keywords)
     ###########################################
     with open('patch_demo.json', 'r') as file:
         data = file.readlines()
@@ -91,7 +93,7 @@ def patch_uk(sku):
     file.close()
 
 
-sku_file = open("uk_personalbodycare.txt", "r+")
+sku_file = open("uk_rug.txt", "r+")
 skus = sku_file.read().splitlines()
 sku_file.close()
 
