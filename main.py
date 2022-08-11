@@ -3,7 +3,6 @@ from configparser import ConfigParser
 from sp_api.base import Marketplaces
 from sp_api.api import ListingsItems
 from sp_api.api import ProductTypeDefinitions
-from sp_api.api import Inventories
 
 config = ConfigParser()
 config.read(".config.txt")
@@ -11,7 +10,6 @@ credentials = dict(config['default'])
 listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.UK)
 listing_us = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
 types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.UK)
-inventories = Inventories(credentials=credentials, marketplace=Marketplaces.UK)
 # notifications = Notifications(credentials=credentials, marketplace=Marketplaces.UK)
 
 # xdxd = types.get_definitions_product_type(productType="PERSONALBODYCARE", marketplaceIds=['A1F83G8C2ARO7P'])
@@ -39,14 +37,15 @@ def add_item_us():
 
 
 def patch_uk(sku):
-    text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
-                                     marketplaceIds=['A1F83G8C2ARO7P']).payload['summaries'][0]['itemName']
+    inventory_file = open("inv_uk.txt", "a+")
+    text = ""
+    try:
+        text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
+                                        marketplaceIds=['A1F83G8C2ARO7P']).payload['summaries'][0]['itemName']
+    except:
+        print("******************Not Found*********************")
     ##############Edit Title###################
-    # text = text.replace("eWorldPartner ", "")
-    text = text.replace("eworldpartner", "")
-    # text = text.replace("EWP ", "")
-    # text = text.replace("Ewp ", "")
-
+    text = text.replace("eworldpartner ", "")
     ###########################################
 
     ##############Create Keywords##############
@@ -56,8 +55,6 @@ def patch_uk(sku):
             keywords = "bath care, bath bomb, bath bomb set, personal care, fragrances, bath ball, bathroom, bodycare, natural, natural oil"
     elif "Ruel Design" in text:
         keywords = "ruel design, designer, silver, accessory, ruby, emerald, gold, ring, luxury, jewelry, diamond, gemstone, sapphire, women, lux, fashion, rich lifestyle"
-    elif "Akinalbella" in text:
-        keywords = "slippers, sandalets, summer shoes, beach shoes, summer season, women shoes, anatomical, comfortable shoes"
     elif "Muslin & Towel" in text:
         keywords = "kid, baby, toddler, poncho, bath, beach, organic, cotton, muslin, fabric, towel, organic fabric, baby clothes"
     elif "Latife" in text:
@@ -88,10 +85,59 @@ def patch_uk(sku):
         keywords = "men outfit, men clothes, tshirt, daily tshirt, cotton, round collar, basic, tshirt set"
     elif "City" in text:
         keywords = "wine cooler, cocktail shaker, bartender, pub, bar, drink, wine, alcohol"
+    elif "Doxa" in text:
+        if "Men" in text:
+            keywords = "shampoo, men shampoo, haircare, suitable for all hair types, bath, shower, " \
+                       "man shampoo, haircare products"
+        elif "Shower Gel" in text:
+            keywords = "shower gel, personal care, unisex, women, men, bath, shower, cherry milk, mango milk, blackberry " \
+                       "milk, avocado milk, fresh, summer edition"
+        elif "Liquid Soap" in text:
+            keywords = "vegan liquid soap, organic liquid soap, vegan, organic, liquid soap, personal care, suitable all " \
+                       "skin types, unisex, vegan products, organic products"
+        elif "Baby" in text:
+            keywords = "baby, baby soap, baby shampoo, bath time, baby cleaning, bath, mother, shower, new, " \
+                       "most purchased, girls, boys, unisex baby soap, solid soap bar, baby soap"
+        elif "Beauty Soap" in text:
+            keywords = "personal care, women, men, bodycare, soap bar, soap, bar, new, most purchased, set, soap set, " \
+                       "fragrance"
+        elif "Vegan Shampoo" in text:
+            keywords = "vegan shampoo, organic shampoo, vegan, organic, skincare, bath, shower, argan oil, lemon oil, " \
+                       "keratine, olive oil, argan oil shampoo, olive oil shampoo, lemon oil " \
+                       "shampoo, women shampoo, haircare products"
+    elif "Confetti" in text:
+        attrib = ""
+        if "Kids" in text:
+            keywords = "Kids Carpet, Natural Carpet, Natural Rug, Kids Rug, For Kids, Polyamide Rug, Polyamide Carpet, " \
+                       "Carpet, Rug, Aesthetic, Home Decoration, Decorative Carpet, Decorative Rug"
+            if text.find("Border") < text.find("Kids") and "Border" in text:
+                attrib = text[0:text.find(" Border")]
+            else:
+                attrib = text[0:text.find(" Kids")]
+            if "Baby Set" in attrib:
+                attrib = attrib[9:len(attrib)]
+        else:
+            keywords = "Decorative Carpet, Natural Carpet, Natural Rug, Decorative Rug, Decoration, Polyamide Rug, " \
+                       "Polyamide Carpet, Carpet, Rug, Aesthetic, Home Decoration"
+            if "Florida" in text:
+                if "Border" in text:
+                    attrib = text[8:text.find(" Border")]
+                else:
+                    attrib = text[8:text.find(" Decorative")]
+            elif "Colorado" in text:
+                attrib = text[9:text.find(" Border")]
+            else:
+                attrib = text[0:text.find(" Decorative")]
+
+        if attrib != " ":
+            keywords += ", " + attrib + " Rug, " + attrib + " Carpet"
+
     keywords = keywords.replace(",", ";")
     keywords = keywords.lower()
     print(text)
     print(keywords)
+    inventory_file.write(sku+"\n"+text+"\n"+keywords+"\n")
+    inventory_file.close()
     ###########################################
 
     ###############Send Request################
@@ -112,7 +158,7 @@ def patch_uk(sku):
     ###########################################
 
 
-sku_file = open("uk_mixed.txt", "r+")
+sku_file = open("skus.txt", "r+")
 skus = sku_file.read().splitlines()
 sku_file.close()
 
