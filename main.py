@@ -12,8 +12,8 @@ listing_us = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
 types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.UK)
 # notifications = Notifications(credentials=credentials, marketplace=Marketplaces.UK)
 
-xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A1F83G8C2ARO7P'])
-print(xdxd)
+# xdxd = types.get_definitions_product_type(productType="SHOES", marketplaceIds=['A1805IZSGTT6HS'])
+# print(xdxd)
 # xd = types.search_definitions_product_types(marketplaceIds=['A1F83G8C2ARO7P'])
 # print(xd)
 
@@ -36,27 +36,42 @@ print(xdxd)
 #     file2.close()
 
 
-def patch_uk(sku, keywords, text):
+def patch_uk(sku):
 
     ##############Edit Title###################
+    text = ""
     try:
-        listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
-                                  marketplaceIds=['A1C3SOZRARQ6R3'])
+        text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
+                                         marketplaceIds=['A1PA6795UKMFR9']).payload['summaries'][0]['itemName']
         print("found")
     except:
         print("not found")
         return
+
+    if "eworldpartner" in text:
+        text = text.replace("eworldpartner ", "")
+    elif "eworld partner" in text:
+        text = text.replace("eworld partner ", "")
+    else:
+        return
     ###########################################
 
     ##############Create Keywords##############
-
+    keywords = ""
+    if "Oguzhan" in text:
+        keywords = "Männerschuhe; Herrenmode; lässige Schuhe; zwanglos; natürliches Material; Naturleder; veganes Leder; Orthopädie; anatomisch; Nubuk; Sommerschuhe; Frühlingsschuhe; klassische; Kunstleder; handgefertigte Schuhe"
+        text = text.replace("Oguzhan Schuhe ", "")
+        if "(" in text:
+            text = text.replace("(", "- Oguzhan Schuhe (")
+        else:
+            text += " - Oguzhan Schuhe"
     keywords = keywords.lower()
     print(text)
     print(keywords)
     ###########################################
 
     ###############Send Request################
-    with open('patch_demo.json', 'r') as file:
+    with open('patch_demo.json', 'r+') as file:
         data = file.readlines()
     with open('patch_demo.json', 'w') as file:
         try:
@@ -74,24 +89,23 @@ def patch_uk(sku, keywords, text):
 
     file = open('patch_demo.json', "r+")
     body = json.load(file)
-    # print(body)
     resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
-                                       marketplaceIds=['A1C3SOZRARQ6R3'])
+                                       marketplaceIds=['A1PA6795UKMFR9'])
     print(resp)
     file.close()
     ###########################################
 
 
-# sku_file = open("inv_pl.txt", "r+", encoding="utf-8")
-# skus = sku_file.read().splitlines()
-# sku_file.close()
-#
-# counter = 0
-# total = str(len(skus)/3)
-# for i in range(0, len(skus), 3):
-#     counter += 1
-#     print(str(counter)+" out of "+total)
-#     patch_uk(skus[i], skus[i+2], skus[i+1])
+sku_file = open("skus.txt", "r+", encoding="utf-8")
+skus = sku_file.read().splitlines()
+sku_file.close()
+
+counter = 0
+total = str(len(skus))
+for sku in skus:
+    counter += 1
+    print(str(counter)+" out of "+total)
+    patch_uk(sku)
 
 # {
 #   "productType":"PERSONALBODYCARE",
