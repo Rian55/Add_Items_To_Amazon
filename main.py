@@ -3,6 +3,7 @@ from configparser import ConfigParser
 from sp_api.base import Marketplaces
 from sp_api.api import ListingsItems
 from sp_api.api import ProductTypeDefinitions
+import re
 
 config = ConfigParser()
 config.read(".config.txt")
@@ -35,6 +36,40 @@ types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces
 #     print(resp)
 #     file2.close()
 
+def change_marketplace(doc, c_code):
+    if c_code == "gb":
+        doc = re.sub('("\w\w_\w\w)"', '"en_GB"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1F83G8C2ARO7P"', str(doc))
+    elif c_code == "us":
+        doc = re.sub('("\w\w_\w\w)"', '"en_US"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "ATVPDKIKX0DER"', str(doc))
+    elif c_code == "de":
+        doc = re.sub('("\w\w_\w\w)"', '"de_DE"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1PA6795UKMFR9"', str(doc))
+    elif c_code == "fr":
+        doc = re.sub('("\w\w_\w\w)"', '"fr_FR"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A13V1IB3VIYZZH"', str(doc))
+    elif c_code == "it":
+        doc = re.sub('("\w\w_\w\w)"', '"it_IT"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "APJ6JRA9NG5V4"', str(doc))
+    elif c_code == "es":
+        doc = re.sub('("\w\w_\w\w)"', '"es_ES"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1RKKUPIHCS9HS"', str(doc))
+    elif c_code == "pl":
+        doc = re.sub('("\w\w_\w\w)"', '"pl_PL"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1C3SOZRARQ6R3"', str(doc))
+    elif c_code == "sw":
+        doc = re.sub('("\w\w_\w\w)"', '"sv_SW"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A2NODRKZP88ZB9"', str(doc))
+    elif c_code == "nl":
+        doc = re.sub('("\w\w_\w\w)"', '"nl_NL"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1805IZSGTT6HS"', str(doc))
+    elif c_code == "au":
+        doc = re.sub('("\w\w_\w\w)"', '"en_AU"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A39IBJ37TRP1C6"', str(doc))
+
+    return doc
+
 
 def patch_uk(sku):
 
@@ -65,8 +100,8 @@ def patch_uk(sku):
     ###########################################
 
     ###############Send Request################
-    # with open('patch_demo.json', 'r+') as file:
-    #     data = file.readlines()
+    with open('patch_demo.json', 'r+') as file:
+        data = file.readlines()
     # with open('patch_demo.json', 'w') as file:
     #     try:
     #         data[8] = '\t\t  "value": "'+text+'",\n'
@@ -83,20 +118,20 @@ def patch_uk(sku):
 
     file = open('patch_demo.json', "r+")
     body = json.load(file)
-    resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
-                                       marketplaceIds=['A1F83G8C2ARO7P'])
-    print(resp)
+    # resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
+    #                                    marketplaceIds=['A1F83G8C2ARO7P'])
+    # print(resp)
     file.close()
     ###########################################
 
 
-sku_file = open("skus.txt", "r+", encoding="utf-8")
-skus = sku_file.read().splitlines()
-sku_file.close()
-
-counter = 0
-total = str(len(skus))
-for sku in skus:
-    counter += 1
-    print(str(counter)+" out of "+total)
-    patch_uk(sku)
+# sku_file = open("skus.txt", "r+", encoding="utf-8")
+# skus = sku_file.read().splitlines()
+# sku_file.close()
+#
+# counter = 0
+# total = str(len(skus))
+# for sku in skus:
+#     counter += 1
+#     print(str(counter)+" out of "+total)
+#     patch_uk(sku)
