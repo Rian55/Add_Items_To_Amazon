@@ -12,7 +12,7 @@ listing_us = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
 types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.UK)
 # notifications = Notifications(credentials=credentials, marketplace=Marketplaces.UK)
 
-# xdxd = types.get_definitions_product_type(productType="SHOES", marketplaceIds=['A1805IZSGTT6HS'])
+# xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A1F83G8C2ARO7P'])
 # print(xdxd)
 # xd = types.search_definitions_product_types(marketplaceIds=['A1F83G8C2ARO7P'])
 # print(xd)
@@ -42,32 +42,33 @@ def patch_uk(sku):
     text = ""
     try:
         text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
-                                         marketplaceIds=['A1PA6795UKMFR9']).payload['summaries'][0]['itemName']
+                                         marketplaceIds=['A1F83G8C2ARO7P']).payload['summaries'][0]['itemName']
         print("found")
     except:
-        print("not found")
+        print("not found " + sku)
         return
 
     if "eworldpartner" in text:
         text = text.replace("eworldpartner ", "")
-    elif "eworld partner" in text:
-        text = text.replace("eworld partner ", "")
-    else:
-        return
+        text = text.replace("Oguzhan Shoes ", "")
+        if "(" in text:
+            text = text.replace("(", "- Oguzhan Shoes (")
+        else:
+            text += " - Oguzhan Shoes"
     ###########################################
 
     ##############Create Keywords##############
-    keywords = ""
-    if "Oguzhan" in text:
-        keywords = "Männerschuhe; Herrenmode; lässige Schuhe; zwanglos; natürliches Material; Naturleder; veganes Leder; Orthopädie; anatomisch; Nubuk; Sommerschuhe; Frühlingsschuhe; klassische; Kunstleder; handgefertigte Schuhe"
-        text = text.replace("Oguzhan Schuhe ", "")
-        if "(" in text:
-            text = text.replace("(", "- Oguzhan Schuhe (")
-        else:
-            text += " - Oguzhan Schuhe"
-    keywords = keywords.lower()
+    # keywords = ""
+    # if "Oguzhan" in text:
+    #     keywords = "Männerschuhe; Herrenmode; lässige Schuhe; zwanglos; natürliches Material; Naturleder; veganes Leder; Orthopädie; anatomisch; Nubuk; Sommerschuhe; Frühlingsschuhe; klassische; Kunstleder; handgefertigte Schuhe"
+    #     text = text.replace("Oguzhan Schuhe ", "")
+    #     if "(" in text:
+    #         text = text.replace("(", "- Oguzhan Schuhe (")
+    #     else:
+    #         text += " - Oguzhan Schuhe"
+    # keywords = keywords.lower()
     print(text)
-    print(keywords)
+    # print(keywords)
     ###########################################
 
     ###############Send Request################
@@ -77,35 +78,35 @@ def patch_uk(sku):
         try:
             data[8] = '\t\t  "value": "'+text+'",\n'
             data[8] = data[8].encode('utf', 'ignore').decode('1252')
-            data[19] = '\t\t  "value": "'+keywords+'",\n'
-            data[19] = data[19].encode('utf', 'ignore').decode('1252')
+            # data[19] = '\t\t  "value": "'+keywords+'",\n'
+            # data[19] = data[19].encode('utf', 'ignore').decode('1252')
             file.writelines(data)
         except:
             data[8] = '\t\t  "value": "' + text + '",\n'
             data[8] = data[8].encode('1252', 'ignore').decode('1252')
-            data[19] = '\t\t  "value": "' + keywords + '",\n'
-            data[19] = data[19].encode('1252', 'ignore').decode('1252')
+            # data[19] = '\t\t  "value": "' + keywords + '",\n'
+            # data[19] = data[19].encode('1252', 'ignore').decode('1252')
             file.writelines(data)
 
     file = open('patch_demo.json', "r+")
     body = json.load(file)
     resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
-                                       marketplaceIds=['A1PA6795UKMFR9'])
+                                       marketplaceIds=['A1F83G8C2ARO7P'])
     print(resp)
     file.close()
     ###########################################
 
 
-sku_file = open("skus.txt", "r+", encoding="utf-8")
-skus = sku_file.read().splitlines()
-sku_file.close()
-
-counter = 0
-total = str(len(skus))
-for sku in skus:
-    counter += 1
-    print(str(counter)+" out of "+total)
-    patch_uk(sku)
+# sku_file = open("skus.txt", "r+", encoding="utf-8")
+# skus = sku_file.read().splitlines()
+# sku_file.close()
+#
+# counter = 0
+# total = str(len(skus))
+# for sku in skus:
+#     counter += 1
+#     print(str(counter)+" out of "+total)
+#     patch_uk(sku)
 
 # {
 #   "productType":"PERSONALBODYCARE",
