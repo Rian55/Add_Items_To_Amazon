@@ -43,18 +43,11 @@ def patch_uk(sku):
     try:
         text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
                                          marketplaceIds=['A1F83G8C2ARO7P']).payload['summaries'][0]['itemName']
-        print("found")
+        print(text)
     except:
         print("not found " + sku)
         return
 
-    if "eworldpartner" in text:
-        text = text.replace("eworldpartner ", "")
-        text = text.replace("Oguzhan Shoes ", "")
-        if "(" in text:
-            text = text.replace("(", "- Oguzhan Shoes (")
-        else:
-            text += " - Oguzhan Shoes"
     ###########################################
 
     ##############Create Keywords##############
@@ -67,26 +60,26 @@ def patch_uk(sku):
     #     else:
     #         text += " - Oguzhan Schuhe"
     # keywords = keywords.lower()
-    print(text)
+    # print(text)
     # print(keywords)
     ###########################################
 
     ###############Send Request################
-    with open('patch_demo.json', 'r+') as file:
-        data = file.readlines()
-    with open('patch_demo.json', 'w') as file:
-        try:
-            data[8] = '\t\t  "value": "'+text+'",\n'
-            data[8] = data[8].encode('utf', 'ignore').decode('1252')
-            # data[19] = '\t\t  "value": "'+keywords+'",\n'
-            # data[19] = data[19].encode('utf', 'ignore').decode('1252')
-            file.writelines(data)
-        except:
-            data[8] = '\t\t  "value": "' + text + '",\n'
-            data[8] = data[8].encode('1252', 'ignore').decode('1252')
-            # data[19] = '\t\t  "value": "' + keywords + '",\n'
-            # data[19] = data[19].encode('1252', 'ignore').decode('1252')
-            file.writelines(data)
+    # with open('patch_demo.json', 'r+') as file:
+    #     data = file.readlines()
+    # with open('patch_demo.json', 'w') as file:
+    #     try:
+    #         data[8] = '\t\t  "value": "'+text+'",\n'
+    #         data[8] = data[8].encode('utf', 'ignore').decode('1252')
+    #         # data[19] = '\t\t  "value": "'+keywords+'",\n'
+    #         # data[19] = data[19].encode('utf', 'ignore').decode('1252')
+    #         file.writelines(data)
+    #     except:
+    #         data[8] = '\t\t  "value": "' + text + '",\n'
+    #         data[8] = data[8].encode('1252', 'ignore').decode('1252')
+    #         # data[19] = '\t\t  "value": "' + keywords + '",\n'
+    #         # data[19] = data[19].encode('1252', 'ignore').decode('1252')
+    #         file.writelines(data)
 
     file = open('patch_demo.json', "r+")
     body = json.load(file)
@@ -97,61 +90,13 @@ def patch_uk(sku):
     ###########################################
 
 
-# sku_file = open("skus.txt", "r+", encoding="utf-8")
-# skus = sku_file.read().splitlines()
-# sku_file.close()
-#
-# counter = 0
-# total = str(len(skus))
-# for sku in skus:
-#     counter += 1
-#     print(str(counter)+" out of "+total)
-#     patch_uk(sku)
+sku_file = open("skus.txt", "r+", encoding="utf-8")
+skus = sku_file.read().splitlines()
+sku_file.close()
 
-# {
-#   "productType":"PERSONALBODYCARE",
-#   "patches":[
-#     {
-#       "op":"replace",
-#       "path":"/attributes/item_name",
-#       "value":[
-#         {
-# 		  "value": "Colorado Border Decorative Carpet Beige - Confetti",
-#           "marketplace_id": "A1F83G8C2ARO7P"
-#         }
-#       ]
-#     },
-#     {
-#       "op": "replace",
-#       "path": "/attributes/item_package_dimensions",
-#       "value": [
-#         {
-#           "length": {
-#             "value": 30,
-#             "unit": "centimeters"
-#           },
-#           "height": {
-#             "value": 140,
-#             "unit": "centimeters"
-#           },
-#           "width": {
-#             "value": 30,
-#             "unit": "centimeters"
-#           },
-#           "marketplace_id": "A1F83G8C2ARO7P"
-#         }
-#       ]
-#     },
-#     {
-#       "op":"replace",
-#       "path":"/attributes/item_package_weight",
-#       "value":[
-#         {
-#           "value": 8,
-#           "unit": "kilograms",
-#           "marketplace_id": "A1F83G8C2ARO7P"
-#         }
-#       ]
-#     },
-#   ]
-# }
+counter = 0
+total = str(len(skus))
+for sku in skus:
+    counter += 1
+    print(str(counter)+" out of "+total)
+    patch_uk(sku)
