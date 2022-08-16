@@ -1,6 +1,7 @@
 from googletrans import Translator
 
 trans = Translator()
+C_CODE = "sv"
 
 sku_file = open("inv_uk.txt", "r+")
 inv_details = sku_file.read().splitlines()
@@ -18,16 +19,16 @@ titles_t = []
 for title in titles:
     if " - " in title:
         title_split = title.split(" - ")
-        titles_t.append(trans.translate(title_split[0], dest='de', src='en').text+" - "+title_split[1])
+        titles_t.append(trans.translate(title_split[0], dest=C_CODE, src='en').text+" - "+title_split[1])
     else:
-        titles_t.append(trans.translate(title, dest='de', src='en').text)
+        titles_t.append(trans.translate(title, dest=C_CODE, src='en').text)
     print(titles_t[len(titles_t)-1])
 
 print("titles translated")
-keywords_t = trans.translate(keywords, dest='de', src='en')
+keywords_t = trans.translate(keywords, dest=C_CODE, src='en')
 print("keywords translated")
 
-file = open("inv_de.txt", "w+", encoding="utf-8")
+file = open(f"inv_{C_CODE}.txt", "w+", encoding="utf-8")
 
 print("writing to file...")
 for i in range(len(skus)):

@@ -71,14 +71,13 @@ def change_marketplace(doc, c_code):
     return doc
 
 
-def patch_uk(sku):
+def patch_uk(sku, text):
 
     ##############Edit Title###################
-    text = ""
     try:
-        text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
-                                         marketplaceIds=['A1F83G8C2ARO7P']).payload['summaries'][0]['itemName']
-        print(text)
+        temp = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
+                                         marketplaceIds=['A1RKKUPIHCS9HS']).payload['summaries'][0]['itemName']
+        # print(text)
     except:
         print("not found " + sku)
         return
@@ -86,7 +85,6 @@ def patch_uk(sku):
     ###########################################
 
     ##############Create Keywords##############
-    # keywords = ""
     # if "Oguzhan" in text:
     #     keywords = "Männerschuhe; Herrenmode; lässige Schuhe; zwanglos; natürliches Material; Naturleder; veganes Leder; Orthopädie; anatomisch; Nubuk; Sommerschuhe; Frühlingsschuhe; klassische; Kunstleder; handgefertigte Schuhe"
     #     text = text.replace("Oguzhan Schuhe ", "")
@@ -95,43 +93,47 @@ def patch_uk(sku):
     #     else:
     #         text += " - Oguzhan Schuhe"
     # keywords = keywords.lower()
-    # print(text)
-    # print(keywords)
+    #print(text)
+    #print(keywords)
     ###########################################
 
     ###############Send Request################
-    with open('patch_demo.json', 'r+') as file:
-        data = file.readlines()
-    # with open('patch_demo.json', 'w') as file:
-    #     try:
-    #         data[8] = '\t\t  "value": "'+text+'",\n'
-    #         data[8] = data[8].encode('utf', 'ignore').decode('1252')
-    #         # data[19] = '\t\t  "value": "'+keywords+'",\n'
-    #         # data[19] = data[19].encode('utf', 'ignore').decode('1252')
-    #         file.writelines(data)
-    #     except:
-    #         data[8] = '\t\t  "value": "' + text + '",\n'
-    #         data[8] = data[8].encode('1252', 'ignore').decode('1252')
-    #         # data[19] = '\t\t  "value": "' + keywords + '",\n'
-    #         # data[19] = data[19].encode('1252', 'ignore').decode('1252')
-    #         file.writelines(data)
+    with open('in_kw_patch.json', 'r+') as file:
+        data = file.read()
+        data = change_marketplace(data, "es")
+    with open('in_kw_patch.json', 'w') as file:
+        try:
+            text = text.encode('utf', 'ignore').decode('1252')
+            data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
+                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
+            # data[19] = '\t\t  "value": "'+keywords+'",\n'
+            # data[19] = data[19].encode('utf', 'ignore').decode('1252')
+            file.writelines(data)
+        except:
+            text = text.encode('1252', 'ignore').decode('1252')
+            data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
+                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
+            # data[19] = '\t\t  "value": "' + keywords + '",\n'
+            # data[19] = data[19].encode('1252', 'ignore').decode('1252')
+            file.writelines(data)
+        print(text)
 
-    file = open('patch_demo.json', "r+")
+    file = open('in_kw_patch.json', "r+")
     body = json.load(file)
-    # resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
-    #                                    marketplaceIds=['A1F83G8C2ARO7P'])
-    # print(resp)
+    resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
+                                       marketplaceIds=['A1RKKUPIHCS9HS'])
+    print(resp)
     file.close()
     ###########################################
 
 
-# sku_file = open("skus.txt", "r+", encoding="utf-8")
-# skus = sku_file.read().splitlines()
-# sku_file.close()
-#
-# counter = 0
-# total = str(len(skus))
-# for sku in skus:
-#     counter += 1
-#     print(str(counter)+" out of "+total)
-#     patch_uk(sku)
+sku_file = open("inv_es.txt", "r+", encoding="utf-8")
+skus = sku_file.read().splitlines()
+sku_file.close()
+
+counter = 0
+total = str(len(skus)/3)
+for i in range(0, len(skus), 3):
+    counter += 1
+    print(str(counter)+" out of "+total)
+    patch_uk(skus[i], skus[i+1].title())
