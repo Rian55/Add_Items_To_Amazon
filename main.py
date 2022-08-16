@@ -13,7 +13,7 @@ listing_us = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
 types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.UK)
 # notifications = Notifications(credentials=credentials, marketplace=Marketplaces.UK)
 
-# xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A1F83G8C2ARO7P'])
+# xdxd = types.get_definitions_product_type(productType="SHOES", marketplaceIds=['A1F83G8C2ARO7P'])
 # print(xdxd)
 # xd = types.search_definitions_product_types(marketplaceIds=['A1F83G8C2ARO7P'])
 # print(xd)

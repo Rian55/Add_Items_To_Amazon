@@ -11,19 +11,27 @@ keywords = []
 
 for i in range(0, len(inv_details), 3):
     skus.append(inv_details[i])
-    titles.append(inv_details[i + 1])
+    titles.append(inv_details[i + 1].lower())
     keywords.append(inv_details[i + 2])
 
-titles_t = trans.translate(titles, dest='pl', src='en')
+titles_t = []
+for title in titles:
+    if " - " in title:
+        title_split = title.split(" - ")
+        titles_t.append(trans.translate(title_split[0], dest='de', src='en').text+" - "+title_split[1])
+    else:
+        titles_t.append(trans.translate(title, dest='de', src='en').text)
+    print(titles_t[len(titles_t)-1])
+
 print("titles translated")
-keywords_t = trans.translate(keywords, dest='pl', src='en')
+keywords_t = trans.translate(keywords, dest='de', src='en')
 print("keywords translated")
 
-file = open("inv_pl.txt", "w+", encoding="utf-8")
+file = open("inv_de.txt", "w+", encoding="utf-8")
 
 print("writing to file...")
 for i in range(len(skus)):
-    file.write(skus[i]+"\n"+titles_t[i].text+"\n"+keywords_t[i].text+"\n")
+    file.write(skus[i]+"\n"+titles_t[i].lower().replace(",", "")+"\n"+keywords_t[i].text+"\n")
 print("writing to file completed")
 
 file.close()
