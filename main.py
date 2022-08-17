@@ -13,7 +13,7 @@ listing_us = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
 types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.UK)
 # notifications = Notifications(credentials=credentials, marketplace=Marketplaces.UK)
 
-# xdxd = types.get_definitions_product_type(productType="SHOES", marketplaceIds=['A1F83G8C2ARO7P'])
+# xdxd = types.get_definitions_product_type(productType="SHOES", marketplaceIds=['A2NODRKZP88ZB9'])
 # print(xdxd)
 # xd = types.search_definitions_product_types(marketplaceIds=['A1F83G8C2ARO7P'])
 # print(xd)
@@ -58,8 +58,8 @@ def change_marketplace(doc, c_code):
     elif c_code == "pl":
         doc = re.sub('("\w\w_\w\w)"', '"pl_PL"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1C3SOZRARQ6R3"', str(doc))
-    elif c_code == "sw":
-        doc = re.sub('("\w\w_\w\w)"', '"sv_SW"', str(doc))
+    elif c_code == "sv":
+        doc = re.sub('("\w\w_\w\w)"', '"sv_SE"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A2NODRKZP88ZB9"', str(doc))
     elif c_code == "nl":
         doc = re.sub('("\w\w_\w\w)"', '"nl_NL"', str(doc))
@@ -76,7 +76,7 @@ def patch_uk(sku, text):
     ##############Edit Title###################
     try:
         temp = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
-                                         marketplaceIds=['A1RKKUPIHCS9HS']).payload['summaries'][0]['itemName']
+                                         marketplaceIds=['APJ6JRA9NG5V4']).payload['summaries'][0]['itemName']
         # print(text)
     except:
         print("not found " + sku)
@@ -98,12 +98,12 @@ def patch_uk(sku, text):
     ###########################################
 
     ###############Send Request################
-    with open('in_kw_patch.json', 'r+') as file:
+    with open('in_kw_patch.json', 'r+', encoding="utf-8") as file:
         data = file.read()
-        data = change_marketplace(data, "es")
-    with open('in_kw_patch.json', 'w') as file:
+        data = change_marketplace(data, "it")
+    with open('in_kw_patch.json', 'w', encoding="utf-8") as file:
         try:
-            text = text.encode('utf', 'ignore').decode('1252')
+            text = text.encode('utf', 'ignore').decode('utf')
             data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
                           'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
             # data[19] = '\t\t  "value": "'+keywords+'",\n'
@@ -118,16 +118,16 @@ def patch_uk(sku, text):
             file.writelines(data)
         print(text)
 
-    file = open('in_kw_patch.json', "r+")
+    file = open('in_kw_patch.json', "r+", encoding="utf-8")
     body = json.load(file)
     resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
-                                       marketplaceIds=['A1RKKUPIHCS9HS'])
+                                       marketplaceIds=['APJ6JRA9NG5V4'])
     print(resp)
     file.close()
     ###########################################
 
 
-sku_file = open("inv_es.txt", "r+", encoding="utf-8")
+sku_file = open("inv_it.txt", "r+", encoding="utf-8")
 skus = sku_file.read().splitlines()
 sku_file.close()
 
