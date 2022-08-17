@@ -3,7 +3,7 @@ from googletrans import Translator
 trans = Translator()
 C_CODE = "sv"
 
-sku_file = open("inv_uk.txt", "r+")
+sku_file = open("inv_gb.txt", "r+")
 inv_details = sku_file.read().splitlines()
 sku_file.close()
 skus = []

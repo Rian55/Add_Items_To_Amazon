@@ -4,7 +4,9 @@ from sp_api.base import Marketplaces
 from sp_api.api import ListingsItems
 from sp_api.api import ProductTypeDefinitions
 import re
+from googletrans import Translator
 
+trans = Translator()
 config = ConfigParser()
 config.read(".config.txt")
 credentials = dict(config['default'])
@@ -36,7 +38,13 @@ types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces
 #     print(resp)
 #     file2.close()
 
-def change_marketplace(doc, c_code):
+def change_marketplace(doc, c_code, t_code):
+    if t_code:
+        for x in re.finditer(': "(.+)",\n\s+"language_tag"', doc):
+            translatable = x.group()[3:x.group().find('"', 4)]
+            translated = trans.translate(translatable.lower(), dest=t_code)
+            doc = re.sub(translatable, translated.text.title(), doc)
+
     if c_code == "gb":
         doc = re.sub('("\w\w_\w\w)"', '"en_GB"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1F83G8C2ARO7P"', str(doc))
@@ -71,69 +79,75 @@ def change_marketplace(doc, c_code):
     return doc
 
 
-def patch_uk(sku, text):
+def patch_uk(sku, mktplc_id):
 
-    ##############Edit Title###################
+    ##############Check Item###################
+    text = ""
     try:
-        temp = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
-                                         marketplaceIds=['APJ6JRA9NG5V4']).payload['summaries'][0]['itemName']
+        text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
+                                         marketplaceIds=[mktplc_id]).payload['summaries'][0]['itemName']
+
         # print(text)
     except:
         print("not found " + sku)
         return
-
     ###########################################
 
-    ##############Create Keywords##############
-    # if "Oguzhan" in text:
-    #     keywords = "Männerschuhe; Herrenmode; lässige Schuhe; zwanglos; natürliches Material; Naturleder; veganes Leder; Orthopädie; anatomisch; Nubuk; Sommerschuhe; Frühlingsschuhe; klassische; Kunstleder; handgefertigte Schuhe"
-    #     text = text.replace("Oguzhan Schuhe ", "")
-    #     if "(" in text:
-    #         text = text.replace("(", "- Oguzhan Schuhe (")
-    #     else:
-    #         text += " - Oguzhan Schuhe"
-    # keywords = keywords.lower()
-    #print(text)
-    #print(keywords)
-    ###########################################
+    ##############Edit Attributes##############
+    text = text.replace("eworldpartner ", "")
 
-    ###############Send Request################
-    with open('in_kw_patch.json', 'r+', encoding="utf-8") as file:
+    with open('fill_shoes.json', 'r+', encoding="utf-8") as file:
         data = file.read()
-        data = change_marketplace(data, "it")
-    with open('in_kw_patch.json', 'w', encoding="utf-8") as file:
+    with open('fill_shoes.json', 'w', encoding="utf-8") as file:
         try:
             text = text.encode('utf', 'ignore').decode('utf')
             data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
+                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text.title() + '"', data)
             # data[19] = '\t\t  "value": "'+keywords+'",\n'
             # data[19] = data[19].encode('utf', 'ignore').decode('1252')
             file.writelines(data)
         except:
             text = text.encode('1252', 'ignore').decode('1252')
             data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
+                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text.title() + '"', data)
             # data[19] = '\t\t  "value": "' + keywords + '",\n'
             # data[19] = data[19].encode('1252', 'ignore').decode('1252')
             file.writelines(data)
         print(text)
+    ###########################################
 
-    file = open('in_kw_patch.json', "r+", encoding="utf-8")
+    ###############Send Request################
+
+    file = open('fill_shoes.json', "r+", encoding="utf-8")
     body = json.load(file)
     resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
-                                       marketplaceIds=['APJ6JRA9NG5V4'])
+                                       marketplaceIds=[mktplc_id])
     print(resp)
     file.close()
     ###########################################
 
 
-sku_file = open("inv_it.txt", "r+", encoding="utf-8")
-skus = sku_file.read().splitlines()
-sku_file.close()
+def select_mktplc(ctry_code):
+    with open("skus.txt", "r+", encoding="utf-8") as sku_file:
+        skus = sku_file.read().splitlines()
 
+    with open('fill_shoes.json', 'r+', encoding="utf-8") as file:
+        data = file.read()
+        if ctry_code == "gb" or ctry_code == "au" or ctry_code == "us":
+            data = change_marketplace(data, ctry_code, "en")
+        else:
+            data = change_marketplace(data, ctry_code, ctry_code)
+
+    with open('fill_shoes.json', 'w', encoding="utf-8") as file:
+        file.writelines(data)
+
+    return skus
+
+
+skus = select_mktplc("de")
 counter = 0
-total = str(len(skus)/3)
-for i in range(0, len(skus), 3):
+total = str(len(skus))
+for i in range(0, len(skus)):
     counter += 1
     print(str(counter)+" out of "+total)
-    patch_uk(skus[i], skus[i+1].title())
+    patch_uk(skus[i], Marketplaces.DE.marketplace_id)

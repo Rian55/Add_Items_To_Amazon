@@ -11,7 +11,7 @@ for line in html_lines:
         if m:
             skus.append(m.group()[1:len(m.group())-1])
 
-file = open("skus.txt", "a+")
+file = open("skus.txt", "w+")
 for sku in skus:
     file.write(sku+"\n")
 file.close()
