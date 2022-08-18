@@ -13,12 +13,12 @@ credentials = dict(config['default'])
 listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.UK)
 listing_us = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
 types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.UK)
-# notifications = Notifications(credentials=credentials, marketplace=Marketplaces.UK)
 
-# xdxd = types.get_definitions_product_type(productType="SHOES", marketplaceIds=['A2NODRKZP88ZB9'])
-# print(xdxd)
+xdxd = types.get_definitions_product_type(productType="HOME_FURNITURE_AND_DECOR", marketplaceIds=['A1F83G8C2ARO7P'])
+print(xdxd)
 # xd = types.search_definitions_product_types(marketplaceIds=['A1F83G8C2ARO7P'])
-# print(xd)
+# for i in xd.payload['productTypes']:
+#     print(i['name'])
 
 
 # def add_item_uk():
@@ -79,7 +79,7 @@ def change_marketplace(doc, c_code, t_code):
     return doc
 
 
-def patch_uk(sku, mktplc_id):
+def patch_uk(sku, mktplc_id, f_name):
 
     ##############Check Item###################
     text = ""
@@ -94,31 +94,33 @@ def patch_uk(sku, mktplc_id):
     ###########################################
 
     ##############Edit Attributes##############
-    text = text.replace("eworldpartner ", "")
-
-    with open('fill_shoes.json', 'r+', encoding="utf-8") as file:
-        data = file.read()
-    with open('fill_shoes.json', 'w', encoding="utf-8") as file:
-        try:
-            text = text.encode('utf', 'ignore').decode('utf')
-            data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text.title() + '"', data)
-            # data[19] = '\t\t  "value": "'+keywords+'",\n'
-            # data[19] = data[19].encode('utf', 'ignore').decode('1252')
-            file.writelines(data)
-        except:
-            text = text.encode('1252', 'ignore').decode('1252')
-            data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text.title() + '"', data)
-            # data[19] = '\t\t  "value": "' + keywords + '",\n'
-            # data[19] = data[19].encode('1252', 'ignore').decode('1252')
-            file.writelines(data)
-        print(text)
+    # text = text.replace("eworldpartner ", "")
+    # color = re.search(" (\w+) - ", text)
+    # if color:
+    #     color = color.group()
+    #     color = color[1:len(color)-3]
+    # else:
+    #     color = ""
+    #
+    # with open(f_name, 'r+', encoding="utf-8") as file:
+    #     data = file.read()
+    # with open(f_name, 'w', encoding="utf-8") as file:
+    #     try:
+    #         text = text.encode('utf', 'ignore').decode('utf')
+    #         data = re.sub('color",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
+    #                       'color",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + color.title() + '"', data)
+    #         file.writelines(data)
+    #     except:
+    #         text = text.encode('1252', 'ignore').decode('1252')
+    #         data = re.sub('color",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
+    #                       'color",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + color.title() + '"', data)
+    #         file.writelines(data)
+    #     print(text)
     ###########################################
 
     ###############Send Request################
 
-    file = open('fill_shoes.json', "r+", encoding="utf-8")
+    file = open(f_name, "r+", encoding="utf-8")
     body = json.load(file)
     resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
                                        marketplaceIds=[mktplc_id])
@@ -127,27 +129,28 @@ def patch_uk(sku, mktplc_id):
     ###########################################
 
 
-def select_mktplc(ctry_code):
+def select_mktplc(ctry_code, f_name):
     with open("skus.txt", "r+", encoding="utf-8") as sku_file:
         skus = sku_file.read().splitlines()
 
-    with open('fill_shoes.json', 'r+', encoding="utf-8") as file:
+    with open(f_name, 'r+', encoding="utf-8") as file:
         data = file.read()
         if ctry_code == "gb" or ctry_code == "au" or ctry_code == "us":
             data = change_marketplace(data, ctry_code, "en")
         else:
             data = change_marketplace(data, ctry_code, ctry_code)
 
-    with open('fill_shoes.json', 'w', encoding="utf-8") as file:
+    with open(f_name, 'w', encoding="utf-8") as file:
         file.writelines(data)
 
     return skus
 
 
-skus = select_mktplc("de")
-counter = 0
-total = str(len(skus))
-for i in range(0, len(skus)):
-    counter += 1
-    print(str(counter)+" out of "+total)
-    patch_uk(skus[i], Marketplaces.DE.marketplace_id)
+# file_name = "fill_wallets.json"
+# skus = select_mktplc("sv", file_name)
+# counter = 0
+# total = str(len(skus))
+# for i in range(0, len(skus)):
+#     counter += 1
+#     print(str(counter)+" out of "+total)
+#     patch_uk(skus[i], Marketplaces.SE.marketplace_id, file_name)
