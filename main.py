@@ -14,8 +14,8 @@ listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.UK)
 listing_us = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
 types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.UK)
 
-xdxd = types.get_definitions_product_type(productType="HOME_FURNITURE_AND_DECOR", marketplaceIds=['A1F83G8C2ARO7P'])
-print(xdxd)
+# xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A1F83G8C2ARO7P'])
+# print(xdxd)
 # xd = types.search_definitions_product_types(marketplaceIds=['A1F83G8C2ARO7P'])
 # for i in xd.payload['productTypes']:
 #     print(i['name'])
@@ -119,7 +119,6 @@ def patch_uk(sku, mktplc_id, f_name):
     ###########################################
 
     ###############Send Request################
-
     file = open(f_name, "r+", encoding="utf-8")
     body = json.load(file)
     resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
@@ -146,11 +145,11 @@ def select_mktplc(ctry_code, f_name):
     return skus
 
 
-# file_name = "fill_wallets.json"
-# skus = select_mktplc("sv", file_name)
-# counter = 0
-# total = str(len(skus))
-# for i in range(0, len(skus)):
-#     counter += 1
-#     print(str(counter)+" out of "+total)
-#     patch_uk(skus[i], Marketplaces.SE.marketplace_id, file_name)
+file_name = "in_kw_patch.json"
+skus = select_mktplc("sv", file_name)
+counter = 0
+total = str(len(skus))
+for i in range(0, len(skus)):
+    counter += 1
+    print(str(counter)+" out of "+total)
+    patch_uk(skus[i], Marketplaces.SE.marketplace_id, file_name)
