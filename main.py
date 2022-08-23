@@ -9,34 +9,19 @@ from googletrans import Translator
 trans = Translator()
 config = ConfigParser()
 config.read(".config.txt")
-credentials = dict(config['default'])
-listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.UK)
+credentials = dict(config['US'])
+# seller id us: ARF5K9J5BZD8E
+# seller id eu: A2YSV8HF6GQ3SP
+listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
 listing_us = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
-types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.UK)
+types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.US)
 
-# xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A1F83G8C2ARO7P'])
+# xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A2EUQ1WTGCTBG2'])
 # print(xdxd)
 # xd = types.search_definitions_product_types(marketplaceIds=['A1F83G8C2ARO7P'])
 # for i in xd.payload['productTypes']:
 #     print(i['name'])
 
-
-# def add_item_uk():
-#     file = open('test3.json', "r+")
-#     body = json.load(file)
-#     resp = listing.put_listings_item(sellerId='A2YSV8HF6GQ3SP', sku='EWP-SATURN-CER-2', body=body,
-#                                      marketplaceIds=['A1F83G8C2ARO7P'])
-#     print(resp)
-#     file.close()
-#
-#
-# def add_item_us():
-#     file2 = open('test2.json', "r+")
-#     body2 = json.load(file2)
-#     resp = listing.put_listings_item(sellerId='A2YSV8HF6GQ3SP', sku='EWP-SATURN-CER-2', body=body2,
-#                                      marketplaceIds=['ATVPDKIKX0DER'])
-#     print(resp)
-#     file2.close()
 
 def change_marketplace(doc, c_code, t_code):
     if t_code:
@@ -75,6 +60,12 @@ def change_marketplace(doc, c_code, t_code):
     elif c_code == "au":
         doc = re.sub('("\w\w_\w\w)"', '"en_AU"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A39IBJ37TRP1C6"', str(doc))
+    elif c_code == "ca":
+        doc = re.sub('("\w\w_\w\w)"', '"en_CA"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A2EUQ1WTGCTBG2"', str(doc))
+    elif c_code == "mx":
+        doc = re.sub('("\w\w_\w\w)"', '"es_MX"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1AM78C64UM0Y8"', str(doc))
 
     return doc
 
@@ -84,7 +75,7 @@ def patch_uk(sku, mktplc_id, f_name):
     ##############Check Item###################
     text = ""
     try:
-        text = listing.get_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku,
+        text = listing.get_listings_item(sellerId='ARF5K9J5BZD8E', sku=sku,
                                          marketplaceIds=[mktplc_id]).payload['summaries'][0]['itemName']
 
         # print(text)
@@ -94,34 +85,78 @@ def patch_uk(sku, mktplc_id, f_name):
     ###########################################
 
     ##############Edit Attributes##############
-    # text = text.replace("eworldpartner ", "")
-    # color = re.search(" (\w+) - ", text)
-    # if color:
-    #     color = color.group()
-    #     color = color[1:len(color)-3]
-    # else:
-    #     color = ""
-    #
-    # with open(f_name, 'r+', encoding="utf-8") as file:
-    #     data = file.read()
-    # with open(f_name, 'w', encoding="utf-8") as file:
-    #     try:
-    #         text = text.encode('utf', 'ignore').decode('utf')
-    #         data = re.sub('color",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-    #                       'color",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + color.title() + '"', data)
-    #         file.writelines(data)
-    #     except:
-    #         text = text.encode('1252', 'ignore').decode('1252')
-    #         data = re.sub('color",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-    #                       'color",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + color.title() + '"', data)
-    #         file.writelines(data)
-    #     print(text)
+    text = text.replace('"', "'")
+    text = text.replace("eworldpartner ", "")
+    text = text.replace("eworldpartner", "")
+    text = text.replace("EWP ", "")
+    text = text.replace(" -", ",")
+    if "Suds Enjoy" in text:
+        text = text.replace("Suds Enjoy ", "")
+        text += " - Suds Enjoy"
+    elif "Dermokil" in text:
+        text = text.replace("Dermokil ", "")
+        text += " - Dermokil"
+    elif "Ruel Design" in text:
+        text = text.replace("Ruel Design ", "")
+        text += " - Ruel Design"
+    elif "Akinalbella" in text:
+        text = text.replace("Akinalbella ", "")
+        text += " - Akinalbella"
+    elif "Muslin & Towel" in text:
+        text = text.replace("Muslin & Towel ", "")
+        text += " - Muslin & Towel"
+    elif "Latife" in text:
+        text = text.replace("Latife ", "")
+        text += " - Latife"
+    elif "Halil Onat" in text:
+        text = text.replace("Halil Onat ", "")
+        text += " - Halil Onat"
+    elif "Homm Life" in text:
+        text = text.replace("Homm Life ", "")
+        text += " - Homm Life"
+    elif "Iva Natura" in text:
+        text = text.replace("Iva Natura ", "")
+        text += " - Iva Natura"
+    elif "Kutahya Porcelain" in text:
+        text = text.replace("Kutahya Porcelain ", "")
+        text = text.replace(" Kutahya Porcelain", "")
+        text += " - Kutahya Porcelain"
+    elif "Kutahya Porselen" in text:
+        text = text.replace("Kutahya Porselen ", "")
+        text += " - Kutahya Porcelain"
+    elif "Sakin Leather Goods" in text:
+        text = text.replace("Sakin Leather Goods ", "")
+        text += " - Sakin Leather Goods"
+    elif "Pasabahce" in text:
+        text = text.replace("Pasabahce ", "")
+        text += " - Pasabahce"
+    elif "Confetti" in text:
+        text = text.replace("Confetti ", "")
+        text += " - Confetti"
+    elif "Pufai" in text:
+        text = text.replace("Pufai ", "")
+        text += " - Pufai"
+
+    with open(f_name, 'r+', encoding="utf-8") as file:
+        data = file.read()
+    with open(f_name, 'w', encoding="utf-8") as file:
+        try:
+            text = text.encode('utf', 'ignore').decode('utf')
+            data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
+                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
+            file.writelines(data)
+        except:
+            text = text.encode('1252', 'ignore').decode('1252')
+            data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
+                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
+            file.writelines(data)
+        print(text)
     ###########################################
 
     ###############Send Request################
     file = open(f_name, "r+", encoding="utf-8")
     body = json.load(file)
-    resp = listing.patch_listings_item(sellerId='A2YSV8HF6GQ3SP', sku=sku, body=body,
+    resp = listing.patch_listings_item(sellerId='ARF5K9J5BZD8E', sku=sku, body=body,
                                        marketplaceIds=[mktplc_id])
     print(resp)
     file.close()
@@ -134,7 +169,7 @@ def select_mktplc(ctry_code, f_name):
 
     with open(f_name, 'r+', encoding="utf-8") as file:
         data = file.read()
-        if ctry_code == "gb" or ctry_code == "au" or ctry_code == "us":
+        if ctry_code == "gb" or ctry_code == "au" or ctry_code == "us" or ctry_code == "ca":
             data = change_marketplace(data, ctry_code, "en")
         else:
             data = change_marketplace(data, ctry_code, ctry_code)
@@ -146,10 +181,10 @@ def select_mktplc(ctry_code, f_name):
 
 
 file_name = "in_kw_patch.json"
-skus = select_mktplc("sv", file_name)
+skus = select_mktplc("ca", file_name)
 counter = 0
 total = str(len(skus))
 for i in range(0, len(skus)):
     counter += 1
     print(str(counter)+" out of "+total)
-    patch_uk(skus[i], Marketplaces.SE.marketplace_id, file_name)
+    patch_uk(skus[i], Marketplaces.CA.marketplace_id, file_name)
