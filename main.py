@@ -9,11 +9,11 @@ from googletrans import Translator
 trans = Translator()
 config = ConfigParser()
 config.read(".config.txt")
-credentials = dict(config['US'])
+credentials = dict(config['AU'])
 # seller id us: ARF5K9J5BZD8E
+# seller id au: A1YMU57VS9K367
 # seller id eu: A2YSV8HF6GQ3SP
-listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
-listing_us = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
+listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.AU)
 types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.US)
 
 # xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A2EUQ1WTGCTBG2'])
@@ -75,7 +75,7 @@ def patch_uk(sku, mktplc_id, f_name):
     ##############Check Item###################
     text = ""
     try:
-        text = listing.get_listings_item(sellerId='ARF5K9J5BZD8E', sku=sku,
+        text = listing.get_listings_item(sellerId='A1YMU57VS9K367', sku=sku,
                                          marketplaceIds=[mktplc_id]).payload['summaries'][0]['itemName']
 
         # print(text)
@@ -89,10 +89,17 @@ def patch_uk(sku, mktplc_id, f_name):
     text = text.replace("eworldpartner ", "")
     text = text.replace("eworldpartner", "")
     text = text.replace("EWP ", "")
+    text = text.replace("Ewp ", "")
     text = text.replace(" -", ",")
     if "Suds Enjoy" in text:
         text = text.replace("Suds Enjoy ", "")
         text += " - Suds Enjoy"
+    elif "Oguzhan Shoes" in text:
+        text = text.replace("Oguzhan Shoes ", "")
+        if "(" in text:
+            text = text.replace("(", "- Oguzhan Shoes (")
+        else:
+            text += " - Oguzhan Shoes"
     elif "Dermokil" in text:
         text = text.replace("Dermokil ", "")
         text += " - Dermokil"
@@ -102,8 +109,11 @@ def patch_uk(sku, mktplc_id, f_name):
     elif "Akinalbella" in text:
         text = text.replace("Akinalbella ", "")
         text += " - Akinalbella"
-    elif "Muslin & Towel" in text:
-        text = text.replace("Muslin & Towel ", "")
+    elif "Muslin" in text:
+        if "Muslin & Towel" in text:
+            text = text.replace("Muslin & Towel ", "")
+        else:
+            text = text.replace("Muslin ", "")
         text += " - Muslin & Towel"
     elif "Latife" in text:
         text = text.replace("Latife ", "")
@@ -156,7 +166,7 @@ def patch_uk(sku, mktplc_id, f_name):
     ###############Send Request################
     file = open(f_name, "r+", encoding="utf-8")
     body = json.load(file)
-    resp = listing.patch_listings_item(sellerId='ARF5K9J5BZD8E', sku=sku, body=body,
+    resp = listing.patch_listings_item(sellerId='A1YMU57VS9K367', sku=sku, body=body,
                                        marketplaceIds=[mktplc_id])
     print(resp)
     file.close()
@@ -181,10 +191,10 @@ def select_mktplc(ctry_code, f_name):
 
 
 file_name = "in_kw_patch.json"
-skus = select_mktplc("ca", file_name)
+skus = select_mktplc("au", file_name)
 counter = 0
 total = str(len(skus))
 for i in range(0, len(skus)):
     counter += 1
     print(str(counter)+" out of "+total)
-    patch_uk(skus[i], Marketplaces.CA.marketplace_id, file_name)
+    patch_uk(skus[i], Marketplaces.AU.marketplace_id, file_name)
