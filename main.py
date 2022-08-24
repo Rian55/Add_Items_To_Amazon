@@ -9,18 +9,21 @@ from googletrans import Translator
 trans = Translator()
 config = ConfigParser()
 config.read(".config.txt")
-credentials = dict(config['AU'])
+credentials = dict(config['JP'])
 # seller id us: ARF5K9J5BZD8E
 # seller id au: A1YMU57VS9K367
 # seller id eu: A2YSV8HF6GQ3SP
-listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.AU)
-types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.US)
+# seller id tr: A3EJANLBKLUQ79
+# seller id sg: A2PXFALX8WSFCY
+# seller id jp: A91TNPYG4TSAR
+listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.SG)
+types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.JP)
 
-# xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A2EUQ1WTGCTBG2'])
+# xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A1VC38T7YXB528'])
 # print(xdxd)
-# xd = types.search_definitions_product_types(marketplaceIds=['A1F83G8C2ARO7P'])
-# for i in xd.payload['productTypes']:
-#     print(i['name'])
+xd = types.search_definitions_product_types(marketplaceIds=['A1VC38T7YXB528'])
+for i in xd.payload['productTypes']:
+    print(i['name'])
 
 
 def change_marketplace(doc, c_code, t_code):
@@ -66,6 +69,15 @@ def change_marketplace(doc, c_code, t_code):
     elif c_code == "mx":
         doc = re.sub('("\w\w_\w\w)"', '"es_MX"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1AM78C64UM0Y8"', str(doc))
+    elif c_code == "tr":
+        doc = re.sub('("\w\w_\w\w)"', '"tr_TR"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A33AVAJ2PDY3EV"', str(doc))
+    elif c_code == "sg":
+        doc = re.sub('("\w\w_\w\w)"', '"en_SG"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A19VAU5U5O7RUS"', str(doc))
+    elif c_code == "jp":
+        doc = re.sub('("\w\w_\w\w)"', '"jp_JP"', str(doc))
+        doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1VC38T7YXB528"', str(doc))
 
     return doc
 
@@ -75,7 +87,7 @@ def patch_uk(sku, mktplc_id, f_name):
     ##############Check Item###################
     text = ""
     try:
-        text = listing.get_listings_item(sellerId='A1YMU57VS9K367', sku=sku,
+        text = listing.get_listings_item(sellerId='A2PXFALX8WSFCY', sku=sku,
                                          marketplaceIds=[mktplc_id]).payload['summaries'][0]['itemName']
 
         # print(text)
@@ -85,12 +97,17 @@ def patch_uk(sku, mktplc_id, f_name):
     ###########################################
 
     ##############Edit Attributes##############
+    text = text.replace(" Please message for size information", "")
+    text = text.replace(" -", "")
+    text = text.replace(" –", "")
     text = text.replace('"', "'")
+    text = text.replace(',', "")
+    text = text.replace('.', "")
     text = text.replace("eworldpartner ", "")
     text = text.replace("eworldpartner", "")
+    text = text.replace("eWorldPartner ", "")
     text = text.replace("EWP ", "")
     text = text.replace("Ewp ", "")
-    text = text.replace(" -", ",")
     if "Suds Enjoy" in text:
         text = text.replace("Suds Enjoy ", "")
         text += " - Suds Enjoy"
@@ -115,6 +132,9 @@ def patch_uk(sku, mktplc_id, f_name):
         else:
             text = text.replace("Muslin ", "")
         text += " - Muslin & Towel"
+    elif "Müslin" in text:
+        text = text.replace("Müslin ", "")
+        text += " - Müslin"
     elif "Latife" in text:
         text = text.replace("Latife ", "")
         text += " - Latife"
@@ -127,9 +147,11 @@ def patch_uk(sku, mktplc_id, f_name):
     elif "Iva Natura" in text:
         text = text.replace("Iva Natura ", "")
         text += " - Iva Natura"
-    elif "Kutahya Porcelain" in text:
+    elif "Kutahya" in text:
         text = text.replace("Kutahya Porcelain ", "")
+        text = text.replace(" de porcelana Kutahya", "")
         text = text.replace(" Kutahya Porcelain", "")
+        text = text.replace("Kutahya ", "")
         text += " - Kutahya Porcelain"
     elif "Kutahya Porselen" in text:
         text = text.replace("Kutahya Porselen ", "")
@@ -140,12 +162,19 @@ def patch_uk(sku, mktplc_id, f_name):
     elif "Pasabahce" in text:
         text = text.replace("Pasabahce ", "")
         text += " - Pasabahce"
-    elif "Confetti" in text:
+    elif "Confetti" in text or "Confeti" in text or "confeti" in text:
         text = text.replace("Confetti ", "")
+        text = text.replace("Confeti ", "")
+        text = text.replace(" de confeti", "")
         text += " - Confetti"
     elif "Pufai" in text:
         text = text.replace("Pufai ", "")
         text += " - Pufai"
+    elif "Doxa" in text:
+        text = text.replace("Doxa ", "")
+        text += " - Doxa"
+
+    text = text.title()
 
     with open(f_name, 'r+', encoding="utf-8") as file:
         data = file.read()
@@ -166,7 +195,7 @@ def patch_uk(sku, mktplc_id, f_name):
     ###############Send Request################
     file = open(f_name, "r+", encoding="utf-8")
     body = json.load(file)
-    resp = listing.patch_listings_item(sellerId='A1YMU57VS9K367', sku=sku, body=body,
+    resp = listing.patch_listings_item(sellerId='A2PXFALX8WSFCY', sku=sku, body=body,
                                        marketplaceIds=[mktplc_id])
     print(resp)
     file.close()
@@ -179,8 +208,10 @@ def select_mktplc(ctry_code, f_name):
 
     with open(f_name, 'r+', encoding="utf-8") as file:
         data = file.read()
-        if ctry_code == "gb" or ctry_code == "au" or ctry_code == "us" or ctry_code == "ca":
+        if ctry_code == "gb" or ctry_code == "au" or ctry_code == "us" or ctry_code == "ca" or ctry_code == "sg":
             data = change_marketplace(data, ctry_code, "en")
+        elif ctry_code == "mx":
+            data = change_marketplace(data, ctry_code, "es")
         else:
             data = change_marketplace(data, ctry_code, ctry_code)
 
@@ -190,11 +221,11 @@ def select_mktplc(ctry_code, f_name):
     return skus
 
 
-file_name = "in_kw_patch.json"
-skus = select_mktplc("au", file_name)
-counter = 0
-total = str(len(skus))
-for i in range(0, len(skus)):
-    counter += 1
-    print(str(counter)+" out of "+total)
-    patch_uk(skus[i], Marketplaces.AU.marketplace_id, file_name)
+# file_name = "in_kw_patch.json"
+# skus = select_mktplc("sg", file_name)
+# counter = 0
+# total = str(len(skus))
+# for i in range(0, len(skus)):
+#     counter += 1
+#     print(str(counter)+" out of "+total)
+#     patch_uk(skus[i], Marketplaces.SG.marketplace_id, file_name)

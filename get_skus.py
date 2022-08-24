@@ -1,6 +1,6 @@
 import re
 
-file = open("html.txt", "r")
+file = open("html.txt", "r", encoding="utf-8")
 html_lines = file.read().splitlines()
 file.close()
 skus = []
