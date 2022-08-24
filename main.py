@@ -9,21 +9,21 @@ from googletrans import Translator
 trans = Translator()
 config = ConfigParser()
 config.read(".config.txt")
-credentials = dict(config['JP'])
+credentials = dict(config['US'])
 # seller id us: ARF5K9J5BZD8E
 # seller id au: A1YMU57VS9K367
 # seller id eu: A2YSV8HF6GQ3SP
 # seller id tr: A3EJANLBKLUQ79
 # seller id sg: A2PXFALX8WSFCY
 # seller id jp: A91TNPYG4TSAR
-listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.SG)
-types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.JP)
 
-# xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A1VC38T7YXB528'])
+types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.US)
+
+# xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['ATVPDKIKX0DER'])
 # print(xdxd)
-xd = types.search_definitions_product_types(marketplaceIds=['A1VC38T7YXB528'])
-for i in xd.payload['productTypes']:
-    print(i['name'])
+# xd = types.search_definitions_product_types(marketplaceIds=['A1VC38T7YXB528'])
+# for i in xd.payload['productTypes']:
+#     print(i['name'])
 
 
 def change_marketplace(doc, c_code, t_code):
@@ -82,121 +82,43 @@ def change_marketplace(doc, c_code, t_code):
     return doc
 
 
-def patch_uk(sku, mktplc_id, f_name):
+def patch_uk(sku, mktplc, f_name):
+    listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
     ##############Check Item###################
     text = ""
     try:
-        text = listing.get_listings_item(sellerId='A2PXFALX8WSFCY', sku=sku,
-                                         marketplaceIds=[mktplc_id]).payload['summaries'][0]['itemName']
+        text = listing.get_listings_item(sellerId='ARF5K9J5BZD8E', sku=sku,
+                                         marketplaceIds=[mktplc.marketplace_id]).payload['summaries'][0]['itemName']
 
-        # print(text)
+        print(text)
     except:
         print("not found " + sku)
         return
     ###########################################
 
     ##############Edit Attributes##############
-    text = text.replace(" Please message for size information", "")
-    text = text.replace(" -", "")
-    text = text.replace(" –", "")
-    text = text.replace('"', "'")
-    text = text.replace(',', "")
-    text = text.replace('.', "")
-    text = text.replace("eworldpartner ", "")
-    text = text.replace("eworldpartner", "")
-    text = text.replace("eWorldPartner ", "")
-    text = text.replace("EWP ", "")
-    text = text.replace("Ewp ", "")
-    if "Suds Enjoy" in text:
-        text = text.replace("Suds Enjoy ", "")
-        text += " - Suds Enjoy"
-    elif "Oguzhan Shoes" in text:
-        text = text.replace("Oguzhan Shoes ", "")
-        if "(" in text:
-            text = text.replace("(", "- Oguzhan Shoes (")
-        else:
-            text += " - Oguzhan Shoes"
-    elif "Dermokil" in text:
-        text = text.replace("Dermokil ", "")
-        text += " - Dermokil"
-    elif "Ruel Design" in text:
-        text = text.replace("Ruel Design ", "")
-        text += " - Ruel Design"
-    elif "Akinalbella" in text:
-        text = text.replace("Akinalbella ", "")
-        text += " - Akinalbella"
-    elif "Muslin" in text:
-        if "Muslin & Towel" in text:
-            text = text.replace("Muslin & Towel ", "")
-        else:
-            text = text.replace("Muslin ", "")
-        text += " - Muslin & Towel"
-    elif "Müslin" in text:
-        text = text.replace("Müslin ", "")
-        text += " - Müslin"
-    elif "Latife" in text:
-        text = text.replace("Latife ", "")
-        text += " - Latife"
-    elif "Halil Onat" in text:
-        text = text.replace("Halil Onat ", "")
-        text += " - Halil Onat"
-    elif "Homm Life" in text:
-        text = text.replace("Homm Life ", "")
-        text += " - Homm Life"
-    elif "Iva Natura" in text:
-        text = text.replace("Iva Natura ", "")
-        text += " - Iva Natura"
-    elif "Kutahya" in text:
-        text = text.replace("Kutahya Porcelain ", "")
-        text = text.replace(" de porcelana Kutahya", "")
-        text = text.replace(" Kutahya Porcelain", "")
-        text = text.replace("Kutahya ", "")
-        text += " - Kutahya Porcelain"
-    elif "Kutahya Porselen" in text:
-        text = text.replace("Kutahya Porselen ", "")
-        text += " - Kutahya Porcelain"
-    elif "Sakin Leather Goods" in text:
-        text = text.replace("Sakin Leather Goods ", "")
-        text += " - Sakin Leather Goods"
-    elif "Pasabahce" in text:
-        text = text.replace("Pasabahce ", "")
-        text += " - Pasabahce"
-    elif "Confetti" in text or "Confeti" in text or "confeti" in text:
-        text = text.replace("Confetti ", "")
-        text = text.replace("Confeti ", "")
-        text = text.replace(" de confeti", "")
-        text += " - Confetti"
-    elif "Pufai" in text:
-        text = text.replace("Pufai ", "")
-        text += " - Pufai"
-    elif "Doxa" in text:
-        text = text.replace("Doxa ", "")
-        text += " - Doxa"
-
-    text = text.title()
-
-    with open(f_name, 'r+', encoding="utf-8") as file:
-        data = file.read()
-    with open(f_name, 'w', encoding="utf-8") as file:
-        try:
-            text = text.encode('utf', 'ignore').decode('utf')
-            data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
-            file.writelines(data)
-        except:
-            text = text.encode('1252', 'ignore').decode('1252')
-            data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-                          'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
-            file.writelines(data)
-        print(text)
+    # with open(f_name, 'r+', encoding="utf-8") as file:
+    #     data = file.read()
+    # with open(f_name, 'w', encoding="utf-8") as file:
+    #     try:
+    #         text = text.encode('utf', 'ignore').decode('utf')
+    #         data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
+    #                       'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
+    #         file.writelines(data)
+    #     except:
+    #         text = text.encode('1252', 'ignore').decode('1252')
+    #         data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
+    #                       'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
+    #         file.writelines(data)
+    #     print(text)
     ###########################################
 
     ###############Send Request################
     file = open(f_name, "r+", encoding="utf-8")
     body = json.load(file)
-    resp = listing.patch_listings_item(sellerId='A2PXFALX8WSFCY', sku=sku, body=body,
-                                       marketplaceIds=[mktplc_id])
+    resp = listing.patch_listings_item(sellerId='ARF5K9J5BZD8E', sku=sku, body=body,
+                                       marketplaceIds=[mktplc.marketplace_id])
     print(resp)
     file.close()
     ###########################################
@@ -221,11 +143,11 @@ def select_mktplc(ctry_code, f_name):
     return skus
 
 
-# file_name = "in_kw_patch.json"
-# skus = select_mktplc("sg", file_name)
-# counter = 0
-# total = str(len(skus))
-# for i in range(0, len(skus)):
-#     counter += 1
-#     print(str(counter)+" out of "+total)
-#     patch_uk(skus[i], Marketplaces.SG.marketplace_id, file_name)
+file_name = "fill_wallets.json"
+skus = select_mktplc("mx", file_name)
+counter = 0
+total = str(len(skus))
+for i in range(0, len(skus)):
+    counter += 1
+    print(str(counter)+" out of "+total)
+    patch_uk(skus[i], Marketplaces.MX, file_name)
