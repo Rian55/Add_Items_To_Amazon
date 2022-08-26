@@ -11,7 +11,7 @@
     ],
     "item_name": [
       {
-        "value": "Saturn Ceramic, Modern, Handmade, Specially Designed, Mixed Pattern, Ceramic Flower Pot",
+        "value": "Modern, Handmade, Specially Designed, Mixed Pattern, Ceramic, Flowerpot, flower pot, home and garden, decoration",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -43,15 +43,9 @@
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
-    "main_offer_image_locator": [
-      {
-        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/B0B8N61TX4.jpg",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
     "main_product_image_locator": [
       {
-        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/B0B8N61TX4.jpg",
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/SCER-FPOT-001.jpg",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -63,7 +57,7 @@
     ],
     "size": [
       {
-        "value": 41,
+        "value": "Small",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -82,23 +76,17 @@
     "item_package_dimensions": [
       {
         "length": {
-          "value": 10,
+          "value": 14,
           "unit": "centimeters"
         },
         "width": {
-          "value": 10,
+          "value": 14,
           "unit": "centimeters"
         },
         "height": {
-          "value": 10,
+          "value": 14,
           "unit": "centimeters"
         },
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "model_name": [
-      {
-        "value": "Yellow",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -140,34 +128,34 @@
     ],
     "color": [
       {
-        "value": "Yellow",
+        "value": "Multicolor",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "externally_assigned_product_identifier": [
       {
-        "value": "4336253351450",
+        "value": "8576660878492",
         "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "item_package_weight": [
       {
-        "value": "10",
-        "unit": "pounds",
+        "value": "1",
+        "unit": "kilograms",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "recommended_browse_nodes": [
       {
-        "value": "2458745557",
+        "value": "FLOWERPOT",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "number_of_items": [
       {
-        "value": 12,
+        "value": 1,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -175,25 +163,19 @@
       {
         "height":
           {
-            "value": 10,
+            "value": 9,
             "unit": "centimeters"
           },
         "length":
           {
-            "value": 5,
+            "value": 11,
             "unit": "centimeters"
           },
         "width":
           {
-            "value": 9,
+            "value": 11,
             "unit": "centimeters"
           },
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "model_number": [
-      {
-        "value": "XDXD123",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],

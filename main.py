@@ -4,30 +4,46 @@ from sp_api.base import Marketplaces
 from sp_api.api import ListingsItems
 from sp_api.api import ProductTypeDefinitions
 import re
+import ean13
 from googletrans import Translator
+import csv
 
 trans = Translator()
+ups_codes = {
+    "0": [Marketplaces.TR],
+    "1": [Marketplaces.DE],
+    "2": [Marketplaces.IT, Marketplaces.UK, Marketplaces.FR, Marketplaces.ES, Marketplaces.NL],
+    "3": [Marketplaces.PL, Marketplaces.SE],
+    "4": [],
+    "5": [Marketplaces.MX, Marketplaces.CA, Marketplaces.US],
+    "6": [Marketplaces.SG],
+    "7": [Marketplaces.AU],
+    "8": [Marketplaces.AE, Marketplaces.JP]
+}
 
 
 def get_attributes(product_type="", mktplc=Marketplaces.UK):
-    credentials = get_creds(mktplc=mktplc)
-    types = ProductTypeDefinitions(credentials=credentials, marketplace=Marketplaces.JP)
+    credentials, s_id = get_creds(mktplc=mktplc)
+    types = ProductTypeDefinitions(credentials=credentials, marketplace=mktplc)
 
-    xd = types.search_definitions_product_types(marketplaceIds=['A1VC38T7YXB528'])
+    if product_type == "":
+        xd = types.search_definitions_product_types(marketplaceIds=[mktplc.marketplace_id])
+        count = 0
+        for i in xd.payload['productTypes']:
+            count += 1
+            print(str(count) + " " + i['name'])
+        choice = input()
 
-    for i in xd.payload['productTypes']:
-        print(i['name'])
-
-    xdxd = types.get_definitions_product_type(productType="RUG", marketplaceIds=['A1VC38T7YXB528'])
-    print(xdxd)
-    attributes = []
-    for i in xdxd.payload['propertyGroups']:
-        prop_names = xdxd.payload['propertyGroups'][i]['propertyNames']
-        for name in prop_names:
-            attributes.append(name)
-
-    for i in attributes:
-        print(i)
+    # xdxd = types.get_definitions_product_type(productType=product_type, marketplaceIds=[mktplc.marketplace_id])
+    # print(xdxd)
+    # attributes = []
+    # for i in xdxd.payload['propertyGroups']:
+    #     prop_names = xdxd.payload['propertyGroups'][i]['propertyNames']
+    #     for name in prop_names:
+    #         attributes.append(name)
+    #
+    # for i in attributes:
+    #     print(i)
 
 
 def get_creds(mktplc):
@@ -172,11 +188,41 @@ def add_item_uk(mktplc):
     file.close()
 
 
-# file_name = "in_kw_patch.json"
-# skus = select_mktplc("jp", file_name)
-# counter = 0
-# total = str(len(skus))
-# for i in range(0, len(skus)):
-#     counter += 1
-#     print(str(counter)+" out of "+total)
-#     patch_uk(skus[i], Marketplaces.JP, file_name)
+color_var = {
+    "1": ["multicolor", "patterned"],
+    "2": ["multicolor", "patterned"],
+    "3": ["yellow", "dotted"],
+    "4": ["white and gray", "striped"],
+    "5": ["red", "striped"],
+    "6": ["black and white", "striped"],
+    "7": ["light blue and white", "striped"],
+    "8": ["black", "striped"],
+    "9": ["black and grey", "striped"],
+    "10": ["white and grey", "striped"],
+    "11": ["brown", "striped"],
+    "12": ["white", "patterned"],
+    "13": ["white", "patterned"],
+    "14": ["green and beige", "striped"],
+    "15": ["grey and white", "striped"],
+    "16": ["black", "patterned"],
+    "17": ["black", "patterned"],
+    "18": ["multicolor", "patterned"],
+    "19": ["multicolor", "patterned"],
+    "20": ["white", "patterned"],
+    "21": ["green and beige", "striped"],
+    "22": ["black", "striped"],
+    "23": ["black and white", "striped"],
+    "24": ["grey and black", "striped"],
+    "25": ["white and black", "striped"],
+    "26": ["black and grey", "striped"],
+    "27": ["multicolor", "patterned"],
+    "28": ["multicolor", "patterned"],
+    "29": ["beige", "striped"],
+    "30": ["multicolor", "patterned"]
+}
+
+get_attributes()
+# with open('saturn_cer.csv', newline='') as csvfile:
+#     reader = csv.DictReader(csvfile)
+#     for row in reader:
+#         print(row)
