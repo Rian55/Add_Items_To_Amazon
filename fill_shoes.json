@@ -1,0 +1,240 @@
+{
+  "productType":"SHOES",
+  "patches":[
+    {
+      "op": "replace",
+      "path": "/attributes/item_name",
+	  "value": [
+		{
+		  "value": "Verona Weiches Naturleder Orthopädischer Komfort Stilvolle Herrenschuhe - Oguzhan Schuhe (Braun, Eu_Footwear_Size_System, Adult, Numeric, Medium, Numeric_42)",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/product_tax_code",
+      "value":[
+        {
+		  "value": "A_GEN_STANDARD",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/gift_options",
+      "value":[
+        {
+		  "can_be_messaged": true,
+          "can_be_wrapped": true,
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/special_feature",
+      "value":[
+        {
+		  "value": "Flexibel",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Atmungsaktiv",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Leicht",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/lifestyle",
+      "value":[
+        {
+		  "value": "Mode Lässig",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/lining_description",
+      "value":[
+        {
+		  "value": "Leder",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/pattern_type",
+      "value":[
+        {
+		  "value": "Fest",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/occasion_type",
+      "value":[
+        {
+		  "value": "Hochzeit",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Arbeit",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Abschlussball",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Geburtstag",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Das Erntedankfest",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Valentinstag",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Datum",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/theme",
+      "value":[
+        {
+		  "value": "Datum",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Arbeit",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Party",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Ferien",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Gelegenheit",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/toe_style",
+      "value":[
+        {
+		  "value": "Einfache Zehe",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/is_expiration_dated_product",
+      "value":[
+        {
+		  "value": false,
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/insole",
+      "value":[
+        {
+		  "material":[
+          {
+            "language_tag": "de_DE",
+            "value": "Leder"
+          }],
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/seasons",
+      "value":[
+        {
+		  "value": "Herbst",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Frühling",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        },
+        {
+		  "value": "Sommer",
+          "language_tag": "de_DE",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/shoe_type",
+      "value":[
+        {
+		  "value": "loafer",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/item_weight",
+      "value":[
+        {
+		  "value": "1500",
+          "unit": "grams",
+          "marketplace_id": "A1PA6795UKMFR9"
+        }
+      ]
+    }
+  ]
+}

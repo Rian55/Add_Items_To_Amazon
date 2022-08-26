@@ -1,6 +1,7 @@
 *.xml
-*.json
 *.txt
+*.xlsx
+*.csv
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml

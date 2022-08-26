@@ -1,0 +1,132 @@
+{
+  "productType":"WALLET",
+  "patches":[
+    {
+      "op":"replace",
+      "path":"/attributes/product_tax_code",
+      "value":[
+        {
+		  "value": "A_GEN_STANDARD",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/gift_options",
+      "value":[
+        {
+		  "can_be_messaged": true,
+          "can_be_wrapped": true,
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/special_feature",
+      "value":[
+        {
+		  "value": "Non Stick",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Sustainable",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Water Resistant",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_type_name",
+      "value": [
+        {
+		  "value": "Dinner Plate",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/number_of_items",
+      "value": [
+        {
+		  "value": 1,
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_weight",
+      "value": [
+        {
+		  "value": 300,
+          "unit": "grams",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_dimensions",
+      "value": [
+        {
+          "width": {
+            "value": 12,
+            "unit": "centimeters"
+          },
+          "height": {
+            "value": 4,
+            "unit": "centimeters"
+          },
+          "length": {
+            "value": 12,
+            "unit": "centimeters"
+          },
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_package_dimensions",
+      "value": [
+        {
+          "width": {
+            "value": 15,
+            "unit": "centimeters"
+          },
+          "height": {
+            "value": 30,
+            "unit": "centimeters"
+          },
+          "length": {
+            "value": 15,
+            "unit": "centimeters"
+          },
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_package_weight",
+      "value": [
+        {
+		  "value": 9,
+          "unit": "kilograms",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "productType":"RUG",
+  "patches":[
+    {
+      "op":"replace",
+      "path":"/attributes/product_tax_code",
+      "value":[
+        {
+		  "value": "A_GEN_STANDARD",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/gift_options",
+      "value":[
+        {
+		  "can_be_messaged": true,
+          "can_be_wrapped": true,
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/special_feature",
+      "value":[
+        {
+		  "value": "Fluffy",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Non-Slip",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Washable",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/target_gender",
+      "value": [
+        {
+		  "value": "unisex",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/material",
+      "value": [
+        {
+		  "value": "Polyamide",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_package_quantity",
+      "value": [
+        {
+		  "value": 1,
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/water_resistance_level",
+      "value": [
+        {
+		  "value": "not_water_resistant",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_shape",
+      "value": [
+        {
+		  "value": "Rectangular",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/weave_type",
+      "value": [
+        {
+		  "value": "Tufted Weave",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/care_instructions",
+      "value": [
+        {
+		  "value": "Dry Cleaning",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Hand Washing",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/is_stain_resistant",
+      "value": [
+        {
+		  "value": false,
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/room_type",
+      "value": [
+        {
+		  "value": "Bedroom",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Conference Room",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Dining Room",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Corridor",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Home Office",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Cuisine",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Salon",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Game Room",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_thickness",
+      "value": [
+        {
+		  "decimal_value": 2.3,
+          "unit": "centimeters",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/rug_form_type",
+      "value": [
+        {
+		  "value": "area_rug",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/indoor_outdoor_usage",
+      "value": [
+        {
+		  "value": "indoor",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_weight",
+      "value": [
+        {
+		  "value": "4",
+          "unit": "kilograms",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    }
+  ]
+}

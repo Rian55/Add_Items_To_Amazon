@@ -1,0 +1,151 @@
+{
+  "productType":"DISHWARE_PLATE",
+  "patches":[
+    {
+      "op":"replace",
+      "path":"/attributes/product_tax_code",
+      "value":[
+        {
+		  "value": "A_GEN_STANDARD",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/gift_options",
+      "value":[
+        {
+		  "can_be_messaged": true,
+          "can_be_wrapped": true,
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/special_feature",
+      "value":[
+        {
+		  "value": "Lightweight",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Waterproof",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+		  "value": "Scratch Resistant",
+          "language_tag": "en_US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/is_microwaveable",
+      "value":[
+        {
+		  "value": true,
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/is_dishwasher_safe",
+      "value":[
+        {
+		  "value": true,
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op":"replace",
+      "path":"/attributes/is_fragile",
+      "value":[
+        {
+		  "value": true,
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/number_of_items",
+      "value": [
+        {
+		  "value": 1,
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_weight",
+      "value": [
+        {
+		  "value": 200,
+          "unit": "grams",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_dimensions",
+      "value": [
+        {
+          "width": {
+            "value": 17,
+            "unit": "centimeters"
+          },
+          "height": {
+            "value": 6,
+            "unit": "centimeters"
+          },
+          "length": {
+            "value": 17,
+            "unit": "centimeters"
+          },
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_package_dimensions",
+      "value": [
+        {
+          "width": {
+            "value": 20,
+            "unit": "centimeters"
+          },
+          "height": {
+            "value": 15,
+            "unit": "centimeters"
+          },
+          "length": {
+            "value": 20,
+            "unit": "centimeters"
+          },
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/item_package_weight",
+      "value": [
+        {
+		  "value": 400,
+          "unit": "grams",
+          "marketplace_id": "ATVPDKIKX0DER"
+        }
+      ]
+    }
+  ]
+}
