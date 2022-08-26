@@ -176,14 +176,20 @@ def patch_uk(sku, mktplc, f_name):
     ###########################################
 
 
-def add_item_uk(mktplc):
+def add_item_uk(mktplc, f_name):
+    with open('saturn_cer.csv', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
+    # for row in reader:
+    #     print(row)
 
-    file = open('test3.json', "r+")
+    file = open('scer_fpot_add.json', "r+")
     body = json.load(file)
+    count = 0
+    sku = "SCER-FPOT-" + str(count)
     resp = listing.put_listings_item(sellerId=s_id, sku='EWP-SATURN-CER-2', body=body,
-                                     marketplaceIds=['A1F83G8C2ARO7P'])
+                                     marketplaceIds=[mktplc])
     print(resp)
     file.close()
 
@@ -221,8 +227,4 @@ color_var = {
     "30": ["multicolor", "patterned"]
 }
 
-get_attributes()
-# with open('saturn_cer.csv', newline='') as csvfile:
-#     reader = csv.DictReader(csvfile)
-#     for row in reader:
-#         print(row)
+# get_attributes()
