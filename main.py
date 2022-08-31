@@ -4,11 +4,13 @@ from sp_api.base import Marketplaces
 from sp_api.api import ListingsItems
 from sp_api.api import ProductTypeDefinitions
 import re
+from forex_python.converter import CurrencyRates
 import ean13
 from googletrans import Translator
 import csv
 
 trans = Translator()
+CURR_RATES = CurrencyRates()
 ups_codes = {
     "0": [Marketplaces.TR],
     "1": [Marketplaces.DE],
@@ -33,9 +35,10 @@ def get_attributes(product_type="", mktplc=Marketplaces.UK):
             count += 1
             print(str(count) + " " + i['name'])
         choice = input()
+        product_type = xd.payload['productTypes'][int(choice)-1]['name']
 
-    # xdxd = types.get_definitions_product_type(productType=product_type, marketplaceIds=[mktplc.marketplace_id])
-    # print(xdxd)
+    xdxd = types.get_definitions_product_type(productType=product_type, marketplaceIds=[mktplc.marketplace_id])
+    print(xdxd)
     # attributes = []
     # for i in xdxd.payload['propertyGroups']:
     #     prop_names = xdxd.payload['propertyGroups'][i]['propertyNames']
@@ -63,68 +66,110 @@ def get_creds(mktplc):
         return dict(config['EU']), dict(config['MID_EU'])['id']
 
 
-def change_marketplace(doc, mktplc):
+def change_price_details(doc, currency):
+    doc = re.sub('("currency": "\w+")', '"currency": "'+currency+'"', str(doc))
+    if currency != "USD":
+        price = re.search('"value_with_tax": \d+.\d+', doc).group()
+        price = price[price.find(": ") + 2:len(price)]
+        new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+        doc = re.sub('("value_with_tax": \d+.\d+)', '"value_with_tax": ' + str("{:.2f}".format(new_price)), str(doc))
+    return doc
+
+
+def change_marketplace(fname, mktplc):
     t_code = ""
+    with open(fname, "r", encoding="utf-8") as file:
+        doc = file.read()
 
     if mktplc == Marketplaces.UK:
         doc = re.sub('("\w\w_\w\w)"', '"en_GB"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1F83G8C2ARO7P"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "GBP")
         t_code = "en"
     elif mktplc == Marketplaces.US:
         doc = re.sub('("\w\w_\w\w)"', '"en_US"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "ATVPDKIKX0DER"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "USD")
         t_code = "en"
     elif mktplc == Marketplaces.DE:
         doc = re.sub('("\w\w_\w\w)"', '"de_DE"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1PA6795UKMFR9"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "EUR")
         t_code = "de"
     elif mktplc == Marketplaces.FR:
         doc = re.sub('("\w\w_\w\w)"', '"fr_FR"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A13V1IB3VIYZZH"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "EUR")
         t_code = "fr"
     elif mktplc == Marketplaces.IT:
         doc = re.sub('("\w\w_\w\w)"', '"it_IT"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "APJ6JRA9NG5V4"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "EUR")
         t_code = "it"
     elif mktplc == Marketplaces.ES:
         doc = re.sub('("\w\w_\w\w)"', '"es_ES"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1RKKUPIHCS9HS"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "EUR")
         t_code = "es"
     elif mktplc == Marketplaces.PL:
         doc = re.sub('("\w\w_\w\w)"', '"pl_PL"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1C3SOZRARQ6R3"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "PLN")
         t_code = "pl"
     elif mktplc == Marketplaces.SE:
         doc = re.sub('("\w\w_\w\w)"', '"sv_SE"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A2NODRKZP88ZB9"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "SEK")
         t_code = "sv"
     elif mktplc == Marketplaces.NL:
         doc = re.sub('("\w\w_\w\w)"', '"nl_NL"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1805IZSGTT6HS"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "EUR")
         t_code = "nl"
     elif mktplc == Marketplaces.AU:
         doc = re.sub('("\w\w_\w\w)"', '"en_AU"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A39IBJ37TRP1C6"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "AUD")
         t_code = "en"
     elif mktplc == Marketplaces.CA:
         doc = re.sub('("\w\w_\w\w)"', '"en_CA"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A2EUQ1WTGCTBG2"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "CAD")
         t_code = "en"
     elif mktplc == Marketplaces.MX:
         doc = re.sub('("\w\w_\w\w)"', '"es_MX"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1AM78C64UM0Y8"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "MXN")
         t_code = "es"
     elif mktplc == Marketplaces.TR:
         doc = re.sub('("\w\w_\w\w)"', '"tr_TR"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A33AVAJ2PDY3EV"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "TRY")
         t_code = "tr"
     elif mktplc == Marketplaces.SG:
         doc = re.sub('("\w\w_\w\w)"', '"en_SG"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A19VAU5U5O7RUS"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "SGD")
         t_code = "en"
     elif mktplc == Marketplaces.JP:
         doc = re.sub('("\w\w_\w\w)"', '"ja_JP"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1VC38T7YXB528"', str(doc))
+        if '"currency":' in doc:
+            doc = change_price_details(doc, "JPY")
         t_code = "ja"
 
     for x in re.finditer(': "(.+)",\n\s+"language_tag"', doc):
@@ -181,16 +226,25 @@ def add_item_uk(mktplc, f_name):
         reader = csv.DictReader(csvfile)
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
-    # for row in reader:
+    for row in reader:
+        size = row['size']
+        products = row['num'].split("-")
+        prices = []
+        for i in range(8):
+            prices.append(row[str(i)])
     #     print(row)
 
-    file = open('scer_fpot_add.json', "r+")
-    body = json.load(file)
+    #############Edit Attributes#############
+
+    #########################################
+
+    with open('scer_fpot_add.json', "r+") as file:
+        body = json.load(file)
     count = 0
     sku = "SCER-FPOT-" + str(count)
-    resp = listing.put_listings_item(sellerId=s_id, sku='EWP-SATURN-CER-2', body=body,
-                                     marketplaceIds=[mktplc])
-    print(resp)
+    # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+    #                                  marketplaceIds=[mktplc])
+    # print(resp)
     file.close()
 
 
@@ -227,4 +281,50 @@ color_var = {
     "30": ["multicolor", "patterned"]
 }
 
-# get_attributes()
+# get_attributes("PLANTER", Marketplaces.AU)
+
+# with open('saturn_cer.csv', newline='') as csvfile:
+#     reader = csv.DictReader(csvfile)
+#     for row in reader:
+#         # print(row)
+#         size = row['size']
+#         products = row['num'].split("-")
+#         prices = []
+#         for i in range(8):
+#             prices.append(row[str(i)])
+#         print(size)
+#         print(products)
+#         print(prices)
+
+# for i in ups_codes:
+#     if Marketplaces.UK in ups_codes[i]:
+#         print(i+" yes")
+
+credentials, s_id = get_creds(Marketplaces.AU)
+
+listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.AU)
+to_send = change_marketplace("scer_fpot_add.json", Marketplaces.AU)
+print(to_send)
+# resp = listing.put_listings_item(sellerId=s_id, sku="SCER-FPOT-001", body=json.loads(to_send),
+#                                  marketplaceIds=[Marketplaces.AU.marketplace_id])
+# print(resp)
+
+# listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
+# to_send2 = change_marketplace("scer_fpot_add.json", Marketplaces.US)
+# resp = listing.put_listings_item(sellerId=s_id, sku="SCER-FPOT-001", body=json.loads(str(to_send2)),
+#                                  marketplaceIds=["ATVPDKIKX0DER"])
+# print(resp)
+
+with open('saturn_cer.csv', newline='') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        size = row['size']
+        products = row['num'].split("-")
+        prices = []
+        for i in range(8):
+            prices.append(row[str(i)])
+        # print(size)
+        # print(products)
+        # print(prices)
+
+add_item_uk(Marketplaces.ES, "scerkdfghjfdg.json")

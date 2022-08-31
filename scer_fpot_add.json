@@ -1,5 +1,5 @@
 {
-  "productType": "VASE",
+  "productType": "PLANTER",
   "requirements": "LISTING_PRODUCT_ONLY",
   "status": "DISCOVERABLE",
   "attributes": {
@@ -11,26 +11,33 @@
     ],
     "item_name": [
       {
-        "value": "Modern, Handmade, Specially Designed, Mixed Pattern, Ceramic, Flowerpot, flower pot, home and garden, decoration",
+        "value": "Modern Handmade Special Design Mixed Patter Multicolor Ceramic Flowerpot - Saturn Ceramic",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "generic_keyword": [
+      {
+        "value": "moder; handmade; specially designed; mixed pattern; ceramic; flowerpot; planter; home and garden; decoration",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "list_price": [
       {
-        "currency": "GBP",
-        "value_with_tax": 3000.00,
+        "currency": "USD",
+        "value_with_tax": 17.00,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "purchasable_offer": [
       {
-        "currency": "GBP",
+        "currency": "USD",
         "our_price": [
           {
             "schedule": [
               {
-                "value_with_tax": 71.00
+                "value_with_tax": 17.00
               }
             ]
           }
@@ -52,13 +59,7 @@
     "fulfillment_availability": [
       {
         "fulfillment_channel_code": "DEFAULT",
-        "quantity": 14
-      }
-    ],
-    "size": [
-      {
-        "value": "Small",
-        "marketplace_id": "ATVPDKIKX0DER"
+        "quantity": 10
       }
     ],
     "country_of_origin": [
@@ -76,23 +77,23 @@
     "item_package_dimensions": [
       {
         "length": {
-          "value": 14,
-          "unit": "centimeters"
+          "value": 5,
+          "unit": "inches"
         },
         "width": {
-          "value": 14,
-          "unit": "centimeters"
+          "value": 5,
+          "unit": "inches"
         },
         "height": {
-          "value": 14,
-          "unit": "centimeters"
+          "value": 5,
+          "unit": "inches"
         },
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "item_type_name": [
       {
-        "value": "Vase, Flower Pot",
+        "value": "Planter, Flowerpot",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -105,6 +106,13 @@
     "supplier_declared_material_regulation": [
       {
         "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "value": "no warranty",
+        "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -135,21 +143,15 @@
     ],
     "externally_assigned_product_identifier": [
       {
-        "value": "8576660878492",
+        "value": "4983950904511",
         "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "item_package_weight": [
       {
-        "value": "1",
-        "unit": "kilograms",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "recommended_browse_nodes": [
-      {
-        "value": "FLOWERPOT",
+        "value": "2",
+        "unit": "pounds",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -159,47 +161,43 @@
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
-    "item_length_width_height": [
+    "item_dimensions": [
       {
         "height":
           {
-            "value": 9,
-            "unit": "centimeters"
+            "value": 3,
+            "unit": "inches"
           },
         "length":
           {
-            "value": 11,
-            "unit": "centimeters"
+            "value": 4,
+            "unit": "inches"
           },
         "width":
           {
-            "value": 11,
-            "unit": "centimeters"
+            "value": 4,
+            "unit": "inches"
           },
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
-    "is_fragile": [
+    "item_depth_width_height": [
       {
-        "value": true,
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "power_plug_type": [
-      {
-        "value": "no_plug",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "part_number": [
-      {
-        "value": "",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "accepted_voltage_frequency": [
-      {
-        "value": "220v_240v_60hz",
+        "height":
+          {
+            "value": 3,
+            "unit": "inches"
+          },
+        "depth":
+          {
+            "value": 3,
+            "unit": "inches"
+          },
+        "width":
+          {
+            "value": 4,
+            "unit": "inches"
+          },
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -243,6 +241,97 @@
     "supplier_declared_dg_hz_regulation": [
       {
         "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "plant_or_animal_product_type": [
+      {
+        "value": "Flower",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gift_options": [
+      {
+        "can_be_messaged": true,
+        "can_be_wrapped": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "value": "Weather Resistant",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Drainage",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Lightweight",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "value": "Ceramic",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "value": "Ceramic Planter",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_shape": [
+      {
+        "value": "Round",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "indoor_outdoor_usage": [
+      {
+        "value": "indoor",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "outdoor",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "planter_form": [
+      {
+        "value": "plant_pot",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_boxes": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_browse_nodes": [
+      {
+        "value": "214",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_plug_type": [
+      {
+        "value": "no_plug",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "accepted_voltage_frequency": [
+      {
+        "value": "100v_120v_50hz",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ]
