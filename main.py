@@ -172,10 +172,17 @@ def change_marketplace(fname, mktplc):
             doc = change_price_details(doc, "JPY")
         t_code = "ja"
 
-    for x in re.finditer(': "(.+)",\n\s+"language_tag"', doc):
-        translatable = x.group()[3:x.group().find('"', 4)]
-        translated = trans.translate(translatable.lower(), dest=t_code)
-        doc = re.sub(translatable, translated.text.title(), doc)
+    if t_code != "en":
+        for x in re.finditer(': "(.+)",\n\s+"language_tag"', doc):
+            translatable = x.group()[3:x.group().find('"', 4)]
+            translated = ""
+            if " - " in translatable:
+                title = translatable.split(" - ")
+                title[0] = trans.translate(title[0].lower(), dest=t_code)
+                translated = title[0].text + " - " + title[1]
+            else:
+                translated = trans.translate(translatable.lower(), dest=t_code).text
+            doc = re.sub(translatable, translated.title(), doc)
 
     # print(doc)
     return doc
@@ -320,4 +327,5 @@ color_var = {
     "30": ["multicolor", "patterned"]
 }
 
-add_item_uk(Marketplaces.AU, "scer_fpot_add.json")
+add_item_uk(Marketplaces.DE, "scer_fpot_add.json")
+# get_attributes("PLANTER")
