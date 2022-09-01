@@ -177,6 +177,7 @@ def change_marketplace(fname, mktplc):
         translated = trans.translate(translatable.lower(), dest=t_code)
         doc = re.sub(translatable, translated.text.title(), doc)
 
+    print(doc)
     return doc
 
 
@@ -222,30 +223,57 @@ def patch_uk(sku, mktplc, f_name):
 
 
 def add_item_uk(mktplc, f_name):
-    with open('saturn_cer.csv', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
-    for row in reader:
-        size = row['size']
-        products = row['num'].split("-")
-        prices = []
-        for i in range(8):
-            prices.append(row[str(i)])
-    #     print(row)
+    with open('saturn_cer.csv', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            size = row['size'].split('x')
+            products = row['num'].split("-")
+            prices = []
+            sku = ""
+            for i in range(9):
+                prices.append(row[str(i)])
+            for product in products:
+                #############Edit Attributes#############
+                with open('scer_fpot_add.json', "r+", encoding="utf-8") as file:
+                    body = json.load(file)
 
-    #############Edit Attributes#############
+                body['attributes']['item_package_dimensions'][0]['length']['value'] = int(size[0]) + 2
+                body['attributes']['item_package_dimensions'][0]['width']['value'] = int(size[0]) + 2
+                body['attributes']['item_package_dimensions'][0]['height']['value'] = int(size[0]) + 2
+                body['attributes']['item_dimensions'][0]['height']['value'] = int(size[2])
+                body['attributes']['item_dimensions'][0]['width']['value'] = int(size[1])
+                body['attributes']['item_dimensions'][0]['length']['value'] = int(size[0])
+                body['attributes']['item_depth_width_height'][0]['height']['value'] = int(size[2])
+                body['attributes']['item_depth_width_height'][0]['width']['value'] = int(size[1])
+                body['attributes']['item_depth_width_height'][0]['depth']['value'] = int(size[2])-1
 
-    #########################################
+                title = f"Modern Handmade Special Design {color_var[product][1]} {color_var[product][0]} Ceramic Flowerpot {size[0]}*{size[1]}*{size[2]} - Saturn Ceramic"
+                body['attributes']['item_name'][0]['value'] = title.title()
+                body['attributes']['product_description'][0]['value'] = f"{size[0]} x {size[1]} x {size[2]} cm.\n It is a natural flowerpot.\n There are holes at the bottom of the pots to prevent moisture. There is no pot plate.\n Since it is produced and colored completely handmade, there may be slight changes.\n It is a product that will attract attention in any environment with its stylish design, size and vivid colors.\n It is a special product that you can use in home or office decoration and gift to your loved ones.\n It is recommended to wipe with a damp cloth."
 
-    with open('scer_fpot_add.json', "r+") as file:
-        body = json.load(file)
-    count = 0
-    sku = "SCER-FPOT-" + str(count)
-    # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
-    #                                  marketplaceIds=[mktplc])
-    # print(resp)
-    file.close()
+                sku = "SCER-FPOT-"
+                for i in range(len(product)-3):
+                    sku += "0"
+                sku += product
+                body['attributes']['main_product_image_locator'][0]['media_location'] = f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{sku}.jpg"
+
+                for i in ups_codes:
+                    if mktplc in ups_codes[i]:
+                        body['attributes']['list_price'][0]['value_with_tax'] = float(prices[int(i)])
+                        body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0]['value_with_tax'] = float(prices[int(i)])
+
+                with open('scer_fpot_add.json', "w", encoding="utf-8") as file:
+                    file.write(json.dumps(body, sort_keys=False, indent=2))
+
+                body = json.loads(change_marketplace(f_name, mktplc))
+                #print(json.dumps(body, sort_keys=False, indent=2))
+
+                # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+                #                                  marketplaceIds=[mktplc])
+                # print(resp)
+                #########################################
 
 
 color_var = {
@@ -281,50 +309,23 @@ color_var = {
     "30": ["multicolor", "patterned"]
 }
 
-# get_attributes("PLANTER", Marketplaces.AU)
-
-# with open('saturn_cer.csv', newline='') as csvfile:
-#     reader = csv.DictReader(csvfile)
-#     for row in reader:
-#         # print(row)
-#         size = row['size']
-#         products = row['num'].split("-")
-#         prices = []
-#         for i in range(8):
-#             prices.append(row[str(i)])
-#         print(size)
-#         print(products)
-#         print(prices)
+# get_attributes("PLANTER", Marketplaces.UK)
 
 # for i in ups_codes:
 #     if Marketplaces.UK in ups_codes[i]:
 #         print(i+" yes")
 
-credentials, s_id = get_creds(Marketplaces.AU)
-
-listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.AU)
-to_send = change_marketplace("scer_fpot_add.json", Marketplaces.AU)
-print(to_send)
+# credentials, s_id = get_creds(Marketplaces.AU)
+#
+# listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.AU)
+# to_send = change_marketplace("scer_fpot_add.json", Marketplaces.AU)
+# print(to_send)
 # resp = listing.put_listings_item(sellerId=s_id, sku="SCER-FPOT-001", body=json.loads(to_send),
 #                                  marketplaceIds=[Marketplaces.AU.marketplace_id])
 # print(resp)
 
-# listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.US)
-# to_send2 = change_marketplace("scer_fpot_add.json", Marketplaces.US)
-# resp = listing.put_listings_item(sellerId=s_id, sku="SCER-FPOT-001", body=json.loads(str(to_send2)),
-#                                  marketplaceIds=["ATVPDKIKX0DER"])
-# print(resp)
-
-with open('saturn_cer.csv', newline='') as csvfile:
-    reader = csv.DictReader(csvfile)
-    for row in reader:
-        size = row['size']
-        products = row['num'].split("-")
-        prices = []
-        for i in range(8):
-            prices.append(row[str(i)])
-        # print(size)
-        # print(products)
-        # print(prices)
-
-add_item_uk(Marketplaces.ES, "scerkdfghjfdg.json")
+# with open("scer_fpot_add.json", "r") as file:
+#     data = json.loads(file.read())
+#     print(data)
+#     print(json.dumps(data, sort_keys=False, indent=2))
+add_item_uk(Marketplaces.DE, "scer_fpot_add.json")

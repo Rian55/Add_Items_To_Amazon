@@ -11,7 +11,7 @@
     ],
     "item_name": [
       {
-        "value": "Modern Handmade Special Design Mixed Patter Multicolor Ceramic Flowerpot - Saturn Ceramic",
+        "value": "Modern Handmade Special Design Striped Black Ceramic Flowerpot 15*15*13 - Saturn Ceramic",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -26,7 +26,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 17.00,
+        "value_with_tax": 101.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -37,7 +37,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 17.00
+                "value_with_tax": 101.0
               }
             ]
           }
@@ -52,7 +52,7 @@
     ],
     "main_product_image_locator": [
       {
-        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/SCER-FPOT-001.jpg",
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/SCER-FPOT-22.jpg",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -77,16 +77,16 @@
     "item_package_dimensions": [
       {
         "length": {
-          "value": 5,
-          "unit": "inches"
+          "value": 17,
+          "unit": "centimeters"
         },
         "width": {
-          "value": 5,
-          "unit": "inches"
+          "value": 17,
+          "unit": "centimeters"
         },
         "height": {
-          "value": 5,
-          "unit": "inches"
+          "value": 17,
+          "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -118,7 +118,7 @@
     ],
     "product_description": [
       {
-        "value": " 33 x 33 x 29 cm.\n It is a natural flowerpot.\n There are holes at the bottom of the pots to prevent moisture. There is no pot plate.\n Since it is produced and colored completely handmade, there may be slight changes.\n It is a product that will attract attention in any environment with its stylish design, size and vivid colors.\n It is a special product that you can use in home or office decoration and gift to your loved ones.\n It is recommended to wipe with a damp cloth.",
+        "value": "15 x 15 x 13 cm.\n It is a natural flowerpot.\n There are holes at the bottom of the pots to prevent moisture. There is no pot plate.\n Since it is produced and colored completely handmade, there may be slight changes.\n It is a product that will attract attention in any environment with its stylish design, size and vivid colors.\n It is a special product that you can use in home or office decoration and gift to your loved ones.\n It is recommended to wipe with a damp cloth.",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -151,7 +151,7 @@
     "item_package_weight": [
       {
         "value": "2",
-        "unit": "pounds",
+        "unit": "kilograms",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -163,41 +163,35 @@
     ],
     "item_dimensions": [
       {
-        "height":
-          {
-            "value": 3,
-            "unit": "inches"
-          },
-        "length":
-          {
-            "value": 4,
-            "unit": "inches"
-          },
-        "width":
-          {
-            "value": 4,
-            "unit": "inches"
-          },
+        "height": {
+          "value": 13,
+          "unit": "centimeters"
+        },
+        "length": {
+          "value": 15,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 15,
+          "unit": "centimeters"
+        },
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "item_depth_width_height": [
       {
-        "height":
-          {
-            "value": 3,
-            "unit": "inches"
-          },
-        "depth":
-          {
-            "value": 3,
-            "unit": "inches"
-          },
-        "width":
-          {
-            "value": 4,
-            "unit": "inches"
-          },
+        "height": {
+          "value": 13,
+          "unit": "centimeters"
+        },
+        "depth": {
+          "value": 12,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 15,
+          "unit": "centimeters"
+        },
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
