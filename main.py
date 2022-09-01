@@ -51,7 +51,7 @@ def get_attributes(product_type="", mktplc=Marketplaces.UK):
 
 def get_creds(mktplc):
     config = ConfigParser()
-    config.read(".config.txt")
+    config.read("./.config.txt")
     if mktplc == Marketplaces.US or mktplc == Marketplaces.MX or mktplc == Marketplaces.CA:
         return dict(config['US']), dict(config['MID_US'])['id']
     elif mktplc == Marketplaces.AU:
@@ -177,7 +177,7 @@ def change_marketplace(fname, mktplc):
         translated = trans.translate(translatable.lower(), dest=t_code)
         doc = re.sub(translatable, translated.text.title(), doc)
 
-    print(doc)
+    # print(doc)
     return doc
 
 
@@ -225,8 +225,10 @@ def patch_uk(sku, mktplc, f_name):
 def add_item_uk(mktplc, f_name):
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
+
     with open('saturn_cer.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
+        random = ean13.generate_12_random_numbers()
         for row in reader:
             size = row['size'].split('x')
             products = row['num'].split("-")
@@ -236,7 +238,7 @@ def add_item_uk(mktplc, f_name):
                 prices.append(row[str(i)])
             for product in products:
                 #############Edit Attributes#############
-                with open('scer_fpot_add.json', "r+", encoding="utf-8") as file:
+                with open(f_name, "r+", encoding="utf-8") as file:
                     body = json.load(file)
 
                 body['attributes']['item_package_dimensions'][0]['length']['value'] = int(size[0]) + 2
@@ -252,9 +254,10 @@ def add_item_uk(mktplc, f_name):
                 title = f"Modern Handmade Special Design {color_var[product][1]} {color_var[product][0]} Ceramic Flowerpot {size[0]}*{size[1]}*{size[2]} - Saturn Ceramic"
                 body['attributes']['item_name'][0]['value'] = title.title()
                 body['attributes']['product_description'][0]['value'] = f"{size[0]} x {size[1]} x {size[2]} cm.\n It is a natural flowerpot.\n There are holes at the bottom of the pots to prevent moisture. There is no pot plate.\n Since it is produced and colored completely handmade, there may be slight changes.\n It is a product that will attract attention in any environment with its stylish design, size and vivid colors.\n It is a special product that you can use in home or office decoration and gift to your loved ones.\n It is recommended to wipe with a damp cloth."
+                body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
 
                 sku = "SCER-FPOT-"
-                for i in range(len(product)-3):
+                for i in range(3-len(product)):
                     sku += "0"
                 sku += product
                 body['attributes']['main_product_image_locator'][0]['media_location'] = f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{sku}.jpg"
@@ -268,12 +271,13 @@ def add_item_uk(mktplc, f_name):
                     file.write(json.dumps(body, sort_keys=False, indent=2))
 
                 body = json.loads(change_marketplace(f_name, mktplc))
-                #print(json.dumps(body, sort_keys=False, indent=2))
+                print(json.dumps(body, sort_keys=False, indent=2))
 
-                # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
-                #                                  marketplaceIds=[mktplc])
-                # print(resp)
+                resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+                                                 marketplaceIds=[mktplc])
+                print(resp)
                 #########################################
+                random += 1
 
 
 color_var = {
@@ -309,23 +313,4 @@ color_var = {
     "30": ["multicolor", "patterned"]
 }
 
-# get_attributes("PLANTER", Marketplaces.UK)
-
-# for i in ups_codes:
-#     if Marketplaces.UK in ups_codes[i]:
-#         print(i+" yes")
-
-# credentials, s_id = get_creds(Marketplaces.AU)
-#
-# listing = ListingsItems(credentials=credentials, marketplace=Marketplaces.AU)
-# to_send = change_marketplace("scer_fpot_add.json", Marketplaces.AU)
-# print(to_send)
-# resp = listing.put_listings_item(sellerId=s_id, sku="SCER-FPOT-001", body=json.loads(to_send),
-#                                  marketplaceIds=[Marketplaces.AU.marketplace_id])
-# print(resp)
-
-# with open("scer_fpot_add.json", "r") as file:
-#     data = json.loads(file.read())
-#     print(data)
-#     print(json.dumps(data, sort_keys=False, indent=2))
-add_item_uk(Marketplaces.DE, "scer_fpot_add.json")
+add_item_uk(Marketplaces.UK, "scer_fpot_add.json")

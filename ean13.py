@@ -20,7 +20,10 @@ def generate_random_ean():
 
 
 def calculate_ean(number):
-    digits = [int(x) for x in str(number)]
+    if type(number) != list:
+        digits = [int(x) for x in str(number)]
+    else:
+        digits = number
     assert len(digits) == 12, "EAN must be a list of 12 numbers"
     sum_ = lambda x, y: int(x) + int(y)
     evensum = reduce(sum_, digits[::2])
