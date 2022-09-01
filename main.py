@@ -228,18 +228,20 @@ def add_item_uk(mktplc, f_name):
 
     with open('saturn_cer.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
-        random = ean13.generate_12_random_numbers()
+        random = 437283420938
+        count = 0
         for row in reader:
             size = row['size'].split('x')
             products = row['num'].split("-")
             prices = []
-            sku = ""
             for i in range(9):
                 prices.append(row[str(i)])
             for product in products:
                 #############Edit Attributes#############
                 with open(f_name, "r+", encoding="utf-8") as file:
                     body = json.load(file)
+
+                count += 1
 
                 body['attributes']['item_package_dimensions'][0]['length']['value'] = int(size[0]) + 2
                 body['attributes']['item_package_dimensions'][0]['width']['value'] = int(size[0]) + 2
@@ -256,11 +258,11 @@ def add_item_uk(mktplc, f_name):
                 body['attributes']['product_description'][0]['value'] = f"{size[0]} x {size[1]} x {size[2]} cm.\n It is a natural flowerpot.\n There are holes at the bottom of the pots to prevent moisture. There is no pot plate.\n Since it is produced and colored completely handmade, there may be slight changes.\n It is a product that will attract attention in any environment with its stylish design, size and vivid colors.\n It is a special product that you can use in home or office decoration and gift to your loved ones.\n It is recommended to wipe with a damp cloth."
                 body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
 
-                sku = "SCER-FPOT-"
+                img_id = "SCER-FPOT-"
                 for i in range(3-len(product)):
-                    sku += "0"
-                sku += product
-                body['attributes']['main_product_image_locator'][0]['media_location'] = f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{sku}.jpg"
+                    img_id += "0"
+                img_id += product
+                body['attributes']['main_product_image_locator'][0]['media_location'] = f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{img_id}.jpg"
 
                 for i in ups_codes:
                     if mktplc in ups_codes[i]:
@@ -271,11 +273,16 @@ def add_item_uk(mktplc, f_name):
                     file.write(json.dumps(body, sort_keys=False, indent=2))
 
                 body = json.loads(change_marketplace(f_name, mktplc))
-                print(json.dumps(body, sort_keys=False, indent=2))
+                # print(json.dumps(body, sort_keys=False, indent=2))
 
-                resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
-                                                 marketplaceIds=[mktplc])
-                print(resp)
+                sku = "SCER-FPOT-"
+                for i in range(3 - len(str(count))):
+                    sku += "0"
+                sku += str(count)
+                print(sku)
+                # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+                #                                  marketplaceIds=[mktplc.marketplace_id])
+                # print(resp)
                 #########################################
                 random += 1
 
@@ -313,4 +320,4 @@ color_var = {
     "30": ["multicolor", "patterned"]
 }
 
-add_item_uk(Marketplaces.UK, "scer_fpot_add.json")
+add_item_uk(Marketplaces.AU, "scer_fpot_add.json")
