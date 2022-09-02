@@ -246,7 +246,7 @@ def add_item_uk(mktplc, f_name):
 
     with open('saturn_cer_sets.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
-        random = 564539853490
+        random = 664548553290
         count = 0
         for row in reader:
             sizes = []
@@ -332,5 +332,5 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-add_item_uk(Marketplaces.FR, "scer_fpot_add.json")
+add_item_uk(Marketplaces.UK, "scer_fpot_add.json")
 # get_attributes("PLANTER", Marketplaces.US)
