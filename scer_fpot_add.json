@@ -1,7 +1,6 @@
 {
   "productType": "PLANTER",
-  "requirements": "LISTING_PRODUCT_ONLY",
-  "status": "DISCOVERABLE",
+  "requirements": "LISTING",
   "attributes": {
     "condition_type": [
       {
@@ -11,14 +10,14 @@
     ],
     "item_name": [
       {
-        "value": "Modern Handmade Special Design Dotted Yellow Ceramic Flowerpot 11*11*9 - Saturn Ceramic",
+        "value": "Modern Handmade Special Design Gilded Ceramic Flowerpot Set Of 2 - Saturn Ceramic",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "generic_keyword": [
       {
-        "value": "moder; handmade; specially designed; mixed pattern; ceramic; flowerpot; planter; home and garden; decoration",
+        "value": "modern; handmade; specially designed; mixed pattern; ceramic; flowerpot; planter; home and garden; decoration; gilded; plant; seed",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -26,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 72.0,
+        "value_with_tax": 225.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -37,7 +36,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 72.0
+                "value_with_tax": 225.0
               }
             ]
           }
@@ -52,7 +51,7 @@
     ],
     "main_product_image_locator": [
       {
-        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/SCER-FPOT-003.jpg",
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/SCER-FSET-004.jpg",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -60,6 +59,18 @@
       {
         "fulfillment_channel_code": "DEFAULT",
         "quantity": 10
+      }
+    ],
+    "is_fragile": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "value": "11x11x9",
+        "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "country_of_origin": [
@@ -77,15 +88,15 @@
     "item_package_dimensions": [
       {
         "length": {
-          "value": 13,
+          "value": 75,
           "unit": "centimeters"
         },
         "width": {
-          "value": 13,
+          "value": 75,
           "unit": "centimeters"
         },
         "height": {
-          "value": 13,
+          "value": 66,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
@@ -118,7 +129,7 @@
     ],
     "product_description": [
       {
-        "value": "11 x 11 x 9 cm.\n It is a natural flowerpot.\n There are holes at the bottom of the pots to prevent moisture. There is no pot plate.\n Since it is produced and colored completely handmade, there may be slight changes.\n It is a product that will attract attention in any environment with its stylish design, size and vivid colors.\n It is a special product that you can use in home or office decoration and gift to your loved ones.\n It is recommended to wipe with a damp cloth.",
+        "value": "The dimensions of the pots are 15x15x13 cm and 20x20x18 cm respectively.They are natural earthen pots.\nThere are holes at the bottom of the pots of ceramics to prevent moisture, but there is no pot base.\nIt is 100% handmade.There may be slight differences in the same models as they are handmade.\nThey are products that will attract attention in any environment with their stylish designs, sizes and vivid colors.\nThey are special products that you can use in home or office decoration and gift to your loved ones.\nIt is recommended to wipe with a damp cloth for cleaning.",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -143,7 +154,7 @@
     ],
     "externally_assigned_product_identifier": [
       {
-        "value": 3533467757332,
+        "value": 5645398534932,
         "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -157,22 +168,29 @@
     ],
     "number_of_items": [
       {
-        "value": 1,
+        "value": 2,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "capacity": [
+      {
+        "value": 56.0,
+        "unit": "liters",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "item_dimensions": [
       {
         "height": {
-          "value": 9,
+          "value": 40,
           "unit": "centimeters"
         },
         "length": {
-          "value": 11,
+          "value": 35,
           "unit": "centimeters"
         },
         "width": {
-          "value": 11,
+          "value": 40,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
@@ -181,15 +199,15 @@
     "item_depth_width_height": [
       {
         "height": {
-          "value": 9,
+          "value": 35,
           "unit": "centimeters"
         },
         "depth": {
-          "value": 8,
+          "value": 34,
           "unit": "centimeters"
         },
         "width": {
-          "value": 11,
+          "value": 40,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"

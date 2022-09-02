@@ -178,10 +178,12 @@ def change_marketplace(fname, mktplc):
             translated = ""
             if " - " in translatable:
                 title = translatable.split(" - ")
-                title[0] = trans.translate(title[0].lower(), dest=t_code)
-                translated = title[0].text + " - " + title[1]
+                f_title = trans.translate(title[0].lower(), dest=t_code)
+                translated = f_title.text + " - " + title[1]
             else:
                 translated = trans.translate(translatable.lower(), dest=t_code).text
+            # print(translated)
+            # print(translatable)
             doc = re.sub(translatable, translated.title(), doc)
 
     # print(doc)
@@ -233,99 +235,92 @@ def add_item_uk(mktplc, f_name):
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
-    with open('saturn_cer.csv', newline='') as csvfile:
+    with open('saturn_cer_sets.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
-        random = 437283420938
+        random = 564539853490
         count = 0
         for row in reader:
-            size = row['size'].split('x')
-            products = row['num'].split("-")
+            sizes = []
+            for x in row['size'].split('-'):
+                sizes.append(x.split("x"))
+            product = row['num']
+            item_count = int(row['items'])
+            pattern = row['pattern']
             prices = []
             for i in range(9):
                 prices.append(row[str(i)])
-            for product in products:
-                #############Edit Attributes#############
-                with open(f_name, "r+", encoding="utf-8") as file:
-                    body = json.load(file)
+            #############Edit Attributes#############
+            with open(f_name, "r+", encoding="utf-8") as file:
+                body = json.load(file)
 
-                count += 1
+            count += 1
 
-                body['attributes']['item_package_dimensions'][0]['length']['value'] = int(size[0]) + 2
-                body['attributes']['item_package_dimensions'][0]['width']['value'] = int(size[0]) + 2
-                body['attributes']['item_package_dimensions'][0]['height']['value'] = int(size[0]) + 2
-                body['attributes']['item_dimensions'][0]['height']['value'] = int(size[2])
-                body['attributes']['item_dimensions'][0]['width']['value'] = int(size[1])
-                body['attributes']['item_dimensions'][0]['length']['value'] = int(size[0])
-                body['attributes']['item_depth_width_height'][0]['height']['value'] = int(size[2])
-                body['attributes']['item_depth_width_height'][0]['width']['value'] = int(size[1])
-                body['attributes']['item_depth_width_height'][0]['depth']['value'] = int(size[2])-1
+            ipd_x, ipd_y, ipd_z, max_x, max_y, max_z = 0, 0, 0, 0, 0, 0
+            for i in range(item_count):
+                ipd_x += int(sizes[i][0])
+                ipd_y += int(sizes[i][1])
+                ipd_z += int(sizes[i][2])
+                if int(sizes[i][0]) > max_x:
+                    max_x = int(sizes[i][0])
+                if int(sizes[i][1]) > max_y:
+                    max_y = int(sizes[i][1])
+                if int(sizes[i][2]) > max_z:
+                    max_z = int(sizes[i][2])
 
-                title = f"Modern Handmade Special Design {color_var[product][1]} {color_var[product][0]} Ceramic Flowerpot {size[0]}*{size[1]}*{size[2]} - Saturn Ceramic"
-                body['attributes']['item_name'][0]['value'] = title.title()
-                body['attributes']['product_description'][0]['value'] = f"{size[0]} x {size[1]} x {size[2]} cm.\n It is a natural flowerpot.\n There are holes at the bottom of the pots to prevent moisture. There is no pot plate.\n Since it is produced and colored completely handmade, there may be slight changes.\n It is a product that will attract attention in any environment with its stylish design, size and vivid colors.\n It is a special product that you can use in home or office decoration and gift to your loved ones.\n It is recommended to wipe with a damp cloth."
-                body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
+            body['attributes']['item_package_dimensions'][0]['length']['value'] = ipd_x + 2
+            body['attributes']['item_package_dimensions'][0]['width']['value'] = ipd_y + 2
+            body['attributes']['item_package_dimensions'][0]['height']['value'] = ipd_z + 2
+            body['attributes']['item_dimensions'][0]['height']['value'] = max_x
+            body['attributes']['item_dimensions'][0]['width']['value'] = max_y
+            body['attributes']['item_dimensions'][0]['length']['value'] = max_z
+            body['attributes']['item_depth_width_height'][0]['height']['value'] = max_z
+            body['attributes']['item_depth_width_height'][0]['width']['value'] = max_x
+            body['attributes']['item_depth_width_height'][0]['depth']['value'] = max_z-1
 
-                img_id = "SCER-FPOT-"
-                for i in range(3-len(product)):
-                    img_id += "0"
-                img_id += product
-                body['attributes']['main_product_image_locator'][0]['media_location'] = f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{img_id}.jpg"
+            title = f"Modern Handmade Special Design {pattern} Ceramic Flowerpot Set of {item_count} - Saturn Ceramic"
+            body['attributes']['item_name'][0]['value'] = title.title()
+            size_line = ""
+            for i in range(item_count):
+                size_line += sizes[i][0]+"x"+sizes[i][1]+"x"+sizes[i][2]+" cm"
+                if i != item_count-2:
+                    size_line += " and "
+                elif i != item_count-1:
+                    size_line = size_line
+                else:
+                    size_line += ", "
+            body['attributes']['product_description'][0]['value'] = f"The dimensions of the pots are 15x15x13 cm and 20x20x18 cm respectively.They are natural earthen pots.\nThere are holes at the bottom of the pots of ceramics to prevent moisture, but there is no pot base.\nIt is 100% handmade.There may be slight differences in the same models as they are handmade.\nThey are products that will attract attention in any environment with their stylish designs, sizes and vivid colors.\nThey are special products that you can use in home or office decoration and gift to your loved ones.\nIt is recommended to wipe with a damp cloth for cleaning."
+            body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
+            body['attributes']['number_of_items'][0]['value'] = item_count
+            body['attributes']['capacity'][0]['value'] = float("%.1f" % (max_z*max_x*max_y/1000))
 
-                for i in ups_codes:
-                    if mktplc in ups_codes[i]:
-                        body['attributes']['list_price'][0]['value_with_tax'] = float(prices[int(i)])
-                        body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0]['value_with_tax'] = float(prices[int(i)])
+            img_id = "SCER-FSET-"
+            for i in range(3-len(product)):
+                img_id += "0"
+            img_id += product
+            body['attributes']['main_product_image_locator'][0]['media_location'] = f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{img_id}.jpg"
 
-                with open('scer_fpot_add.json', "w", encoding="utf-8") as file:
-                    file.write(json.dumps(body, sort_keys=False, indent=2))
+            for i in ups_codes:
+                if mktplc in ups_codes[i]:
+                    body['attributes']['list_price'][0]['value_with_tax'] = float(prices[int(i)])
+                    body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0]['value_with_tax'] = float(prices[int(i)])
 
-                body = json.loads(change_marketplace(f_name, mktplc))
-                # print(json.dumps(body, sort_keys=False, indent=2))
+            with open('scer_fpot_add.json', "w", encoding="utf-8") as file:
+                file.write(json.dumps(body, sort_keys=False, indent=2))
 
-                sku = "SCER-FPOT-"
-                for i in range(3 - len(str(count))):
-                    sku += "0"
-                sku += str(count)
-                print(sku)
-                # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
-                #                                  marketplaceIds=[mktplc.marketplace_id])
-                # print(resp)
-                #########################################
-                random += 1
+            body = json.loads(change_marketplace(f_name, mktplc))
+            print(json.dumps(body, sort_keys=False, indent=2))
+
+            sku = "SCER-FSET-"
+            for i in range(3 - len(str(count))):
+                sku += "0"
+            sku += str(count)
+            print(sku)
+            # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+            #                                  marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
+            # print(resp)
+            #########################################
+            random += 1
 
 
-color_var = {
-    "1": ["multicolor", "patterned"],
-    "2": ["multicolor", "patterned"],
-    "3": ["yellow", "dotted"],
-    "4": ["white and gray", "striped"],
-    "5": ["red", "striped"],
-    "6": ["black and white", "striped"],
-    "7": ["light blue and white", "striped"],
-    "8": ["black", "striped"],
-    "9": ["black and grey", "striped"],
-    "10": ["white and grey", "striped"],
-    "11": ["brown", "striped"],
-    "12": ["white", "patterned"],
-    "13": ["white", "patterned"],
-    "14": ["green and beige", "striped"],
-    "15": ["grey and white", "striped"],
-    "16": ["black", "patterned"],
-    "17": ["black", "patterned"],
-    "18": ["multicolor", "patterned"],
-    "19": ["multicolor", "patterned"],
-    "20": ["white", "patterned"],
-    "21": ["green and beige", "striped"],
-    "22": ["black", "striped"],
-    "23": ["black and white", "striped"],
-    "24": ["grey and black", "striped"],
-    "25": ["white and black", "striped"],
-    "26": ["black and grey", "striped"],
-    "27": ["multicolor", "patterned"],
-    "28": ["multicolor", "patterned"],
-    "29": ["beige", "striped"],
-    "30": ["multicolor", "patterned"]
-}
-
-add_item_uk(Marketplaces.DE, "scer_fpot_add.json")
-# get_attributes("PLANTER")
+add_item_uk(Marketplaces.UK, "scer_fpot_add.json")
+# get_attributes("PLANTER", Marketplaces.US)
