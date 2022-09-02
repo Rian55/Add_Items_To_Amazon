@@ -315,12 +315,12 @@ def add_item_uk(mktplc, f_name):
                 sku += "0"
             sku += str(count)
             print(sku)
-            # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
-            #                                  marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
-            # print(resp)
+            resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+                                             marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
+            print(resp)
             #########################################
             random += 1
 
 
-add_item_uk(Marketplaces.UK, "scer_fpot_add.json")
+add_item_uk(Marketplaces.FR, "scer_fpot_add.json")
 # get_attributes("PLANTER", Marketplaces.US)

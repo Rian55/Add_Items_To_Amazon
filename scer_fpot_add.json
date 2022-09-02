@@ -10,7 +10,7 @@
     ],
     "item_name": [
       {
-        "value": "Modern Handmade Special Design Gilded Ceramic Flowerpot Set Of 2 - Saturn Ceramic",
+        "value": "Modern Handmade Special Design Mixed Pattern Ceramic Flowerpot Set Of 2 - Saturn Ceramic",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -25,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 225.0,
+        "value_with_tax": 254.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -36,7 +36,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 225.0
+                "value_with_tax": 254.0
               }
             ]
           }
@@ -51,7 +51,7 @@
     ],
     "main_product_image_locator": [
       {
-        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/SCER-FSET-004.jpg",
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/SCER-FSET-017.jpg",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -154,7 +154,7 @@
     ],
     "externally_assigned_product_identifier": [
       {
-        "value": 5645398534932,
+        "value": 5645398535069,
         "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
