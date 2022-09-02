@@ -173,18 +173,27 @@ def change_marketplace(fname, mktplc):
         t_code = "ja"
 
     if t_code != "en":
-        for x in re.finditer(': "(.+)",\n\s+"language_tag"', doc):
-            translatable = x.group()[3:x.group().find('"', 4)]
-            translated = ""
-            if " - " in translatable:
-                title = translatable.split(" - ")
-                f_title = trans.translate(title[0].lower(), dest=t_code)
-                translated = f_title.text + " - " + title[1]
-            else:
-                translated = trans.translate(translatable.lower(), dest=t_code).text
-            # print(translated)
-            # print(translatable)
-            doc = re.sub(translatable, translated.title(), doc)
+        doc_js = json.loads(doc)
+        attrs = doc_js['attributes']
+        for key, value in attrs.items():
+            for i in value:
+                if "language_tag" in i:
+                    translatable = i['value']
+                    translated = ""
+                    if " - " in translatable:
+                        title = translatable.split(" - ")
+                        f_title = trans.translate(title[0].lower(), dest=t_code)
+                        translated = f_title.text + " - " + title[1]
+                    else:
+                        translated = trans.translate(translatable.lower(), dest=t_code).text
+                    # print(translated)
+                    # print(translatable)
+                    if " - " in i["value"]:
+                        i["value"] = translated.title()
+                    else:
+                        i["value"] = translated
+        doc_js['attributes'] = attrs
+        doc = json.dumps(doc_js, sort_keys=False, indent=2)
 
     # print(doc)
     return doc
@@ -308,13 +317,14 @@ def add_item_uk(mktplc, f_name):
                 file.write(json.dumps(body, sort_keys=False, indent=2))
 
             body = json.loads(change_marketplace(f_name, mktplc))
-            print(json.dumps(body, sort_keys=False, indent=2))
+            # print(json.dumps(body, sort_keys=False, indent=2))
 
             sku = "SCER-FSET-"
             for i in range(3 - len(str(count))):
                 sku += "0"
             sku += str(count)
             print(sku)
+            print(body)
             resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
                                              marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
             print(resp)

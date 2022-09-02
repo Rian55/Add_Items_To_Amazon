@@ -10,7 +10,7 @@
     ],
     "item_name": [
       {
-        "value": "Modern Handmade Special Design Mixed Pattern Ceramic Flowerpot Set Of 2 - Saturn Ceramic",
+        "value": "Modern Handmade Special Design Mixed Pattern Ceramic Flowerpot Set Of 3 - Saturn Ceramic",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -25,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 155.0,
+        "value_with_tax": 185.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -36,7 +36,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 155.0
+                "value_with_tax": 185.0
               }
             ]
           }
@@ -51,7 +51,7 @@
     ],
     "main_product_image_locator": [
       {
-        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/SCER-FSET-001.jpg",
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/SCER-FSET-002.jpg",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -88,15 +88,15 @@
     "item_package_dimensions": [
       {
         "length": {
-          "value": 37,
+          "value": 48,
           "unit": "centimeters"
         },
         "width": {
-          "value": 37,
+          "value": 48,
           "unit": "centimeters"
         },
         "height": {
-          "value": 33,
+          "value": 42,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
@@ -155,7 +155,7 @@
     ],
     "externally_assigned_product_identifier": [
       {
-        "value": 5645398534901,
+        "value": 5645398534918,
         "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -169,7 +169,7 @@
     ],
     "number_of_items": [
       {
-        "value": 2,
+        "value": 3,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
