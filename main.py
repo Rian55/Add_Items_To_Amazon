@@ -172,30 +172,44 @@ def change_marketplace(fname, mktplc):
             doc = change_price_details(doc, "JPY")
         t_code = "ja"
 
-    if t_code != "en":
-        doc_js = json.loads(doc)
-        attrs = doc_js['attributes']
-        for key, value in attrs.items():
-            for i in value:
-                if "language_tag" in i:
-                    translatable = i['value']
-                    translated = ""
-                    if " - " in translatable:
-                        title = translatable.split(" - ")
-                        f_title = trans.translate(title[0].lower(), dest=t_code)
-                        translated = f_title.text + " - " + title[1]
-                    else:
-                        translated = trans.translate(translatable.lower(), dest=t_code).text
-                    # print(translated)
-                    # print(translatable)
-                    if " - " in i["value"]:
-                        i["value"] = translated.title()
-                    else:
-                        i["value"] = translated
-        doc_js['attributes'] = attrs
-        doc = json.dumps(doc_js, sort_keys=False, indent=2)
+    for x in re.finditer(': "(.+)",\n\s+"language_tag"', doc):
+        translatable = x.group()[3:x.group().find('"', 4)]
+        translated = ""
+        if " - " in translatable:
+            title = translatable.split(" - ")
+            f_title = trans.translate(title[0].lower(), dest=t_code)
+            title[1] = "Saturn Ceramic"
+            translated = f_title.text + " - " + title[1]
+        else:
+            translated = trans.translate(translatable.lower(), dest=t_code).text
+        print(translated)
+        # print(translatable)
+        doc = doc.replace(translatable, translated.title())
+        print(doc)
 
-    # print(doc)
+    # if t_code != "en":
+    #     doc_js = json.loads(doc)
+    #     attrs = doc_js['attributes']
+    #     for key, value in attrs.items():
+    #         for i in value:
+    #             if "language_tag" in i:
+    #                 translatable = i['value']
+    #                 translated = ""
+    #                 if " - " in translatable:
+    #                     title = translatable.split(" - ")
+    #                     f_title = trans.translate(title[0].lower(), dest=t_code)
+    #                     translated = f_title.text + " - " + title[1]
+    #                 else:
+    #                     translated = trans.translate(translatable.lower(), dest=t_code).text
+    #                 print(translated)
+    #                 # print(translatable)
+    #                 if " - " in i["value"]:
+    #                     i["value"] = translated.title()
+    #                 else:
+    #                     i["value"] = translated
+    #     doc_js['attributes'] = attrs
+    #     doc = json.dumps(doc_js, sort_keys=False, indent=2)
+
     return doc
 
 
@@ -207,15 +221,15 @@ def patch_uk(sku, mktplc, f_name):
     try:
         text = listing.get_listings_item(sellerId=s_id, sku=sku,
                                          marketplaceIds=[mktplc.marketplace_id]).payload['summaries'][0]['itemName']
-        # print(text)
+        print(text)
     except:
         print("not found " + sku)
         return
     ###########################################
 
     ##############Edit Attributes##############
-    # with open(f_name, 'r+', encoding="utf-8") as file:
-    #     data = file.read()
+    with open(f_name, 'r+', encoding="utf-8") as file:
+        data = file.read()
     # with open(f_name, 'w', encoding="utf-8") as file:
     #     try:
     #         text = text.encode('utf', 'ignore').decode('utf')
@@ -228,14 +242,21 @@ def patch_uk(sku, mktplc, f_name):
     #                       'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
     #         file.writelines(data)
     #     print(text)
+    with open(f_name, 'w', encoding="utf-8") as file:
+        text = text.encode('utf', 'ignore').decode('utf')
+        data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
+                      'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
+        file.writelines(data)
+
+    body = json.loads(change_marketplace(f_name, mktplc))
     ###########################################
 
     ###############Send Request################
-    file = open(f_name, "r+", encoding="utf-8")
-    body = json.load(file)
-    # resp = listing.patch_listings_item(sellerId=s_id, sku=sku, body=body,
-    #                                    marketplaceIds=[mktplc.marketplace_id])
-    # print(resp)
+    # file = open(f_name, "r+", encoding="utf-8")
+    # body = json.load(file)
+    resp = listing.patch_listings_item(sellerId=s_id, sku=sku, body=body,
+                                       marketplaceIds=[mktplc.marketplace_id])
+    print(resp)
     file.close()
     ###########################################
 
@@ -332,5 +353,11 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-add_item_uk(Marketplaces.UK, "scer_fpot_add.json")
-# get_attributes("PLANTER", Marketplaces.US)
+# add_item_uk(Marketplaces.DE, "scer_fpot_add.json")
+# get_attributes()
+for count in range(1, 180):
+    sku = "SCER-FPOT-"
+    for i in range(3 - len(str(count))):
+        sku += "0"
+    sku += str(count)
+    patch_uk(sku, Marketplaces.FR, "in_kw_patch.json")
