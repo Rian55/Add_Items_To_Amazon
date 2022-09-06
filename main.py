@@ -172,6 +172,7 @@ def change_marketplace(fname, mktplc):
             doc = change_price_details(doc, "JPY")
         t_code = "ja"
 
+    #uncomment this part when you do patching and comment translation part below
     # for x in re.finditer(': "(.+)",\n\s+"language_tag"', doc):
     #     translatable = x.group()[3:x.group().find('"', 4)]
     #     translated = ""
@@ -186,6 +187,7 @@ def change_marketplace(fname, mktplc):
     #     doc = doc.replace(translatable, translated.title())
     #     print(doc)
 
+    #uncomment this part when you do adding and comment translation part above
     if t_code != "en":
         doc_js = json.loads(doc)
         attrs = doc_js['attributes']
@@ -266,8 +268,8 @@ def add_item_uk(mktplc, f_name):
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
     with open(csv_file, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        random = 825541153290
+        reader = csv.DictReader(csvfile)#reads csv file
+        random = 825541153290#this number should be changed for every product type and consist of 12 digits
         count = 0
         for row in reader:
             sizes = []
@@ -280,6 +282,8 @@ def add_item_uk(mktplc, f_name):
             for i in range(9):
                 prices.append(row[str(i)])
             #############Edit Attributes#############
+            #this part should be changed for every new product type
+            #non existing attributes should be deleted and variating attributes should be added
             with open(f_name, "r+", encoding="utf-8") as file:
                 body = json.load(file)
 
@@ -297,9 +301,12 @@ def add_item_uk(mktplc, f_name):
                 if int(sizes[i][2]) > max_z:
                     max_z = int(sizes[i][2])
 
-            body['attributes']['item_package_dimensions'][0]['length']['value'] = max_x + 4
+            body['attributes']['item_package_dimensions'][0]['length']['value'] = max_x + 6
             body['attributes']['item_package_dimensions'][0]['width']['value'] = ipd_y + 6
             body['attributes']['item_package_dimensions'][0]['height']['value'] = ipd_z + 6
+            body['attributes']['item_length_width_height'][0]['length']['value'] = max_x
+            body['attributes']['item_length_width_height'][0]['width']['value'] = max_y
+            body['attributes']['item_length_width_height'][0]['height']['value'] = max_z
             body['attributes']['item_dimensions'][0]['height']['value'] = max_x
             body['attributes']['item_dimensions'][0]['width']['value'] = max_y
             body['attributes']['item_dimensions'][0]['length']['value'] = max_z
@@ -313,13 +320,16 @@ def add_item_uk(mktplc, f_name):
                     size_line = size_line
                 else:
                     size_line += ", "
+            #change title for every product type
             title = f"Lighting Bathroom Table Mirror Top Led Flute Sconce Wireless Battery Powered Daylight {size_line}, {colors} Set of {item_count}"
             body['attributes']['item_name'][0]['value'] = title.title()
+            #descripton should be changed for every new product type and in case of pasabahce for every new product
             body['attributes']['product_description'][0]['value'] = f"<p>These sconces, which you can easily use in every area of your home, will add elegance and style to the atmosphere of your home.<br />-You will love these sconces, which do not require installation and most importantly, are battery powered and allow you to get rid of the appearance of bad cables.<br />-Easy setup.<br />-It is a decorative design.<br />-It works with battery.<br />-It is long lasting.<br />-It is economical.<br />-Does not fade and rust.<br />-Daytime.<br />- Body colors of appliques are {colors}.<br />- 3 appliques of {size_line} will be sent.</p>"
             body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
             body['attributes']['number_of_items'][0]['value'] = item_count
             body['attributes']['color'][0]['value'] = colors
 
+            #this part is okay dont touch it
             for i in ups_codes:
                 if mktplc in ups_codes[i]:
                     body['attributes']['list_price'][0]['value_with_tax'] = float(prices[int(i)])
@@ -331,7 +341,7 @@ def add_item_uk(mktplc, f_name):
             body = json.loads(change_marketplace(f_name, mktplc))
 
             for i in range(len(images)):
-                img_id = "EWPR-APLK-"
+                img_id = "EWPR-APLK-" #here should be changed
                 for j in range(3-len(images[i])):
                     img_id += "0"
                 img_id += images[i]
@@ -342,7 +352,7 @@ def add_item_uk(mktplc, f_name):
                     body['attributes'][f'other_product_image_locator_{i}'] = [{"media_location": f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{img_id}.jpg", "marketplace_id": body['attributes']['item_name'][0]['marketplace_id']}]
 
             # print(json.dumps(body, sort_keys=False, indent=2))
-            sku = "EWPR-APLK-"
+            sku = "EWPR-APLK-" #here should be changed
             for i in range(3 - len(str(count))):
                 sku += "0"
             sku += str(count)
