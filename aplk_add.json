@@ -10,7 +10,7 @@
     ],
     "item_name": [
       {
-        "value": "Ece Yalim D.S. \"Oil Lamp\" Lampshade S.Maxi - Pasabahce ",
+        "value": "Oil Lamp Shade Spiral Small - Pasabahce",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -25,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 250.0,
+        "value_with_tax": 224.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -36,7 +36,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 250.0
+                "value_with_tax": 224.0
               }
             ]
           }
@@ -74,7 +74,7 @@
           "unit": "centimeters"
         },
         "width": {
-          "value": 24,
+          "value": 11,
           "unit": "centimeters"
         },
         "height": {
@@ -99,7 +99,7 @@
     ],
     "product_description": [
       {
-        "value": "<p>Product width: 18 cm<br />Product height: 38 cm<br />It is 100% handmade.<br />Maxi size.<br />It is a special design lampshade lamp type.</p>",
+        "value": "<p>The nostalgia of the oil lamp is reflected in the thinness and elegance of the glass with its stylish stance.<br />\nProduct height: 38 cm<br />\nIt is 100% handmade.<br />\nMini size.<br />\nIt is a special design lampshade lamp type.</p>",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -123,10 +123,9 @@
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
-    "externally_assigned_product_identifier": [
+    "supplier_declared_has_product_identifier_exemption": [
       {
-        "value": 9255498222910,
-        "type": "ean",
+        "value": true,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -154,7 +153,7 @@
           "unit": "centimeters"
         },
         "width": {
-          "value": 18,
+          "value": 5,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
@@ -171,7 +170,7 @@
           "unit": "centimeters"
         },
         "width": {
-          "value": 18,
+          "value": 5,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"

@@ -315,7 +315,7 @@ def add_item_uk(mktplc, f_name):
 
             body['attributes']['item_name'][0]['value'] = title.title()
             body['attributes']['product_description'][0]['value'] = description
-            body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
+            # body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
             body['attributes']['number_of_items'][0]['value'] = item_count
             body['attributes']['color'][0]['value'] = colors
 
@@ -350,14 +350,14 @@ def add_item_uk(mktplc, f_name):
             sku += str(count)
             print(sku)
             print(body)
-            # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
-            #                                  marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
-            # print(resp)
+            resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+                                             marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
+            print(resp)
             #########################################
             random += 1
 
 
-add_item_uk(Marketplaces.UK, "aplk_add.json")
+add_item_uk(Marketplaces.IT, "aplk_add.json")
 # get_attributes()
 # for count in range(1, 180):
 #     sku = "SCER-FPOT-"
