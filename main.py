@@ -318,7 +318,7 @@ def add_item_uk(mktplc, f_name):
             body['attributes']['item_package_dimensions'][0]['height']['value'] = max_z + 6
 
             body['attributes']['item_name'][0]['value'] = title.title()
-            body['attributes']['product_description'][0]['value'] = description
+            body['attributes']['product_description'][0]['value'] = "<p>" + description.replace("\n", "<br \>") + "</p>"
             body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
             body['attributes']['number_of_items'][0]['value'] = item_count
             body['attributes']['color'][0]['value'] = colors
