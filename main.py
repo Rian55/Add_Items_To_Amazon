@@ -76,7 +76,7 @@ def change_price_details(doc, currency):
     return doc
 
 
-def change_marketplace(fname, mktplc):
+def change_marketplace(fname, mktplc, is_patch):
     t_code = ""
     with open(fname, "r", encoding="utf-8") as file:
         doc = file.read()
@@ -172,44 +172,44 @@ def change_marketplace(fname, mktplc):
             doc = change_price_details(doc, "JPY")
         t_code = "ja"
 
-    #uncomment this part when you do patching and comment translation part below
-    # for x in re.finditer(': "(.+)",\n\s+"language_tag"', doc):
-    #     translatable = x.group()[3:x.group().find('"', 4)]
-    #     translated = ""
-    #     if " - " in translatable:
-    #         title = translatable.split(" - ")
-    #         f_title = trans.translate(title[0].lower(), dest=t_code)
-    #         translated = f_title.text + " - " + title[1]
-    #     else:
-    #         translated = trans.translate(translatable.lower(), dest=t_code).text
-    #     print(translated)
-    #     # print(translatable)
-    #     doc = doc.replace(translatable, translated.title())
-    #     print(doc)
+    if is_patch:
+        for x in re.finditer(': "(.+)",\n\s+"language_tag"', doc):
+            translatable = x.group()[3:x.group().find('"', 4)]
+            translated = ""
+            if " - " in translatable:
+                title = translatable.split(" - ")
+                f_title = trans.translate(title[0].lower(), dest=t_code)
+                translated = f_title.text + " - " + title[1]
+            else:
+                translated = trans.translate(translatable.lower(), dest=t_code).text
+            print(translated)
+            # print(translatable)
+            doc = doc.replace(translatable, translated.title())
+            print(doc)
 
-    #uncomment this part when you do adding and comment translation part above
-    if t_code != "en":
-        doc_js = json.loads(doc)
-        attrs = doc_js['attributes']
-        for key, value in attrs.items():
-            for i in value:
-                if "language_tag" in i:
-                    translatable = i['value']
-                    translated = ""
-                    if " - " in translatable:
-                        title = translatable.split(" - ")
-                        f_title = trans.translate(title[0].lower(), dest=t_code)
-                        translated = f_title.text + " - " + title[1]
-                    else:
-                        translated = trans.translate(translatable.lower(), dest=t_code).text
-                    # print(translated)
-                    # print(translatable)
-                    if " - " in i["value"]:
-                        i["value"] = translated.title()
-                    else:
-                        i["value"] = translated
-        doc_js['attributes'] = attrs
-        doc = json.dumps(doc_js, sort_keys=False, indent=2)
+    if not is_patch:
+        if t_code != "en":
+            doc_js = json.loads(doc)
+            attrs = doc_js['attributes']
+            for key, value in attrs.items():
+                for i in value:
+                    if "language_tag" in i:
+                        translatable = i['value']
+                        translated = ""
+                        if " - " in translatable:
+                            title = translatable.split(" - ")
+                            f_title = trans.translate(title[0].lower(), dest=t_code)
+                            translated = f_title.text + " - " + title[1]
+                        else:
+                            translated = trans.translate(translatable.lower(), dest=t_code).text
+                        # print(translated)
+                        # print(translatable)
+                        if " - " in i["value"]:
+                            i["value"] = translated.title()
+                        else:
+                            i["value"] = translated
+            doc_js['attributes'] = attrs
+            doc = json.dumps(doc_js, sort_keys=False, indent=2)
 
     return doc
 
@@ -244,12 +244,17 @@ def patch_uk(sku, mktplc, f_name):
     #         file.writelines(data)
     #     print(text)
     with open(f_name, 'w', encoding="utf-8") as file:
+        text = text.replace('"', '')
         text = text.encode('utf', 'ignore').decode('utf')
         data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
                       'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
+        data = data.replace(" - Pasabahce", "")
+        data = data.replace(" -Pasabahce", "")
+        data = data.replace("- Pasabahce", "")
+        data = data.replace("-Pasabahce", "")
         file.writelines(data)
 
-    body = json.loads(change_marketplace(f_name, mktplc))
+    body = json.loads(change_marketplace(f_name, mktplc, True))
     ###########################################
 
     ###############Send Request################
@@ -269,7 +274,7 @@ def add_item_uk(mktplc, f_name):
 
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)#reads csv file
-        random = 925549822291#this number should be changed for every product type and consist of 12 digits
+        random = 888329953578#this number should be changed for every product type and consist of 12 digits
         count = 0
         for row in reader:
             sizes = []
@@ -286,6 +291,8 @@ def add_item_uk(mktplc, f_name):
             #############Edit Attributes#############
             #this part should be changed for every new product type
             #non existing attributes should be deleted and variating attributes should be added
+            title = title.replace(" -", "")
+
             with open(f_name, "r+", encoding="utf-8") as file:
                 body = json.load(file)
 
@@ -315,7 +322,7 @@ def add_item_uk(mktplc, f_name):
 
             body['attributes']['item_name'][0]['value'] = title.title()
             body['attributes']['product_description'][0]['value'] = description
-            # body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
+            body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
             body['attributes']['number_of_items'][0]['value'] = item_count
             body['attributes']['color'][0]['value'] = colors
 
@@ -328,7 +335,7 @@ def add_item_uk(mktplc, f_name):
             with open(f_name, "w", encoding="utf-8") as file:
                 file.write(json.dumps(body, sort_keys=False, indent=2))
 
-            body = json.loads(change_marketplace(f_name, mktplc))
+            body = json.loads(change_marketplace(f_name, mktplc, False))
             sku_pattern = "EWPR-LPSD-"
 
             for i in range(len(images)):
@@ -357,11 +364,13 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-add_item_uk(Marketplaces.IT, "aplk_add.json")
-# get_attributes()
-# for count in range(1, 180):
-#     sku = "SCER-FPOT-"
+# add_item_uk(Marketplaces.SG, "aplk_add.json")
+
+get_attributes("PERSONALBODYCARE", Marketplaces.UK)
+
+# for count in range(1, 66):
+#     sku = "EWPR-FPOT-"
 #     for i in range(3 - len(str(count))):
 #         sku += "0"
 #     sku += str(count)
-#     patch_uk(sku, Marketplaces.TR, "in_kw_patch.json")
+#     patch_uk(sku, Marketplaces.DE, "in_kw_patch.json")

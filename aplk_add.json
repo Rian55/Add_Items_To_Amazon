@@ -10,7 +10,7 @@
     ],
     "item_name": [
       {
-        "value": "Oil Lamp Shade Spiral Small - Pasabahce",
+        "value": "Oil Lamp Shade Spiral Small",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -25,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 224.0,
+        "value_with_tax": 264.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -36,7 +36,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 224.0
+                "value_with_tax": 264.0
               }
             ]
           }
@@ -112,7 +112,7 @@
     ],
     "manufacturer": [
       {
-        "value": "Pasabahce",
+        "value": "eWorldPartner",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -123,9 +123,10 @@
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
-    "supplier_declared_has_product_identifier_exemption": [
+    "externally_assigned_product_identifier": [
       {
-        "value": true,
+        "value": 8883299535918,
+        "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -225,16 +226,29 @@
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
+    "material": [
+      {
+        "value": "Metal",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "value": "001",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "required_product_compliance_certificate": [
+      {
+        "value": "Not Applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
     "color_temperature": [
       {
         "value": 6000,
         "unit": "kelvin",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "eu_energy_label_efficiency_class": [
-      {
-        "value": "a_plus_plus_to_g",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -357,12 +371,6 @@
     "part_number": [
       {
         "value": 1,
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "is_fragile": [
-      {
-        "value": true,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
