@@ -10,14 +10,14 @@
     ],
     "item_name": [
       {
-        "value": "Handmade Natural Antioxidant Anti-Aging Pomegranate Soap Set 10 Pcs",
+        "value": "Nail Polish Remover Set In Separate Packages 5 Boxes",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "generic_keyword": [
       {
-        "value": "soap; liquid soap; solid soap; handmade; natural; fruit pulp; cleaner; shower; shower gel; bathroom; hair; plasticizer; clean; personal care kit; trip; 10 units;",
+        "value": "nail polish; nail polish remover; manicure; pedicure; make-up; nail; nail art; personal care; woman; cleaning; hairdresser; male; care; hygiene; moisturizer; handkerchief; wet wipes",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -25,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 122.0,
+        "value_with_tax": 381.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -36,7 +36,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 122.0
+                "value_with_tax": 381.0
               }
             ]
           }
@@ -70,15 +70,15 @@
     "item_package_dimensions": [
       {
         "length": {
-          "value": 14,
+          "value": 56,
           "unit": "centimeters"
         },
         "width": {
-          "value": 11,
+          "value": 56,
           "unit": "centimeters"
         },
         "height": {
-          "value": 11,
+          "value": 56,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
@@ -92,7 +92,7 @@
     ],
     "product_description": [
       {
-        "value": "<p> Pomegranate Soap (100 gr)<br \\><br \\>Contains powerful antioxidants.<br \\>-Helps your skin fight aging.<br \\>-Pomegranate oil neutralizes the oxidants that cause your skin to age.<br \\>- It moisturizes your skin.<br \\>-100% Handmade.<br \\>- Suitable for all skin types.<br \\>- 10 soaps will be sent in the package</p>",
+        "value": "<p>Lozzy Acetone Nail Polish Removal Wipe<br \\>TOTAL 250 BOXES EVERY BOX HAS 10 PRODUCTS.<br \\>Acetone disposable moisturizing nail polish removal wipes. It is applied with a single wipe, ideal for travel.</p>",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -105,13 +105,13 @@
     ],
     "manufacturer": [
       {
-        "value": "Latife",
+        "value": "Lozzy",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "externally_assigned_product_identifier": [
       {
-        "value": 8883299546167,
+        "value": 8883299545979,
         "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -125,23 +125,28 @@
     ],
     "number_of_items": [
       {
-        "value": 10,
+        "value": 250,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "bullet_point": [
       {
-        "value": "It moisturizes your skin.",
+        "value": "They are disposable wipes.",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       },
       {
-        "value": " Suitable for all skin types.",
+        "value": "It does not harm your nails.",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       },
       {
-        "value": " Fruit extracts are used.",
+        "value": "It can be used instead of acetone.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "It is moisturizing.",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -168,7 +173,7 @@
     ],
     "color": [
       {
-        "value": "colorless",
+        "value": "White",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -189,7 +194,7 @@
     ],
     "recommended_browse_nodes": [
       {
-        "value": 2805285031,
+        "value": 64257031,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -203,7 +208,7 @@
       {
         "material": [
           {
-            "value": "none",
+            "value": "Down",
             "language_tag": "en_US"
           }
         ],
@@ -214,7 +219,7 @@
       {
         "type": [
           {
-            "value": "none",
+            "value": "Pull On",
             "language_tag": "en_US"
           }
         ],
@@ -237,7 +242,7 @@
     ],
     "size": [
       {
-        "value": "none",
+        "value": "50x50x50",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],

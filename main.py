@@ -324,6 +324,7 @@ def add_item_uk(mktplc, f_name):
             body['attributes']['color'][0]['value'] = colors
             body['attributes']['generic_keyword'][0]['value'] = keywords
             body['attributes']['manufacturer'][0]['value'] = manufacturer
+            body['attributes']['size'][0]['value'] = row['size']
 
             body['attributes']['bullet_point'] = []
             for i in range(len(bullet_points)):
@@ -370,13 +371,13 @@ def add_item_uk(mktplc, f_name):
                     body['attributes'][f'other_product_image_locator_{i}'] = [{"media_location": f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{img_id}.jpg", "marketplace_id": body['attributes']['item_name'][0]['marketplace_id']}]
 
             body['attributes']['item_name'][0]['value'] = body['attributes']['item_name'][0]['value'].title()
-            print(json.dumps(body, sort_keys=False, indent=2))
+            # print(json.dumps(body, sort_keys=False, indent=2))
             sku = sku_pattern #here should be changed
             for i in range(3 - len(str(count))):
                 sku += "0"
             sku += str(count)
             print(sku)
-            # print(body)
+            print(body)
             resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
                                              marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
             print(resp)
@@ -384,9 +385,9 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-add_item_uk(Marketplaces.UK, "personalbodycare.json")
+add_item_uk(Marketplaces.DE, "personalbodycare.json")
 
-# get_attributes()
+# get_attributes("PERSONAL_CARE_APPLIANCE")
 
 # for count in range(1, 66):
 #     sku = "EWPR-FPOT-"
