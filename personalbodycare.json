@@ -1,0 +1,271 @@
+{
+  "productType": "PERSONALBODYCARE",
+  "requirements": "LISTING",
+  "attributes": {
+    "condition_type": [
+      {
+        "value": "new_new",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "value": "Acetone Wipes Women Nail Polish Remover In Single Packages 10 Pcs",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "generic_keyword": [
+      {
+        "value": "nail polish; woman; nail polish remover; manicure; pedicure; beauty; care; feeder; cleaner; application; red nail polish; make-up; hand; cream; handkerchief; wet wipes; nail art; nail; foot;",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value_with_tax": 43.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "purchasable_offer": [
+      {
+        "currency": "USD",
+        "our_price": [
+          {
+            "schedule": [
+              {
+                "value_with_tax": 43.0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "product_tax_code": [
+      {
+        "value": "A_GEN_TAX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "main_product_image_locator": [
+      {
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/EWPR-APLK-31,8.jpg",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fulfillment_availability": [
+      {
+        "fulfillment_channel_code": "DEFAULT",
+        "quantity": 50
+      }
+    ],
+    "country_of_origin": [
+      {
+        "value": "UK",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "value": 16,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 16,
+          "unit": "centimeters"
+        },
+        "height": {
+          "value": 16,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_name": [
+      {
+        "value": "Body Care, Personal Care, Face Care",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "value": "Nail polish remover wipes in single packs of 10.\nBest Acetone Nail Polish Remover Wipes\nWhat if you had the opportunity to remove your nail polish with a single tissue instead of carrying acetone and tissue separately? Lozzy\u00ef\u00bf\u00bds acetone nail polish cleaning wipes offer you exactly this. You can clean your nail polish with just one wipe on your travels, outside your home, at school and many other places. Let\u00ef\u00bf\u00bds learn more about the features and usage areas of Lozzy acetone nail polish wipe that will certainly make your life easier.\n\nLozzy Acetone Nail Polish Remover Wipes Features\nThe nail polish removing step can be challenging at times. That\u00ef\u00bf\u00bds why you always might want to delay removing your nail polish until another color day. As Lozzy, we care about not harming your skin while meeting this need in the best way. This wipe, which contains nail polish removing acids and alcohol, also contains nourishing substances such as vitamin E to prevent irritation on your skin.\n\nUsage Areas of Acetone Nail Polish Remover Wipes\nWhen it comes to nail polish removers, usually only acetones come to mind. With not only acetone, you can now also remove your nail polish with wipes. Acetone nail polish cleaning wipes can also be effective in the cleaning of some surfaces, thanks to the acid and alcohol contained in it. In particular, stains on your clothes or shoes or some dirt that does not come off can be removed with nail polish removers. Nail polish remover wipes, which provide different advantages compared to other cleaning methods, have many benefits in terms of use, such as:\n\n- Each nail polish remover comes in its own individual package. As a result, you are free to open and use as many as you want.\n\n- Because of its practical application, you can establish a routine for applying and removing nail polish.\n\n- It is particularly well suited for long journeys and travels. You can remove your nail polish with a package rather than having to carry around an extra item. Besides, acetones might pour out when travelling.\n\n- Since acetone contains only acid and alcohol, using these cleaning wipes that also contain nourishing substances is especially beneficial when your skin is dehydrated or irritated. So you can keep your skin looking young.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "value": "eworldpartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "value": "Lozzy",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": 8883299545795,
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "value": "2",
+        "unit": "kilograms",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 10,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "value": "Each nail polish remover comes in its own package.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "It comes with 10 nail polish removers.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "It does not harm the skin.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "It does not spill because it is packaged.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gift_options": [
+      {
+        "can_be_messaged": true,
+        "can_be_wrapped": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "age_range_description": [
+      {
+        "value": "Adult",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "value": "White",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_gender": [
+      {
+        "value": "unisex",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "department": [
+      {
+        "value": "Unisex",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_browse_nodes": [
+      {
+        "value": 66280031,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_material_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "outer": [
+      {
+        "material": [
+          {
+            "value": "none",
+            "language_tag": "en_US"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "closure": [
+      {
+        "type": [
+          {
+            "value": "none",
+            "language_tag": "en_US"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "value": "none",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fabric_type": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_size_type": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  }
+}
