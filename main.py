@@ -272,7 +272,7 @@ def add_item_uk(mktplc, f_name):
 
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)#reads csv file
-        random = 888329974578#this number should be changed for every product type and consist of 12 digits
+        random = 888329974878#this number should be changed for every product type and consist of 12 digits
         count = 0
         for row in reader:
             sizes = []
@@ -312,11 +312,9 @@ def add_item_uk(mktplc, f_name):
                 if int(sizes[i][2]) > max_z:
                     max_z = int(sizes[i][2])
 
-            body['attributes']['item_package_dimensions'][0]['length']['value'] = int(max_x/4)
-            body['attributes']['item_package_dimensions'][0]['width']['value'] = int(max_x/4)
+            body['attributes']['item_package_dimensions'][0]['length']['value'] = max_x + 6
+            body['attributes']['item_package_dimensions'][0]['width']['value'] = ipd_z + 6
             body['attributes']['item_package_dimensions'][0]['height']['value'] = max_y + 6
-            body['attributes']['item_length_width'][0]['length']['value'] = max_y
-            body['attributes']['item_length_width'][0]['width']['value'] = max_x
 
             body['attributes']['item_name'][0]['value'] = title.title()
             description = "<p>" + description.replace("\n", "<br>") + "</p>"
@@ -324,10 +322,12 @@ def add_item_uk(mktplc, f_name):
             body['attributes']['product_description'][0]['value'] = description
             body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
             # body['attributes']['number_of_items'][0]['value'] = item_count
-            body['attributes']['color'][0]['value'] = colors
+            # body['attributes']['color'][0]['value'] = colors
             body['attributes']['generic_keyword'][0]['value'] = keywords
             body['attributes']['manufacturer'][0]['value'] = manufacturer
             body['attributes']['size'][0]['value'] = row['size']
+            body['attributes']['material'][0]['value'] = row['material']
+            body['attributes']['material_composition'][0]['value'] = "100% " + row['material']
 
             body['attributes']['bullet_point'] = []
             for i in range(len(bullet_points)):
@@ -388,7 +388,7 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-# add_item_uk(Marketplaces.JP, "jsons/add/rug.json")
+add_item_uk(Marketplaces.UK, "jsons/add/home_furniture_and_decor.json")
 
 # get_attributes()
 

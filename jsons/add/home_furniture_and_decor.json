@@ -1,0 +1,251 @@
+{
+  "productType": "HOME_FURNITURE_AND_DECOR",
+  "requirements": "LISTING",
+  "attributes": {
+    "condition_type": [
+      {
+        "value": "new_new",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "value": "Green Kids Room Carpet Kilim Bedroom Baby Room Colorful Non-Slip Carpet",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "generic_keyword": [
+      {
+        "value": "soft textured; situation; rug; bedroom; children's room; baby room; non-slip; does not hold dust; girl child; boy; home decoration; kitchen; living room;",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value_with_tax": 172.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "purchasable_offer": [
+      {
+        "currency": "USD",
+        "our_price": [
+          {
+            "schedule": [
+              {
+                "value_with_tax": 172.0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "product_tax_code": [
+      {
+        "value": "A_GEN_TAX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "main_product_image_locator": [
+      {
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/EWPR-APLK-31.jpg",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fulfillment_availability": [
+      {
+        "fulfillment_channel_code": "DEFAULT",
+        "quantity": 10
+      }
+    ],
+    "country_of_origin": [
+      {
+        "value": "UK",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "value": 206,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 8,
+          "unit": "centimeters"
+        },
+        "height": {
+          "value": 296,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_name": [
+      {
+        "value": "Home Decoration, Decorative Box",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "value": "<p>Confetti Children's Carpets with Eco-Tex Standard 100 certificate will be indispensable for your children's and baby rooms in terms of quality and health.<br>Since Confetti Kids Carpets are Teflon coated, they prevent dirt from adhering to the surface of the carpet and do not keep any dust that is risky for health on its surface.<br>In addition, liquids spilled on the surface of the carpet cannot go deep into your carpet, so Confetti Kids Carpets are cleaned more quickly than other carpets.<br>Product features<br>Machine Washable at 30C<br>Non-Slip Base<br>100% Polyamide<br>Total Carpet Weight: 1282 gr - 1432 gr / m2<br>Thread Height : 5 mm ca. - 6 mm ca<br>It is a type of carpet consisting of curls at a homogeneous level. The smooth surface of the carpet makes it durable, so it is preferred in environments with high traffic.<br>It is a type of carpet consisting of curls at a homogeneous level.<br>The smooth surface of the carpet makes it durable, so it is preferred in environments with high traffic.<br>Your children will be safer with Confetti Kids Carpets.</p>",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "value": "eworldpartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "value": "Confetti",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": 8883299745805,
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "value": "1",
+        "unit": "kilograms",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "value": "Quality threads have been used.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "It will benefit your children with its creative design.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "It can be washed in the washing machine.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "It is durable.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gift_options": [
+      {
+        "can_be_messaged": true,
+        "can_be_wrapped": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_browse_nodes": [
+      {
+        "value": 3028565031,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "value": "200x290x2",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_assembly_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_fragile": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "value": "Box",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "001",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_boxes": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "base_type": [
+      {
+        "value": "Rectangle",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_shape": [
+      {
+        "value": "Rectangle",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "value": "Rectangle",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material_composition": [
+      {
+        "value": "Rectangle",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  }
+}
