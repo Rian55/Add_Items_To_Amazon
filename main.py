@@ -200,8 +200,8 @@ def change_marketplace(fname, mktplc, is_patch):
                             translated = trans.translate(translatable.lower(), dest=t_code).text
                         else:
                             translated = trans.translate(translatable, dest=t_code).text
-                        print(translated)
-                        print(translatable)
+                        # print(translated)
+                        # print(translatable)
                         if key == "item_name":
                             i["value"] = translated.title()
                         else:
@@ -319,7 +319,7 @@ def add_item_uk(mktplc, f_name):
             body['attributes']['item_length_width'][0]['width']['value'] = max_x
 
             body['attributes']['item_name'][0]['value'] = title.title()
-            description = "<p>" + description.replace("\n", "<br \>") + "</p>"
+            description = "<p>" + description.replace("\n", "<br>") + "</p>"
             description = re.sub("(<br \\> )", "", description)
             body['attributes']['product_description'][0]['value'] = description
             body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
@@ -388,7 +388,7 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-add_item_uk(Marketplaces.DE, "rug.json")
+add_item_uk(Marketplaces.IT, "rug.json")
 
 # get_attributes("RUG")
 
