@@ -1,0 +1,322 @@
+{
+  "productType": "RUG",
+  "requirements": "LISTING",
+  "attributes": {
+    "condition_type": [
+      {
+        "value": "new_new",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "value": "Modern Educational Tutorial Outer Space Kids Carpet 133X190 Cm Navy Blue",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "generic_keyword": [
+      {
+        "value": "boys; girls; rug ;carpet; child; weaving; pattern; soft; non-slip sole; baby; room; house; colourful; healthy; trustworthy; quality; can be cleaned; navy blue; washable; game",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value_with_tax": 146.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "purchasable_offer": [
+      {
+        "currency": "USD",
+        "our_price": [
+          {
+            "schedule": [
+              {
+                "value_with_tax": 146.0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "product_tax_code": [
+      {
+        "value": "A_GEN_TAX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "main_product_image_locator": [
+      {
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/EWPR-APLK-31,8.jpg",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fulfillment_availability": [
+      {
+        "fulfillment_channel_code": "DEFAULT",
+        "quantity": 10
+      }
+    ],
+    "country_of_origin": [
+      {
+        "value": "UK",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "value": 33,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 33,
+          "unit": "centimeters"
+        },
+        "height": {
+          "value": 196,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_length_width": [
+      {
+        "length": {
+          "value": 190,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 133,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_name": [
+      {
+        "value": "Rug, Carpet, Kid's Carpet",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "value": "<p>Confetti Kids Carpets will be indispensable for your children's and baby rooms in terms of quality and health.<br \\>Due to its Teflon coating, it prevents dirt from adhering to the carpet surface and does not keep any dust that is risky for health on its surface. In addition, liquids spilled on the surface of the carpet cannot go deep into your carpet, so it is cleaned faster than other carpets.<br \\>Our carpets, which provide a soft texture to your children, prevent possible injuries with their texture that will soften the fall and also protect your children from dangers.<br \\>Machine Washable at 30\u00ef\u00bf\u00bdC<br \\>Non-Slip Base<br \\>100% Polyamide<br \\>Total Carpet Weight: 1827 gr / m2<br \\>Thread Height : 14 mm<br \\>Hand Carved Cut Pile Carpet</p>",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "value": "eworldpartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "value": "Confetti",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": 8883299746604,
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "value": "2",
+        "unit": "kilograms",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "value": "Made for your children. ",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " It is safe to have a non-slip sole. ",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " Patterns are for children.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gift_options": [
+      {
+        "can_be_messaged": true,
+        "can_be_wrapped": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_shape": [
+      {
+        "value": "Rectangular",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "value": "Navy blue",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "weave_type": [
+      {
+        "value": "Tufted Weave",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_stain_resistant": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_browse_nodes": [
+      {
+        "value": 3028565031,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "room_type": [
+      {
+        "value": "Bedroom",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Nursery",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Kid's Room",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Game Room",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "value": "133x190x2",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_thickness": [
+      {
+        "decimal_value": 2.3,
+        "unit": "centimeters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "rug_form_type": [
+      {
+        "value": "area_rug",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "indoor_outdoor_usage": [
+      {
+        "value": "indoor",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "age_range_description": [
+      {
+        "value": "Child, Toddler",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "value": "Polyamide",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": "false",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "false",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_assembly_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_fragile": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "pile_height": [
+      {
+        "value": "Medium Pile",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "value": "Carpet",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  }
+}

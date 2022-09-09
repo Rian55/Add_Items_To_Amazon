@@ -10,14 +10,14 @@
     ],
     "item_name": [
       {
-        "value": "Nail Polish Remover Set In Separate Packages 5 Boxes",
+        "value": "Skin And Mouth Cleaning Mask And Cream Set Of 6",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "generic_keyword": [
       {
-        "value": "nail polish; nail polish remover; manicure; pedicure; make-up; nail; nail art; personal care; woman; cleaning; hairdresser; male; care; hygiene; moisturizer; handkerchief; wet wipes",
+        "value": "organic; cleanser; make up; moisturizing; quick; practical; portable; beauty; skin; care; hand; female; body; mask; shampoo; liquid; gel; softness; tooth paste; garlic; cucumber",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -25,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 381.0,
+        "value_with_tax": 91.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -36,7 +36,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 381.0
+                "value_with_tax": 91.0
               }
             ]
           }
@@ -70,15 +70,15 @@
     "item_package_dimensions": [
       {
         "length": {
-          "value": 56,
+          "value": 18,
           "unit": "centimeters"
         },
         "width": {
-          "value": 56,
+          "value": 12,
           "unit": "centimeters"
         },
         "height": {
-          "value": 56,
+          "value": 31,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
@@ -92,7 +92,7 @@
     ],
     "product_description": [
       {
-        "value": "<p>Lozzy Acetone Nail Polish Removal Wipe<br \\>TOTAL 250 BOXES EVERY BOX HAS 10 PRODUCTS.<br \\>Acetone disposable moisturizing nail polish removal wipes. It is applied with a single wipe, ideal for travel.</p>",
+        "value": "<p>Dermokil Cucumber Extract Gel Face Mask 15 ml<br \\><br \\>Dermokil Cucumber Gel Mask, which consists of natural combinations of Cucumber, Aloe Vera and Chamomile extracts, contributes to the shrinkage of enlarged pores on the skin thanks to its astringent effect. It helps to reduce acne spots and sun spots on the skin. From the first application, it contributes shine and moisture to the skin, while helping to smooth out wrinkles. It provides a refreshing and relaxing effect to the skin.<br \\><br \\>Dermokil Hemp Seed Oily Hand and Body Cream<br \\><br \\> It deeply cares for your skin, which is most exposed to harmful external factors. By meeting your skin's moisture need, it protects against drying, wear and premature aging. Thanks to the herbal extracts and clay in its formula, it keeps the skin moist and soft without drying it and deeply cares for the skin. Its permanent effect protects against external factors all day long.<br \\><br \\>Dermokil Mango Extract Hand and Body Cream<br \\><br \\>It deeply cares for your skin, which is most exposed to harmful external factors. By meeting your skin's moisture need, it protects against drying, wear and premature aging. Thanks to the herbal extracts and clay in its formula, it keeps the skin moist and soft without drying it and deeply cares for the skin. Its permanent effect protects against external factors all day long.<br \\><br \\>Dermokil Vegan Coconut Extract Herbal Shampoo 400 ml<br \\><br \\>Coconut oil in Dermokil Coconut Extract Shampoo is the most popular oil of recent times. With its rich content, coconut oil helps the hair to be nourished and grow healthy. Coconut oil also contains vitamins E, K and iron. These vitamins provide the moisture needed by the skin and hair to a large extent. Coconut oil also helps prevent damage from combing and brushing. Coconut oil is used for a fresh, healthy scalp and radiant hair that shines in the sunlight. This natural, tropical wonder is packed with vitamin E and fatty acids that nourish and protect the hair and scalp. Coconut oil helps clear sebum inside the hair follicles, which makes your hair look healthier overall.<br \\><br \\>Dkdent Mint Extract Natural Fluoride Free Toothpaste 100 ml & Dkdent Propolis Fluoride Free Natural Toothpaste 100 ml<br \\><br \\>The common features of our Dk Dent Toothpaste products are that they do not contain fluoride, sles, gluten and artificial sweetener. It is not harmful if swallowed.<br \\><br \\>It contains micronized fine and sterile natural white clay.<br \\><br \\>When used regularly, it ensures the natural whiteness of the teeth. Thanks to the substances in its content that do not harm the tooth enamel, it provides natural whiteness and moistness in your teeth. It whitens your tooth enamel without eroding it.</p>",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -105,13 +105,13 @@
     ],
     "manufacturer": [
       {
-        "value": "Lozzy",
+        "value": "eWorldPartner",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "externally_assigned_product_identifier": [
       {
-        "value": 8883299545979,
+        "value": 8883299546433,
         "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -125,28 +125,23 @@
     ],
     "number_of_items": [
       {
-        "value": 250,
+        "value": 6,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "bullet_point": [
       {
-        "value": "They are disposable wipes.",
+        "value": "Natural plant extracts moisturize the skin. ",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       },
       {
-        "value": "It does not harm your nails.",
+        "value": " Softens and shines hair. ",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       },
       {
-        "value": "It can be used instead of acetone.",
-        "language_tag": "en_US",
-        "marketplace_id": "ATVPDKIKX0DER"
-      },
-      {
-        "value": "It is moisturizing.",
+        "value": " Toothpaste cleans teeth without damaging them.",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -173,7 +168,7 @@
     ],
     "color": [
       {
-        "value": "White",
+        "value": "colorless",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -181,7 +176,6 @@
     "target_gender": [
       {
         "value": "unisex",
-        "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -194,24 +188,13 @@
     ],
     "recommended_browse_nodes": [
       {
-        "value": 64257031,
+        "value": 20638045031,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "supplier_declared_material_regulation": [
       {
         "value": "not_applicable",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "outer": [
-      {
-        "material": [
-          {
-            "value": "Down",
-            "language_tag": "en_US"
-          }
-        ],
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -242,7 +225,7 @@
     ],
     "size": [
       {
-        "value": "50x50x50",
+        "value": "12x6x25",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],

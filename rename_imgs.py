@@ -1,8 +1,8 @@
 import os
 
-for i in range(1, 32):
-    old_name = rf"C:/Users/Yenip/Downloads/AplikSetler/{i}.jpg"
-    new_name = r"C:/Users/Yenip/Downloads/AplikSetler/EWPR-APLK-"
+for i in range(1, 252):
+    old_name = rf"C:/Users/Yenip/Downloads/Confetti_kids/{i}.jpg"
+    new_name = r"C:/Users/Yenip/Downloads/Confetti_kids/CNFT-KDRG-"
     for j in range(3-int(len(str(i)))):
         new_name += "0"
     new_name += str(i) + ".jpg"

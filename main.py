@@ -196,15 +196,13 @@ def change_marketplace(fname, mktplc, is_patch):
                     if "language_tag" in i:
                         translatable = i['value']
                         translated = ""
-                        if " - " in translatable:
-                            title = translatable.split(" - ")
-                            f_title = trans.translate(title[0].lower(), dest=t_code)
-                            translated = f_title.text + " - " + title[1]
-                        else:
+                        if key == "item_name":
                             translated = trans.translate(translatable.lower(), dest=t_code).text
-                        # print(translated)
-                        # print(translatable)
-                        if " - " in i["value"]:
+                        else:
+                            translated = trans.translate(translatable, dest=t_code).text
+                        print(translated)
+                        print(translatable)
+                        if key == "item_name":
                             i["value"] = translated.title()
                         else:
                             i["value"] = translated
@@ -268,20 +266,20 @@ def patch_uk(sku, mktplc, f_name):
 
 
 def add_item_uk(mktplc, f_name):
-    csv_file = "personalbodycare.csv"
+    csv_file = "rug.csv"
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)#reads csv file
-        random = 888329954578#this number should be changed for every product type and consist of 12 digits
+        random = 888329974578#this number should be changed for every product type and consist of 12 digits
         count = 0
         for row in reader:
             sizes = []
             for x in row['size'].split(','):
                 sizes.append(x.split("x"))
             images = row['images'].split(",")
-            item_count = int(row['piece'])
+            # item_count = int(row['piece'])
             colors = row['colors']
             title = row['title']
             description = row['description']
@@ -295,6 +293,7 @@ def add_item_uk(mktplc, f_name):
             #this part should be changed for every new product type
             #non existing attributes should be deleted and variating attributes should be added
             title = title.replace(" -", "")
+            title = title.replace("- ", " ")
 
             with open(f_name, "r+", encoding="utf-8") as file:
                 body = json.load(file)
@@ -313,14 +312,18 @@ def add_item_uk(mktplc, f_name):
                 if int(sizes[i][2]) > max_z:
                     max_z = int(sizes[i][2])
 
-            body['attributes']['item_package_dimensions'][0]['length']['value'] = max_x + 6
-            body['attributes']['item_package_dimensions'][0]['width']['value'] = ipd_y + 6
-            body['attributes']['item_package_dimensions'][0]['height']['value'] = max_z + 6
+            body['attributes']['item_package_dimensions'][0]['length']['value'] = int(max_x/4)
+            body['attributes']['item_package_dimensions'][0]['width']['value'] = int(max_x/4)
+            body['attributes']['item_package_dimensions'][0]['height']['value'] = max_y + 6
+            body['attributes']['item_length_width'][0]['length']['value'] = max_y
+            body['attributes']['item_length_width'][0]['width']['value'] = max_x
 
             body['attributes']['item_name'][0]['value'] = title.title()
-            body['attributes']['product_description'][0]['value'] = "<p>" + description.replace("\n", "<br \>") + "</p>"
+            description = "<p>" + description.replace("\n", "<br \>") + "</p>"
+            description = re.sub("(<br \\> )", "", description)
+            body['attributes']['product_description'][0]['value'] = description
             body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
-            body['attributes']['number_of_items'][0]['value'] = item_count
+            # body['attributes']['number_of_items'][0]['value'] = item_count
             body['attributes']['color'][0]['value'] = colors
             body['attributes']['generic_keyword'][0]['value'] = keywords
             body['attributes']['manufacturer'][0]['value'] = manufacturer
@@ -357,7 +360,7 @@ def add_item_uk(mktplc, f_name):
                 file.write(json.dumps(body, sort_keys=False, indent=2))
 
             body = json.loads(change_marketplace(f_name, mktplc, False))
-            sku_pattern = "EWPR-PBCR-"
+            sku_pattern = "CNFT-KDRG-"
 
             for i in range(len(images)):
                 img_id = sku_pattern #here should be changed
@@ -385,9 +388,9 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-add_item_uk(Marketplaces.DE, "personalbodycare.json")
+add_item_uk(Marketplaces.DE, "rug.json")
 
-# get_attributes("PERSONAL_CARE_APPLIANCE")
+# get_attributes("RUG")
 
 # for count in range(1, 66):
 #     sku = "EWPR-FPOT-"
