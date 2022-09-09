@@ -266,7 +266,7 @@ def patch_uk(sku, mktplc, f_name):
 
 
 def add_item_uk(mktplc, f_name):
-    csv_file = "rug.csv"
+    csv_file = "csvs/rug.csv"
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
@@ -320,7 +320,7 @@ def add_item_uk(mktplc, f_name):
 
             body['attributes']['item_name'][0]['value'] = title.title()
             description = "<p>" + description.replace("\n", "<br>") + "</p>"
-            description = re.sub("(<br \\> )", "", description)
+            # description = re.sub("(<br> )", "", description)
             body['attributes']['product_description'][0]['value'] = description
             body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
             # body['attributes']['number_of_items'][0]['value'] = item_count
@@ -388,9 +388,9 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-add_item_uk(Marketplaces.IT, "rug.json")
+# add_item_uk(Marketplaces.JP, "jsons/add/rug.json")
 
-# get_attributes("RUG")
+# get_attributes()
 
 # for count in range(1, 66):
 #     sku = "EWPR-FPOT-"
