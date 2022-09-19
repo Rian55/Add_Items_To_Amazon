@@ -283,14 +283,14 @@ def patch_uk(sku, mktplc, f_name):
 
 
 def add_item_uk(mktplc, f_name):
-    csv_file = "csvs/lampshade.csv"
+    csv_file = "csvs/bottle.csv"
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  # reads csv file
         print(csv_file)
-        random = 991456422666  # this number should be changed for every product type and consist of 12 digits
+        random = 992456422666  # this number should be changed for every product type and consist of 12 digits
         count = 0
 
         for row in reader:
@@ -298,12 +298,12 @@ def add_item_uk(mktplc, f_name):
             for x in row['size'].split(','):
                 sizes.append(x.split("x"))
             images = row['images'].split(",")
-            # item_count = int(row['piece'])
-            colors = row['colors']
+            item_count = int(row['piece'])
+            # colors = row['colors']
             title = row['title']
             # desi = row['desi']
             description = row['description']
-            itemType = row['item type name']
+            # itemType = row['item type name']
             bullet_points = row['bullet'].split("=")
             keywords = row['keywords']
             unitcount = "count"
@@ -342,18 +342,21 @@ def add_item_uk(mktplc, f_name):
             body['attributes']['item_dimensions'][0]['width']['value'] = max_z
             body['attributes']['item_dimensions'][0]['height']['value'] = max_y
 
+            body['attributes']['item_width_height'][0]['width']['value'] = max_x
+            body['attributes']['item_width_height'][0]['height']['value'] = max_y
+
             body['attributes']['item_name'][0]['value'] = title.title()
             description = "<p>" + description.replace("\n", "<br>") + "</p>"
             # description = re.sub("(<br> )", "", description)
             body['attributes']['product_description'][0]['value'] = description
             body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
-            # body['attributes']['number_of_items'][0]['value'] = item_count
-            body['attributes']['color'][0]['value'] = colors
+            body['attributes']['number_of_items'][0]['value'] = item_count
+            # body['attributes']['color'][0]['value'] = colors
             body['attributes']['generic_keyword'][0]['value'] = keywords
 
             # body['attributes']['target_audience_keyword'][0]['value'] = keywords
             body['attributes']['manufacturer'][0]['value'] = manufacturer
-            body['attributes']['item_type_name'][0]['value'] = itemType
+            # body['attributes']['item_type_name'][0]['value'] = itemType
             # body['attributes']['manufacturer_contact_information'][0]['value'] = manufacturer
 
             # body['attributes']['size'][0]['value'] = row['size']
@@ -361,6 +364,10 @@ def add_item_uk(mktplc, f_name):
             # body['attributes']['fabric_type'][0]['value'] = "100% " + row['materiel']
             # body['attributes']['item_type_keyword'][0]['value'] = row['US_item_type_keyword']
             # body['attributes']['material_composition'][0]['value'] = "100% " + row['material']
+
+            if mktplc == Marketplaces.US:
+                body['attributes']['item_type_keyword'] = [{"value": row['US item_type_keyword'], "marketplace_id": Marketplaces.US.marketplace_id}]
+                body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.US.marketplace_id}]
 
             body['attributes']['bullet_point'] = []
             for i in range(len(bullet_points)):
@@ -404,7 +411,7 @@ def add_item_uk(mktplc, f_name):
                 file.write(json.dumps(body, sort_keys=False, indent=2))
 
             body = json.loads(change_marketplace(f_name, mktplc, False))
-            sku_pattern = "LAMP-SHDE-"
+            sku_pattern = "PBHC-BTTL-"
 
             for i in range(len(images)):
                 img_id = sku_pattern  # here should be changed
@@ -427,7 +434,7 @@ def add_item_uk(mktplc, f_name):
 
             body['attributes']['item_name'][0]['value'] = body['attributes']['item_name'][0]['value'].title()
 
-            print(json.dumps(body, sort_keys=False, indent=2))
+            # print(json.dumps(body, sort_keys=False, indent=2))
             sku = sku_pattern  # here should be changed
             for i in range(3 - len(str(count))):
                 sku += "0"
@@ -435,17 +442,17 @@ def add_item_uk(mktplc, f_name):
             body['attributes']['model_number'][0]['value'] = sku
             body['attributes']['model_name'][0]['value'] = sku
             print(sku)
-            # print(body)
-            # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
-            #                                  marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
-            # print(resp)
+            print(body)
+            resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+                                             marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
+            print(resp)
             #########################################
             random += 1
 
 
-add_item_uk(Marketplaces.FR, "jsons/add/lampshade.json")
+add_item_uk(Marketplaces.UK, "jsons/add/bottle.json")
 
-# get_attributes("JEWELRY", Marketplaces.UK)
+# get_attributes("", Marketplaces.UK)
 
 # for count in range(1, 66):
 #     sku = "EWPR-FPOT-"

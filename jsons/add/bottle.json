@@ -1,5 +1,5 @@
 {
-  "productType": "HOME_LIGHTING_ACCESSORY",
+  "productType": "BOTTLE",
   "requirements": "LISTING",
   "attributes": {
     "condition_type": [
@@ -10,14 +10,14 @@
     ],
     "item_name": [
       {
-        "value": "Lampshade Home Decorative Fabric Cover Light Table Lamp Indoor Lighting Marble Lampshade Home Decor Wired Night Light 28X51Cm ",
+        "value": "Checkmate Patterned Blue Bottle Water Bottle Kitchenware Modern And Stylish Design",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "generic_keyword": [
       {
-        "value": "lampshade; lamp; lighting; light; decoration; desk lamp; house; decorative lampshade; interior; decorative; bedroom; special; modern; design; marble; living room; lighting; interior; gift; lighting",
+        "value": "house; house; decoration; kitchen; pine; water; bottle; water bottle; juice; fruit; refrigerator; cold; decorative; illustrated; design; glass; food; modern bottle",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -25,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 361.0,
+        "value_with_tax": 180.0,
         "marketplace_id": "ATVPDKIKX0DER",
         "value": 1060.0
       }
@@ -37,7 +37,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 361.0
+                "value_with_tax": 180.0
               }
             ]
           }
@@ -71,15 +71,15 @@
     "item_package_dimensions": [
       {
         "length": {
-          "value": 34,
+          "value": 21,
           "unit": "centimeters"
         },
         "width": {
-          "value": 57,
+          "value": 41,
           "unit": "centimeters"
         },
         "height": {
-          "value": 34,
+          "value": 21,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
@@ -87,7 +87,7 @@
     ],
     "item_type_name": [
       {
-        "value": "Lampshade, Lighting",
+        "value": "Bottle",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -100,7 +100,7 @@
     ],
     "product_description": [
       {
-        "value": "<p>It is made of specially designed marble material.<br>Use soap and water for cleaning marble products. After cleaning, be sure to dry it with a soft cloth. Avoid contact with Chemical Cleaning Materials.<br>The hat part is fabric and disassembled.<br>It has a long cord.<br>It has an on/off button.<br>Product dimensions 22x17x37 cm</p>",
+        "value": "<p>It is a design product where you can put your caramel color patterned water and many other drinks.<br>It is colorful and detailed.<br>It is made entirely of glass.<br>It is suitable for contact with food.<br>Diameter : 15 cm<br>Height : 35 cm<br>Color/Pattern : Blue</p>",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -117,16 +117,9 @@
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
-    "color": [
-      {
-        "value": "black",
-        "language_tag": "en_US",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
     "externally_assigned_product_identifier": [
       {
-        "value": 9914564227241,
+        "value": 9924564226687,
         "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -147,15 +140,15 @@
     "item_dimensions": [
       {
         "height": {
-          "value": 28,
+          "value": 15,
           "unit": "centimeters"
         },
         "length": {
-          "value": 28,
+          "value": 15,
           "unit": "centimeters"
         },
         "width": {
-          "value": 51,
+          "value": 35,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
@@ -163,17 +156,17 @@
     ],
     "bullet_point": [
       {
-        "value": "It is produced as a special design.",
+        "value": "It is produced with glass.",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       },
       {
-        "value": " It has easy installation and cable.",
+        "value": " It has a special design.",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       },
       {
-        "value": " You can clean it with a damp cloth.",
+        "value": " It has a cover.",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -193,7 +186,7 @@
     ],
     "material": [
       {
-        "value": "marble",
+        "value": "glass",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -204,54 +197,9 @@
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
-    "color_temperature": [
-      {
-        "value": 6000,
-        "unit": "kelvin",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "lighting_method": [
-      {
-        "value": "Downlight",
-        "language_tag": "en_US",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "voltage": [
-      {
-        "value": 220,
-        "unit": "volts",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "operating_life": [
-      {
-        "value": 2440,
-        "unit": "hours",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "light_source": [
-      {
-        "type": [
-          {
-            "value": "LED",
-            "language_tag": "en_US"
-          }
-        ],
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "batteries_required": [
-      {
-        "value": false,
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
     "included_components": [
       {
-        "value": "none",
+        "value": "bottle",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -259,13 +207,6 @@
     "part_number": [
       {
         "value": 1,
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "power_source_type": [
-      {
-        "value": "AC",
-        "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -277,13 +218,56 @@
     ],
     "recommended_browse_nodes": [
       {
-        "value": 9886302011,
+        "value": 30434408031,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "specific_uses_for_product": [
       {
         "value": "none",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "value": "Lightweight",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Scratch resistant",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Wide mouth",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "capacity": [
+      {
+        "value": 750,
+        "unit": "milliliters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_width_height": [
+      {
+        "height": {
+          "value": 15,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 35,
+          "unit": "centimeters"
+        },
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ]
