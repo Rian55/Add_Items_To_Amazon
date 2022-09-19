@@ -35,7 +35,7 @@ def get_attributes(product_type="", mktplc=Marketplaces.UK):
             count += 1
             print(str(count) + " " + i['name'])
         choice = input()
-        product_type = xd.payload['productTypes'][int(choice)-1]['name']
+        product_type = xd.payload['productTypes'][int(choice) - 1]['name']
 
     xdxd = types.get_definitions_product_type(productType=product_type, marketplaceIds=[mktplc.marketplace_id])
     print(xdxd)
@@ -67,12 +67,29 @@ def get_creds(mktplc):
 
 
 def change_price_details(doc, currency):
-    doc = re.sub('("currency": "\w+")', '"currency": "'+currency+'"', str(doc))
+    body = json.loads(doc)
+    body['attributes']['list_price'][0]['currency'] = currency
+    body['attributes']['purchasable_offer'][0]['currency'] = currency
     if currency != "USD":
-        price = re.search('"value_with_tax": \d+.\d+', doc).group()
-        price = price[price.find(": ") + 2:len(price)]
-        new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
-        doc = re.sub('("value_with_tax": \d+.\d+)', '"value_with_tax": ' + str("{:.2f}".format(new_price)), str(doc))
+        if "value_with_tax" in body['attributes']['list_price'][0]:
+            price = body['attributes']['list_price'][0]['value_with_tax']
+            new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+            body['attributes']['list_price'][0]['value_with_tax'] = str("{:.2f}".format(new_price))
+            body['attributes']['purchasable_offer'][0]["our_price"][0]["schedule"][0]["value_with_tax"] = str("{:.2f}".format(new_price))
+        else:
+            price = body['attributes']['list_price'][0]['value_with_tax']
+            new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+            body['attributes']['list_price'][0]['value'] = str("{:.2f}".format(new_price))
+            body['attributes']['purchasable_offer'][0]["our_price"][0]["schedule"][0]["value"] = str("{:.2f}".format(new_price))
+
+    # doc = re.sub('("currency": "\w+")', '"currency": "' + currency + '"', str(doc))
+    # if currency != "USD":
+    #     price = re.search('"value_with_tax": \d+.\d+', doc).group()
+    #     price = price[price.find(": ") + 2:len(price)]
+    #     new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+    #     doc = re.sub('("value_with_tax": \d+.\d+)', '"value_with_tax": ' + str("{:.2f}".format(new_price)), str(doc))
+
+    doc = json.dumps(body, sort_keys=False, indent=2)
     return doc
 
 
@@ -266,14 +283,16 @@ def patch_uk(sku, mktplc, f_name):
 
 
 def add_item_uk(mktplc, f_name):
-    csv_file = "csvs/rug.csv"
+    csv_file = "csvs/lampshade.csv"
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
     with open(csv_file, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)#reads csv file
-        random = 888329974878#this number should be changed for every product type and consist of 12 digits
+        reader = csv.DictReader(csvfile)  # reads csv file
+        print(csv_file)
+        random = 991456422666  # this number should be changed for every product type and consist of 12 digits
         count = 0
+
         for row in reader:
             sizes = []
             for x in row['size'].split(','):
@@ -282,16 +301,19 @@ def add_item_uk(mktplc, f_name):
             # item_count = int(row['piece'])
             colors = row['colors']
             title = row['title']
+            # desi = row['desi']
             description = row['description']
+            itemType = row['item type name']
             bullet_points = row['bullet'].split("=")
             keywords = row['keywords']
+            unitcount = "count"
             manufacturer = row['manufacturer']
             prices = []
             for i in range(9):
                 prices.append(row[str(i)])
             #############Edit Attributes#############
-            #this part should be changed for every new product type
-            #non existing attributes should be deleted and variating attributes should be added
+            # this part should be changed for every new product type
+            # non existing attributes should be deleted and variating attributes should be added
             title = title.replace(" -", "")
             title = title.replace("- ", " ")
 
@@ -316,22 +338,34 @@ def add_item_uk(mktplc, f_name):
             body['attributes']['item_package_dimensions'][0]['width']['value'] = ipd_z + 6
             body['attributes']['item_package_dimensions'][0]['height']['value'] = max_y + 6
 
+            body['attributes']['item_dimensions'][0]['length']['value'] = max_x
+            body['attributes']['item_dimensions'][0]['width']['value'] = max_z
+            body['attributes']['item_dimensions'][0]['height']['value'] = max_y
+
             body['attributes']['item_name'][0]['value'] = title.title()
             description = "<p>" + description.replace("\n", "<br>") + "</p>"
             # description = re.sub("(<br> )", "", description)
             body['attributes']['product_description'][0]['value'] = description
             body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(random)
             # body['attributes']['number_of_items'][0]['value'] = item_count
-            # body['attributes']['color'][0]['value'] = colors
+            body['attributes']['color'][0]['value'] = colors
             body['attributes']['generic_keyword'][0]['value'] = keywords
+
+            # body['attributes']['target_audience_keyword'][0]['value'] = keywords
             body['attributes']['manufacturer'][0]['value'] = manufacturer
-            body['attributes']['size'][0]['value'] = row['size']
+            body['attributes']['item_type_name'][0]['value'] = itemType
+            # body['attributes']['manufacturer_contact_information'][0]['value'] = manufacturer
+
+            # body['attributes']['size'][0]['value'] = row['size']
             body['attributes']['material'][0]['value'] = row['material']
-            body['attributes']['material_composition'][0]['value'] = "100% " + row['material']
+            # body['attributes']['fabric_type'][0]['value'] = "100% " + row['materiel']
+            # body['attributes']['item_type_keyword'][0]['value'] = row['US_item_type_keyword']
+            # body['attributes']['material_composition'][0]['value'] = "100% " + row['material']
 
             body['attributes']['bullet_point'] = []
             for i in range(len(bullet_points)):
-                body['attributes']['bullet_point'].append({"value": bullet_points[i], "language_tag": "en_US", "marketplace_id": "ATVPDKIKX0DER"})
+                body['attributes']['bullet_point'].append(
+                    {"value": bullet_points[i], "language_tag": "en_US", "marketplace_id": "ATVPDKIKX0DER"})
 
             if mktplc == Marketplaces.UK:
                 body['attributes']['recommended_browse_nodes'][0]['value'] = int(row['UK ID'])
@@ -349,48 +383,69 @@ def add_item_uk(mktplc, f_name):
                 body['attributes']['recommended_browse_nodes'][0]['value'] = int(row['PL ID'])
             elif mktplc == Marketplaces.NL:
                 body['attributes']['recommended_browse_nodes'][0]['value'] = int(row['NL ID'])
+            elif mktplc == Marketplaces.AU:
+                body['attributes']['recommended_browse_nodes'][0]['value'] = int(row['AU ID'])
+            elif mktplc == Marketplaces.MX:
+                body['attributes']['recommended_browse_nodes'][0]['value'] = int(row['MX ID'])
+            elif mktplc == Marketplaces.CA:
+                body['attributes']['recommended_browse_nodes'][0]['value'] = int(row['CA ID'])
 
-            #this part is okay dont touch it
+            # this part is okay dont touch it
             for i in ups_codes:
                 if mktplc in ups_codes[i]:
-                    body['attributes']['list_price'][0]['value_with_tax'] = float(prices[int(i)])
-                    body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0]['value_with_tax'] = float(prices[int(i)])
+                    if "value_with_tax" in body['attributes']['list_price'][0]:
+                        body['attributes']['list_price'][0]['value_with_tax'] = float(prices[int(i)])
+                        body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0]['value_with_tax'] = float(prices[int(i)])
+                    else:
+                        body['attributes']['list_price'][0]['value'] = float(prices[int(i)])
+                        body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0]['value'] = float(prices[int(i)])
 
             with open(f_name, "w", encoding="utf-8") as file:
                 file.write(json.dumps(body, sort_keys=False, indent=2))
 
             body = json.loads(change_marketplace(f_name, mktplc, False))
-            sku_pattern = "CNFT-KDRG-"
+            sku_pattern = "LAMP-SHDE-"
 
             for i in range(len(images)):
-                img_id = sku_pattern #here should be changed
-                for j in range(3-len(images[i])):
+                img_id = sku_pattern  # here should be changed
+                for j in range(3 - len(images[i])):
                     img_id += "0"
                 img_id += images[i]
+
                 if i == 0:
-                    body['attributes']['main_product_image_locator'][0]['media_location'] = f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{img_id}.jpg"
-                    body['attributes']['main_product_image_locator'][0]['marketplace_id'] = body['attributes']['item_name'][0]['marketplace_id']
+                    body['attributes']['main_product_image_locator'][0][
+                        'media_location'] = f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{img_id}.jpg"
+                    body['attributes']['main_product_image_locator'][0]['marketplace_id'] = \
+                    body['attributes']['item_name'][0]['marketplace_id']
+
                 else:
-                    body['attributes'][f'other_product_image_locator_{i}'] = [{"media_location": f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{img_id}.jpg", "marketplace_id": body['attributes']['item_name'][0]['marketplace_id']}]
+
+                    body['attributes']['model_number'][0]['value'] = img_id
+                    body['attributes'][f'other_product_image_locator_{i}'] = [
+                        {"media_location": f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{img_id}.jpg",
+                         "marketplace_id": body['attributes']['item_name'][0]['marketplace_id']}]
 
             body['attributes']['item_name'][0]['value'] = body['attributes']['item_name'][0]['value'].title()
-            # print(json.dumps(body, sort_keys=False, indent=2))
-            sku = sku_pattern #here should be changed
+
+            print(json.dumps(body, sort_keys=False, indent=2))
+            sku = sku_pattern  # here should be changed
             for i in range(3 - len(str(count))):
                 sku += "0"
             sku += str(count)
+            body['attributes']['model_number'][0]['value'] = sku
+            body['attributes']['model_name'][0]['value'] = sku
             print(sku)
-            print(body)
-            resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
-                                             marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
-            print(resp)
+            # print(body)
+            # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+            #                                  marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
+            # print(resp)
             #########################################
             random += 1
 
 
-add_item_uk(Marketplaces.UK, "jsons/add/home_furniture_and_decor.json")
+add_item_uk(Marketplaces.FR, "jsons/add/lampshade.json")
 
-# get_attributes()
+# get_attributes("JEWELRY", Marketplaces.UK)
 
 # for count in range(1, 66):
 #     sku = "EWPR-FPOT-"

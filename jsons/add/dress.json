@@ -1,0 +1,228 @@
+{
+  "productType": "DRESS",
+  "requirements": "LISTING",
+  "attributes": {
+    "condition_type": [
+      {
+        "value": "new_new",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "value": "Green Non-Slip Kids Carpet Baby Room Bedroom Modern Fun Carpet Rug",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "generic_keyword": [
+      {
+        "value": "children's room; modern; stylish; home decoration; rug; bedroom; baby room; baby girl; 3 years; 5 years old; non-slip; baby boy; living room; house; carpet",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value_with_tax": 235.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "purchasable_offer": [
+      {
+        "currency": "USD",
+        "our_price": [
+          {
+            "schedule": [
+              {
+                "value_with_tax": 235.0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "product_tax_code": [
+      {
+        "value": "A_GEN_TAX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "main_product_image_locator": [
+      {
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/EWPR-APLK-31.jpg",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fulfillment_availability": [
+      {
+        "fulfillment_channel_code": "DEFAULT",
+        "quantity": 10
+      }
+    ],
+    "country_of_origin": [
+      {
+        "value": "UK",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "value": 33,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 33,
+          "unit": "centimeters"
+        },
+        "height": {
+          "value": 196,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_length_width": [
+      {
+        "length": {
+          "value": 190,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 133,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_name": [
+      {
+        "value": "Rug, Carpet, Kid's Carpet",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "value": "<p>Confetti Children's Carpets with Eco-Tex Standard 100 certificate will be indispensable for your children's and baby rooms in terms of quality and health.<br>Since Confetti Kids Carpets are Teflon coated, they prevent dirt from adhering to the surface of the carpet and do not keep any dust that is risky for health on its surface.<br>In addition, liquids spilled on the surface of the carpet cannot go deep into your carpet, so Confetti Kids Carpets are cleaned more quickly than other carpets.<br>Machine Washable at 30C<br>Non-Slip Base<br>100% Polyamide<br>Total Carpet Weight: 1282 gr - 1432 gr / m2<br>Thread Height : 5 mm ca. - 6 mm ca<br>It is green in color.<br>It is a type of carpet consisting of curls at a homogeneous level.<br>The smooth surface of the carpet makes it durable, so it is preferred in environments with high traffic.<br>Your children will be safer with Confetti Kids Carpets.</p>",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "value": "eworldpartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "value": "Confetti",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": 8883299745799,
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "value": "2",
+        "unit": "kilograms",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "value": "It can be washed in the washing machine.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "It has a fine structure.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " It is woven solid.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gift_options": [
+      {
+        "can_be_messaged": true,
+        "can_be_wrapped": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "value": "green",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_stain_resistant": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_browse_nodes": [
+      {
+        "value": 2844187031,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "value": "133x190x2",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "age_range_description": [
+      {
+        "value": "Adult",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "value": "Polyamide",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "000",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  }
+}

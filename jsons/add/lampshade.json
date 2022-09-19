@@ -1,0 +1,297 @@
+{
+  "productType": "HOME_LIGHTING_ACCESSORY",
+  "requirements": "LISTING",
+  "attributes": {
+    "condition_type": [
+      {
+        "value": "new_new",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "value": "Lampshade Wooden Stylish Home Decor Indoor Lighting  Study Room Decorative Lampshade",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "generic_keyword": [
+      {
+        "value": "design; modern; stylish; wood; linden; lighting; lampshade; home decoration; lamp; library; study room; bedroom; decorative; living room; personal belongings; furniture",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value_with_tax": 566.0,
+        "marketplace_id": "ATVPDKIKX0DER",
+        "value": 1060.0
+      }
+    ],
+    "purchasable_offer": [
+      {
+        "currency": "USD",
+        "our_price": [
+          {
+            "schedule": [
+              {
+                "value_with_tax": 566.0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "product_tax_code": [
+      {
+        "value": "A_GEN_TAX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "main_product_image_locator": [
+      {
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/EWPR-APLK-31,8.jpg",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fulfillment_availability": [
+      {
+        "fulfillment_channel_code": "DEFAULT",
+        "quantity": 10
+      }
+    ],
+    "country_of_origin": [
+      {
+        "value": "UK",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "value": 36,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 58,
+          "unit": "centimeters"
+        },
+        "height": {
+          "value": 36,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_name": [
+      {
+        "value": "Lampshade, Lighting",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "value": "no warranty",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "value": "<p>The design is wooden lampshade.<br>It is a colorful product.<br>It is easy to clean.<br>You can easily use it in every corner of your home.<br>It has a modern and stylish design.<br>It is decorated with geometric pieces.<br>Product dimensions are 30x52 cm.</p>",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "value": "eworldpartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "value": "eWorldpartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "value": "gray",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": 9914564226718,
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "value": "2",
+        "unit": "kilograms",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "height": {
+          "value": 30,
+          "unit": "centimeters"
+        },
+        "length": {
+          "value": 30,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 52,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "value": "It is produced as a special design.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " You can use it in many corners of your home. ",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " You can clean it with a damp cloth.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gift_options": [
+      {
+        "can_be_messaged": true,
+        "can_be_wrapped": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "value": "wooden",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "value": "001",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color_temperature": [
+      {
+        "value": 6000,
+        "unit": "kelvin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "lighting_method": [
+      {
+        "value": "Downlight",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "voltage": [
+      {
+        "value": 220,
+        "unit": "volts",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_plug_type": [
+      {
+        "value": "type_c_2pin_eu",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "accepted_voltage_frequency": [
+      {
+        "value": "220v_240v_50hz",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "operating_life": [
+      {
+        "value": 2440,
+        "unit": "hours",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "light_source": [
+      {
+        "type": [
+          {
+            "value": "LED",
+            "language_tag": "en_US"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_browse_nodes": [
+      {
+        "value": 248382031,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_source_type": [
+      {
+        "value": "AC",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  }
+}
