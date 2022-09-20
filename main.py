@@ -283,14 +283,14 @@ def patch_uk(sku, mktplc, f_name):
 
 
 def add_item_uk(mktplc, f_name):
-    csv_file = "csvs/sehpa.csv"
+    csv_file = "csvs/shawls.csv"
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  # reads csv file
         print(csv_file)
-        random = 994456422666  # this number should be changed for every product type and consist of 12 digits
+        random = 995456422666  # this number should be changed for every product type and consist of 12 digits
         count = 0
 
         for row in reader:
@@ -334,20 +334,20 @@ def add_item_uk(mktplc, f_name):
                 if int(sizes[i][2]) > max_z:
                     max_z = int(sizes[i][2])
 
-            body['attributes']['item_package_dimensions'][0]['length']['value'] = max_x + 6
-            body['attributes']['item_package_dimensions'][0]['width']['value'] = ipd_z + 6
-            body['attributes']['item_package_dimensions'][0]['height']['value'] = max_y + 6
+            body['attributes']['item_package_dimensions'][0]['length']['value'] = 10
+            body['attributes']['item_package_dimensions'][0]['width']['value'] = 12
+            body['attributes']['item_package_dimensions'][0]['height']['value'] = 2
 
-            # body['attributes']['item_dimensions'][0]['length']['value'] = max_x
-            # body['attributes']['item_dimensions'][0]['width']['value'] = max_z
-            # body['attributes']['item_dimensions'][0]['height']['value'] = max_y
+            body['attributes']['item_dimensions'][0]['length']['value'] = max_x
+            body['attributes']['item_dimensions'][0]['width']['value'] = max_y
+            body['attributes']['item_dimensions'][0]['height']['value'] = max_z
 
             # body['attributes']['item_width_height'][0]['width']['value'] = max_x
-            # body['attributes']['item_width_height'][0]['height']['value'] = max_y
+            # body['attributes']['item_width_height'][0]['height']['value'] = max_z
 
-            body['attributes']['item_depth_width_height'][0]['depth']['value'] = max_y - 1
-            body['attributes']['item_depth_width_height'][0]['width']['value'] = max_z
-            body['attributes']['item_depth_width_height'][0]['height']['value'] = max_y
+            body['attributes']['item_depth_width_height'][0]['depth']['value'] = max_z - 1
+            body['attributes']['item_depth_width_height'][0]['width']['value'] = max_x
+            body['attributes']['item_depth_width_height'][0]['height']['value'] = max_z
 
             body['attributes']['item_name'][0]['value'] = title.title()
             description = "<p>" + description.replace("\n", "<br>") + "</p>"
@@ -364,7 +364,7 @@ def add_item_uk(mktplc, f_name):
 
             body['attributes']['size'][0]['value'] = row['size']
             body['attributes']['material'][0]['value'] = row['material']
-            body['attributes']['item_shape'][0]['value'] = row['shape']
+            # body['attributes']['item_shape'][0]['value'] = row['shape']
             body['attributes']['fabric_type'][0]['value'] = row['material']
             # body['attributes']['material_composition'][0]['value'] = "100% " + row['material']
 
@@ -457,9 +457,9 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-# add_item_uk(Marketplaces.SE, "jsons/add/home_furniture_and_decor.json")
+add_item_uk(Marketplaces.UK, "jsons/add/furniture_cover.json")
 
-get_attributes("HOME_FURNITURE_AND_DECOR", Marketplaces.UK)
+# get_attributes("", Marketplaces.UK)
 
 # for count in range(1, 66):
 #     sku = "EWPR-FPOT-"
