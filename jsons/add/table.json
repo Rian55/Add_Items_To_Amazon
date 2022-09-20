@@ -10,14 +10,14 @@
     ],
     "item_name": [
       {
-        "value": "Side Table Massello Design Tulip Solid Wood Stool Special Design Gray Coffee Table  Home Decoration",
+        "value": "Side Table Decorative Mini Wooden Flowerpot Coffee Table Handmade Walnut Brown For Living Room Home Decoration",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "generic_keyword": [
       {
-        "value": "side; coffee table; middle; room; house; home; wood; Metal; woman; male; design; shopping; modern; bronze; black; white; nest; walnut; natural; center; round; rectangle",
+        "value": "coffee table; middle; side; room; house; home; wood; Metal; woman; male; design; shopping; modern; bronze; black; white; nest; walnut; natural; center; round; rectangle",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -25,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 636.0,
+        "value_with_tax": 108.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -36,7 +36,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 636.0
+                "value_with_tax": 108.0
               }
             ]
           }
@@ -70,15 +70,15 @@
     "item_package_dimensions": [
       {
         "length": {
-          "value": 36,
+          "value": 26,
           "unit": "centimeters"
         },
         "width": {
-          "value": 51,
+          "value": 39,
           "unit": "centimeters"
         },
         "height": {
-          "value": 27,
+          "value": 26,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
@@ -92,7 +92,7 @@
     ],
     "product_description": [
       {
-        "value": "<p>The Wooden Coffee Table is completely solid wood and handcrafted using traditional turning techniques from first class linden wood.<br>The product is combined with the laminated method. Lacquer paint has been applied to the product. All products using lacquer paint have been selected from the \"RAL\" color catalogue.<br>There may be tonal differences between the product you will buy and the product in the image.<br>The Wooden Coffee Table will bring vitality to your home with its modern design and eye-catching color.<br>The cleaning of the product should be done with the help of professional wood care products or a slightly damp cloth.<br>The size of the product is 30x21x45 cm.</p>",
+        "value": "<p>Side Table is made of wood material.<br>It will bring vitality to your home with its modern design and eye-catching color.<br>The cleaning of the product should be done with the help of a slightly damp cloth.<br>The size of the product is 20x20x33 cm.</p>",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -111,7 +111,7 @@
     ],
     "externally_assigned_product_identifier": [
       {
-        "value": 9944564227002,
+        "value": 9944564227101,
         "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -138,17 +138,17 @@
     ],
     "bullet_point": [
       {
-        "value": "Made of solid wood. ",
+        "value": "It is a specially designed coffee table. ",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       },
       {
-        "value": " The model is specially designed. ",
+        "value": " It can be used for a long time. ",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       },
       {
-        "value": " You can use it anywhere in your home.",
+        "value": " It adds style and elegance to your home.",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -168,13 +168,13 @@
     ],
     "recommended_browse_nodes": [
       {
-        "value": 2808733031,
+        "value": 20650250031,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "size": [
       {
-        "value": "30x21x45",
+        "value": "20x20x33",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -244,7 +244,7 @@
     ],
     "color": [
       {
-        "value": "gray",
+        "value": "brown",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -252,15 +252,15 @@
     "item_depth_width_height": [
       {
         "depth": {
-          "value": 20,
+          "value": 19,
           "unit": "centimeters"
         },
         "width": {
-          "value": 45,
+          "value": 33,
           "unit": "centimeters"
         },
         "height": {
-          "value": 21,
+          "value": 20,
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
