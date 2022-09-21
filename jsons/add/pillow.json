@@ -1,0 +1,324 @@
+{
+  "productType": "DECORATIVE_PILLOW_COVER",
+  "requirements": "LISTING",
+  "attributes": {
+    "condition_type": [
+      {
+        "value": "new_new",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fabric_type": [
+      {
+        "value": "100% ",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "value": "None",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "accepted_voltage_frequency": [
+      {
+        "value": "100v_120v_50hz",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_plug_type": [
+      {
+        "value": "16_a_5_pin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "value": "001",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "value": "43x43x3",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "value": 1.0,
+        "type": {
+          "value": "count",
+          "language_tag": "en_US"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_fragile": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "value": "Pillow Cover Tasseled Machine Washable Pillow Cover Set Of 3 Decorative Living Room Young'S Room Modern",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "generic_keyword": [
+      {
+        "value": "bedroom; modern; stylish; seat; bed; pillowcase ; bed; house; home decoration; decorative; blue; colourful; soft; sheet; unfilled; 1 pc; living room",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value_with_tax": 156.0,
+        "marketplace_id": "ATVPDKIKX0DER",
+        "value": 102.0
+      }
+    ],
+    "purchasable_offer": [
+      {
+        "currency": "USD",
+        "our_price": [
+          {
+            "schedule": [
+              {
+                "value_with_tax": 156.0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "product_tax_code": [
+      {
+        "value": "A_GEN_TAX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "main_product_image_locator": [
+      {
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/EWPR-APLK-31,8.jpg",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fulfillment_availability": [
+      {
+        "fulfillment_channel_code": "DEFAULT",
+        "quantity": 10
+      }
+    ],
+    "country_of_origin": [
+      {
+        "value": "UK",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "value": 49,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 9,
+          "unit": "centimeters"
+        },
+        "height": {
+          "value": 49,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_length_width": [
+      {
+        "length": {
+          "value": 190,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 133,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_name": [
+      {
+        "value": "home decoration,cushion",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "value": "<p>The back is flat and the front is tassel detail.<br>Wash meticulously and delicately at 30\u00ef\u00bf\u00bdC in the machine.<br>Do not use bleach.<br>Iron on reverse on medium heat settings.<br>The product has 3 pillowcases.<br>Product dimensions are 2 pieces of 43x43x3 and 1 piece of 35x35x3 cm.</p>",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "value": "eworldpartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "value": "eWorldPartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": 9994163227149,
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "value": "1",
+        "unit": "kilograms",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "value": "Tassel detailed.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " Sax blue color.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " 3 pieces are sent.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gift_options": [
+      {
+        "can_be_messaged": true,
+        "can_be_wrapped": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_shape": [
+      {
+        "value": "Rectangular",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "value": "blue",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "weave_type": [
+      {
+        "value": "Tufted Weave",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_browse_nodes": [
+      {
+        "value": 731762031,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "room_type": [
+      {
+        "value": "Bedroom",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Nursery",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Kid's Room",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Game Room",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "value": "",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "false",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_assembly_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_material_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "value": "Carpet",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  }
+}

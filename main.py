@@ -456,4 +456,4 @@ def add_item_uk(mktplc, f_name):
 
 # get_attributes("", Marketplaces.UK)
 
-patch_uk(mktplc=Marketplaces.UK, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPR-SHPA-", csv_file="csvs/sehpa.csv")
+patch_uk(mktplc=Marketplaces.IT, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPR-SHPA-", csv_file="csvs/sehpa.csv")

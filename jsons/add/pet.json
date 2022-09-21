@@ -1,0 +1,305 @@
+{
+  "productType": "PET_ACTIVITY_STRUCTURE",
+  "requirements": "LISTING",
+  "attributes": {
+    "condition_type": [
+      {
+        "value": "new_new",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_name": [
+      {
+        "value": "Pet Feeder, Pet Bowl",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "value": "Color Printed Steel Bowl Cat And Dog Food And Water Bowl Wooden White Modern Pet Garden Design Food Container",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "generic_keyword": [
+      {
+        "value": "pet; cat; dog; lunch box; water bucket; colourful; patterned; pink; water; bird; decorative; wood; home decoration; animal; garden; house; 2 pieces; pet; love",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value_with_tax": 265.0,
+        "marketplace_id": "ATVPDKIKX0DER",
+        "value": 115.0
+      }
+    ],
+    "purchasable_offer": [
+      {
+        "currency": "USD",
+        "our_price": [
+          {
+            "schedule": [
+              {
+                "value_with_tax": 265.0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "product_tax_code": [
+      {
+        "value": "A_GEN_TAX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "main_product_image_locator": [
+      {
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/EWPR-APLK-16,3,4.jpg",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fulfillment_availability": [
+      {
+        "fulfillment_channel_code": "DEFAULT",
+        "quantity": 10
+      }
+    ],
+    "country_of_origin": [
+      {
+        "value": "UK",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_length_width_height": [
+      {
+        "length": {
+          "value": 6,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 6,
+          "unit": "centimeters"
+        },
+        "height": {
+          "value": 6,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "value": "none",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "value": "",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "value": "no warranty",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "value": "<p>Specially designed wooden food and drink bowls that can be used for cats and dogs with their different patterns and figures offer a comfortable space for our clawed friends.<br>It has 2 different areas for water and food.<br>The cat and small breed dog food and water bowl is easy to clean. Steel bowls can be easily removed and reinstalled.<br>Food and water containers are made of stainless steel containers and Mdf lam material.<br>12cm diameter<br>300 ml water and food volume<br>Product size is 27x32x17 cm.</p>",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "value": "eworldpartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "value": "eWorldpartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "value": "Multicolor",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": 9994163853379,
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "value": "1",
+        "unit": "kilograms",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "height": {
+          "value": 50,
+          "unit": "centimeters"
+        },
+        "length": {
+          "value": 2,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 12,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "value": "Does not harm your pet.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " Easy to clean.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " Suitable for contact with food.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_oem_authorized": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "RIV001",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "value": 1.0,
+        "type": {
+          "value": "count",
+          "language_tag": "en_US"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "specific_uses_for_product": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "age_range_description": [
+      {
+        "language_tag": "en_US",
+        "value": "For all ages",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_browse_nodes": [
+      {
+        "value": 20653036031,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_plug_type": [
+      {
+        "value": "16_a_5_pin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "accepted_voltage_frequency": [
+      {
+        "value": "100v_120v_50hz",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "allergen_information": [
+      {
+        "value": "abalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "value": "Pet",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "value": "001",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER",
+        "value": "Pet_001"
+      }
+    ],
+    "oem_equivalent_part_number": [
+      {
+        "marketplace_id": "ATVPDKIKX0DER",
+        "value": "KN.A080A.001"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "marketplace_id": "ATVPDKIKX0DER",
+        "value": false
+      }
+    ],
+    "number_of_boxes": [
+      {
+        "marketplace_id": "ATVPDKIKX0DER",
+        "value": 1
+      }
+    ],
+    "gift_options": [
+      {
+        "can_be_messaged": true,
+        "can_be_wrapped": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  }
+}
