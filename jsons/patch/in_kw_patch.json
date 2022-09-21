@@ -1,13 +1,12 @@
 {
-  "productType": "PRODUCT",
+  "productType": "TABLE",
   "patches": [
     {
       "op": "replace",
-      "path": "/attributes/item_name",
-	  "value": [
-		{
-		  "value": "Moderne Sarman Blumentopf Design Heimtextilien",
-          "language_tag": "ja_JP",
+      "path": "/attributes/size",
+      "value": [
+        {
+          "value": "30x21x50",
           "marketplace_id": "A1VC38T7YXB528"
         }
       ]

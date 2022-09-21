@@ -10,14 +10,14 @@
     ],
     "item_name": [
       {
-        "value": "Wall Ornament Set Handmade Detailed Set Of 5 Home Decoration Living Room Wall Accessory Mirror Design Product Wicker Indoor Wall Object",
+        "value": "Wall Ornament Handmade Detailed Home Decoration Bohemian Living Room Wall Accessory Bohemian Eye Design Product Wicker Indoor Wall Object  37X5 Cm",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "generic_keyword": [
       {
-        "value": "handmade; design; decoration; wall decoration; home; woman; wicker; indoor; accessory; decorative; modern; style; living room; decorative set; garden; outdoor decoration",
+        "value": "handmade; design; decoration; wall decoration; home; wicker; indoor; accessory; decorative; bohemian; living room; garden decoration; outdoor decoration; women; gift;",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -25,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 309.0,
+        "value_with_tax": 123.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -36,7 +36,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 309.0
+                "value_with_tax": 123.0
               }
             ]
           }
@@ -78,7 +78,7 @@
           "unit": "centimeters"
         },
         "height": {
-          "value": "25",
+          "value": "8",
           "unit": "centimeters"
         },
         "marketplace_id": "ATVPDKIKX0DER"
@@ -86,7 +86,7 @@
     ],
     "product_description": [
       {
-        "value": "<p>Handmade products inspired by nature.<br>The design made of wicker is a wall decoration product.<br>It can be used for home, garden or balcony wall decoration.<br>There are 5 items in the set<br>You can clean it with a damp cloth.Product diameters: 37-37-37-37-30</p>",
+        "value": "<p>Handmade products inspired by nature.<br>The design made of wicker is a wall decoration product.<br>It can be used for home, garden or balcony wall decoration.<br>You can clean it with a damp cloth.Product diameters: 37x5 cm</p>",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -99,7 +99,7 @@
     ],
     "externally_assigned_product_identifier": [
       {
-        "value": 9934564251794,
+        "value": 9934564252074,
         "type": "ean",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -113,7 +113,7 @@
     ],
     "number_of_items": [
       {
-        "value": 5,
+        "value": 1,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -149,13 +149,13 @@
     ],
     "recommended_browse_nodes": [
       {
-        "value": 731697031,
+        "value": 9757039011,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "size": [
       {
-        "value": "37x37x2,37x37x2,37x37x2,37x37x2,30x30x2",
+        "value": "37x37x5",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -175,7 +175,7 @@
     ],
     "color": [
       {
-        "value": "colorful",
+        "value": "brown",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }

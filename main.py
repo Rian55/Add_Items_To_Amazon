@@ -229,57 +229,47 @@ def change_marketplace(fname, mktplc, is_patch):
     return doc
 
 
-def patch_uk(sku, mktplc, f_name):
+def patch_uk(mktplc, f_name, sku_pattern, csv_file):
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
-    ##############Check Item###################
-    try:
-        text = listing.get_listings_item(sellerId=s_id, sku=sku,
-                                         marketplaceIds=[mktplc.marketplace_id]).payload['summaries'][0]['itemName']
-        print(text)
-    except:
-        print("not found " + sku)
-        return
-    ###########################################
+    with open(csv_file, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)  # reads csv file
+        print(csv_file)
+        count = 0
 
-    ##############Edit Attributes##############
-    with open(f_name, 'r+', encoding="utf-8") as file:
-        data = file.read()
-    # with open(f_name, 'w', encoding="utf-8") as file:
-    #     try:
-    #         text = text.encode('utf', 'ignore').decode('utf')
-    #         data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-    #                       'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
-    #         file.writelines(data)
-    #     except:
-    #         text = text.encode('1252', 'ignore').decode('1252')
-    #         data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-    #                       'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
-    #         file.writelines(data)
-    #     print(text)
-    with open(f_name, 'w', encoding="utf-8") as file:
-        text = text.replace('"', '')
-        text = text.encode('utf', 'ignore').decode('utf')
-        data = re.sub('item_name",\n\s+"value":\s\[\n\s+{\n\s+"value":\s"(.+)"',
-                      'item_name",\n\t  "value": [\n\t\t{\n\t\t  "value": "' + text + '"', data)
-        data = data.replace(" - Pasabahce", "")
-        data = data.replace(" -Pasabahce", "")
-        data = data.replace("- Pasabahce", "")
-        data = data.replace("-Pasabahce", "")
-        file.writelines(data)
+        for row in reader:
+            count += 1
+            sku = sku_pattern  # here should be changed
+            for i in range(3 - len(str(count))):
+                sku += "0"
+            sku += str(count)
+            ##############Check Item###################
+            try:
+                text = listing.get_listings_item(sellerId=s_id, sku=sku,
+                                                 marketplaceIds=[mktplc.marketplace_id]).payload['summaries'][0]['itemName']
+                print(text)
+            except:
+                print("not found " + sku)
+                continue
+            ###########################################
 
-    body = json.loads(change_marketplace(f_name, mktplc, True))
-    ###########################################
+            with open(f_name, "r+", encoding="utf-8") as file:
+                body = json.load(file)
 
-    ###############Send Request################
-    # file = open(f_name, "r+", encoding="utf-8")
-    # body = json.load(file)
-    resp = listing.patch_listings_item(sellerId=s_id, sku=sku, body=body,
-                                       marketplaceIds=[mktplc.marketplace_id])
-    print(resp)
-    file.close()
-    ###########################################
+            body['patches'][0]['value'][0]['value'] = row['size']
+
+            with open(f_name, "w", encoding="utf-8") as file:
+                file.write(json.dumps(body, sort_keys=False, indent=2))
+            body = json.loads(change_marketplace(f_name, mktplc, True))
+
+            print(body)
+            ###############Send Request################
+            resp = listing.patch_listings_item(sellerId=s_id, sku=sku, body=body,
+                                               marketplaceIds=[mktplc.marketplace_id])
+            print(resp)
+            file.close()
+            ###########################################
 
 
 def add_item_uk(mktplc, f_name):
@@ -432,14 +422,18 @@ def add_item_uk(mktplc, f_name):
             body['attributes']['item_name'][0]['value'] = body['attributes']['item_name'][0]['value'].title()
             if mktplc == Marketplaces.US:
                 body['attributes'].pop("recommended_browse_nodes", None)
-                value_with_tax = body['attributes']['list_price']['value_with_tax']
+                value_with_tax = body['attributes']['list_price'][0]['value_with_tax']
                 body['attributes']['list_price'][0].pop("value_with_tax", None)
                 body['attributes']['list_price'][0]['value'] = value_with_tax
                 body['attributes']['item_type_keyword'] = [{"value": row['US item_type_keyword'], "marketplace_id": Marketplaces.US.marketplace_id}]
-                body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.US.marketplace_id}]
+                # body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.US.marketplace_id}]
             elif mktplc == Marketplaces.CA:
+                value_with_tax = body['attributes']['list_price'][0]['value_with_tax']
+                body['attributes']['list_price'][0].pop("value_with_tax", None)
+                body['attributes']['list_price'][0]['value'] = value_with_tax
                 body['attributes']['contains_liquid_contents'] = [{"value": False, "marketplace_id": Marketplaces.CA.marketplace_id}]
-                body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.CA.marketplace_id}]
+                body['attributes']['warranty_description'] = [{"value": "none", "marketplace_id": Marketplaces.CA.marketplace_id}]
+                # body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.CA.marketplace_id}]
                 body['attributes']['manufacturer_contact_information'] = [{"value": "eworldpartner", "marketplace_id": Marketplaces.CA.marketplace_id}]
 
             # print(json.dumps(body, sort_keys=False, indent=2))
@@ -458,13 +452,8 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-add_item_uk(Marketplaces.IT, "jsons/add/wall_art.json")
+# add_item_uk(Marketplaces.MX, "jsons/add/wall_art.json")
 
 # get_attributes("", Marketplaces.UK)
 
-# for count in range(1, 66):
-#     sku = "EWPR-FPOT-"
-#     for i in range(3 - len(str(count))):
-#         sku += "0"
-#     sku += str(count)
-#     patch_uk(sku, Marketplaces.DE, "in_kw_patch.json")
+patch_uk(mktplc=Marketplaces.UK, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPR-SHPA-", csv_file="csvs/sehpa.csv")
