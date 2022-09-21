@@ -272,6 +272,8 @@ def patch_uk(mktplc, f_name, sku_pattern, csv_file):
                         body['patches'][0]['value'][0]['value_with_tax'] = float(row[i])
                         body['patches'][1]['value'][0]['our_price'][0]['schedule'][0]['value_with_tax'] = float(row[i])
 
+            body['patches'][2]['value'][0]['value'] = row['piece']
+
             with open(f_name, "w", encoding="utf-8") as file:
                 file.write(json.dumps(body, sort_keys=False, indent=2))
             body = json.loads(change_marketplace(f_name, mktplc, True))
@@ -280,7 +282,7 @@ def patch_uk(mktplc, f_name, sku_pattern, csv_file):
             print(body)
             ###############Send Request################
             resp = listing.patch_listings_item(sellerId=s_id, sku=sku, body=body,
-                                               marketplaceIds=[mktplc.marketplace_id])
+                                               marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
             print(resp)
             file.close()
             ###########################################
@@ -468,6 +470,6 @@ def add_item_uk(mktplc, f_name):
 
 # add_item_uk(Marketplaces.MX, "jsons/add/wall_art.json")
 
-# get_attributes("", Marketplaces.UK)
+# get_attributes("PILLOW", Marketplaces.UK)
 
 patch_uk(mktplc=Marketplaces.IT, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPP-PILW-", csv_file="csvs/pillow.csv")
