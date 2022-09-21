@@ -36,7 +36,8 @@
           {
             "schedule": [
               {
-                "value_with_tax": 131.0
+                "value_with_tax": 131.0,
+                "value": 85.0
               }
             ]
           }
@@ -192,7 +193,7 @@
     ],
     "recommended_browse_nodes": [
       {
-        "value": 3229382031,
+        "value": 2896568031,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],

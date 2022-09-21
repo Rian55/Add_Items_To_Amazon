@@ -283,30 +283,30 @@ def patch_uk(sku, mktplc, f_name):
 
 
 def add_item_uk(mktplc, f_name):
-    csv_file = "csvs/shawls.csv"
+    csv_file = "csvs/wall_art.csv"
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  # reads csv file
         print(csv_file)
-        random = 995456422666  # this number should be changed for every product type and consist of 12 digits
+        random = 993456425165  # this number should be changed for every product type and consist of 12 digits
         count = 0
 
         for row in reader:
             sizes = []
             for x in row['size'].split(','):
                 sizes.append(x.split("x"))
+            package_size = row['package size'].split('x')
             images = row['images'].split(",")
             item_count = int(row['piece'])
             colors = row['colors']
             title = row['title']
             # desi = row['desi']
             description = row['description']
-            itemType = row['item type name']
+            item_type = row['item type name']
             bullet_points = row['bullet'].split("=")
             keywords = row['keywords']
-            unitcount = "count"
             manufacturer = row['manufacturer']
             prices = []
             for i in range(9):
@@ -314,9 +314,6 @@ def add_item_uk(mktplc, f_name):
             #############Edit Attributes#############
             # this part should be changed for every new product type
             # non existing attributes should be deleted and variating attributes should be added
-            title = title.replace(" -", "")
-            title = title.replace("- ", " ")
-
             with open(f_name, "r+", encoding="utf-8") as file:
                 body = json.load(file)
 
@@ -334,20 +331,23 @@ def add_item_uk(mktplc, f_name):
                 if int(sizes[i][2]) > max_z:
                     max_z = int(sizes[i][2])
 
-            body['attributes']['item_package_dimensions'][0]['length']['value'] = 10
-            body['attributes']['item_package_dimensions'][0]['width']['value'] = 12
-            body['attributes']['item_package_dimensions'][0]['height']['value'] = 2
+            body['attributes']['item_package_dimensions'][0]['length']['value'] = package_size[0]
+            body['attributes']['item_package_dimensions'][0]['width']['value'] = package_size[1]
+            body['attributes']['item_package_dimensions'][0]['height']['value'] = package_size[2]
 
-            body['attributes']['item_dimensions'][0]['length']['value'] = max_x
-            body['attributes']['item_dimensions'][0]['width']['value'] = max_y
-            body['attributes']['item_dimensions'][0]['height']['value'] = max_z
+            # body['attributes']['item_dimensions'][0]['length']['value'] = max_x
+            # body['attributes']['item_dimensions'][0]['width']['value'] = max_y
+            # body['attributes']['item_dimensions'][0]['height']['value'] = max_z
 
             # body['attributes']['item_width_height'][0]['width']['value'] = max_x
             # body['attributes']['item_width_height'][0]['height']['value'] = max_z
 
-            body['attributes']['item_depth_width_height'][0]['depth']['value'] = max_z - 1
-            body['attributes']['item_depth_width_height'][0]['width']['value'] = max_x
-            body['attributes']['item_depth_width_height'][0]['height']['value'] = max_z
+            body['attributes']['item_length_width'][0]['width']['value'] = max_x
+            body['attributes']['item_length_width'][0]['length']['value'] = max_y
+
+            # body['attributes']['item_depth_width_height'][0]['depth']['value'] = max_z - 1
+            # body['attributes']['item_depth_width_height'][0]['width']['value'] = max_x
+            # body['attributes']['item_depth_width_height'][0]['height']['value'] = max_z
 
             body['attributes']['item_name'][0]['value'] = title.title()
             description = "<p>" + description.replace("\n", "<br>") + "</p>"
@@ -359,13 +359,13 @@ def add_item_uk(mktplc, f_name):
             body['attributes']['generic_keyword'][0]['value'] = keywords
 
             # body['attributes']['target_audience_keyword'][0]['value'] = keywords
-            body['attributes']['manufacturer'][0]['value'] = manufacturer
-            body['attributes']['item_type_name'][0]['value'] = itemType
+            # body['attributes']['manufacturer'][0]['value'] = manufacturer
+            # body['attributes']['item_type_name'][0]['value'] = item_type
 
             body['attributes']['size'][0]['value'] = row['size']
             body['attributes']['material'][0]['value'] = row['material']
             # body['attributes']['item_shape'][0]['value'] = row['shape']
-            body['attributes']['fabric_type'][0]['value'] = row['material']
+            # body['attributes']['fabric_type'][0]['value'] = row['material']
             # body['attributes']['material_composition'][0]['value'] = "100% " + row['material']
 
             body['attributes']['bullet_point'] = []
@@ -410,7 +410,7 @@ def add_item_uk(mktplc, f_name):
                 file.write(json.dumps(body, sort_keys=False, indent=2))
 
             body = json.loads(change_marketplace(f_name, mktplc, False))
-            sku_pattern = "EWPR-SHWL-"
+            sku_pattern = "EWPR-WART-"
 
             for i in range(len(images)):
                 img_id = sku_pattern  # here should be changed
@@ -425,8 +425,6 @@ def add_item_uk(mktplc, f_name):
                     body['attributes']['item_name'][0]['marketplace_id']
 
                 else:
-
-                    body['attributes']['model_number'][0]['value'] = img_id
                     body['attributes'][f'other_product_image_locator_{i}'] = [
                         {"media_location": f"https://seller-central-storage.s3.eu-central-1.amazonaws.com/{img_id}.jpg",
                          "marketplace_id": body['attributes']['item_name'][0]['marketplace_id']}]
@@ -434,10 +432,13 @@ def add_item_uk(mktplc, f_name):
             body['attributes']['item_name'][0]['value'] = body['attributes']['item_name'][0]['value'].title()
             if mktplc == Marketplaces.US:
                 body['attributes'].pop("recommended_browse_nodes", None)
+                value_with_tax = body['attributes']['list_price']['value_with_tax']
+                body['attributes']['list_price'][0].pop("value_with_tax", None)
+                body['attributes']['list_price'][0]['value'] = value_with_tax
                 body['attributes']['item_type_keyword'] = [{"value": row['US item_type_keyword'], "marketplace_id": Marketplaces.US.marketplace_id}]
                 body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.US.marketplace_id}]
             elif mktplc == Marketplaces.CA:
-                body['attributes']['contains_liquid_content'] = [{"value": False, "marketplace_id": Marketplaces.CA.marketplace_id}]
+                body['attributes']['contains_liquid_contents'] = [{"value": False, "marketplace_id": Marketplaces.CA.marketplace_id}]
                 body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.CA.marketplace_id}]
                 body['attributes']['manufacturer_contact_information'] = [{"value": "eworldpartner", "marketplace_id": Marketplaces.CA.marketplace_id}]
 
@@ -446,8 +447,8 @@ def add_item_uk(mktplc, f_name):
             for i in range(3 - len(str(count))):
                 sku += "0"
             sku += str(count)
-            body['attributes']['model_number'][0]['value'] = sku[10:13]
-            body['attributes']['model_name'][0]['value'] = sku
+            # body['attributes']['model_number'][0]['value'] = sku[10:13]
+            # body['attributes']['model_name'][0]['value'] = sku
             print(sku)
             print(body)
             resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
@@ -457,7 +458,7 @@ def add_item_uk(mktplc, f_name):
             random += 1
 
 
-add_item_uk(Marketplaces.UK, "jsons/add/furniture_cover.json")
+add_item_uk(Marketplaces.IT, "jsons/add/wall_art.json")
 
 # get_attributes("", Marketplaces.UK)
 
