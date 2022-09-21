@@ -66,30 +66,32 @@ def get_creds(mktplc):
         return dict(config['EU']), dict(config['MID_EU'])['id']
 
 
-def change_price_details(doc, currency):
-    body = json.loads(doc)
-    body['attributes']['list_price'][0]['currency'] = currency
-    body['attributes']['purchasable_offer'][0]['currency'] = currency
-    if currency != "USD":
-        if "value_with_tax" in body['attributes']['list_price'][0]:
-            price = body['attributes']['list_price'][0]['value_with_tax']
-            new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
-            body['attributes']['list_price'][0]['value_with_tax'] = str("{:.2f}".format(new_price))
-            body['attributes']['purchasable_offer'][0]["our_price"][0]["schedule"][0]["value_with_tax"] = str("{:.2f}".format(new_price))
-        else:
-            price = body['attributes']['list_price'][0]['value']
-            new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
-            body['attributes']['list_price'][0]['value'] = str("{:.2f}".format(new_price))
-            body['attributes']['purchasable_offer'][0]["our_price"][0]["schedule"][0]["value"] = str("{:.2f}".format(new_price))
+def change_price_details(doc, currency, is_patch):
+    if is_patch is False:
+        body = json.loads(doc)
+        body['attributes']['list_price'][0]['currency'] = currency
+        body['attributes']['purchasable_offer'][0]['currency'] = currency
+        if currency != "USD":
+            if "value_with_tax" in body['attributes']['list_price'][0]:
+                price = body['attributes']['list_price'][0]['value_with_tax']
+                new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+                body['attributes']['list_price'][0]['value_with_tax'] = str("{:.2f}".format(new_price))
+                body['attributes']['purchasable_offer'][0]["our_price"][0]["schedule"][0]["value_with_tax"] = str("{:.2f}".format(new_price))
+            else:
+                price = body['attributes']['list_price'][0]['value']
+                new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+                body['attributes']['list_price'][0]['value'] = str("{:.2f}".format(new_price))
+                body['attributes']['purchasable_offer'][0]["our_price"][0]["schedule"][0]["value"] = str("{:.2f}".format(new_price))
 
-    # doc = re.sub('("currency": "\w+")', '"currency": "' + currency + '"', str(doc))
-    # if currency != "USD":
-    #     price = re.search('"value_with_tax": \d+.\d+', doc).group()
-    #     price = price[price.find(": ") + 2:len(price)]
-    #     new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
-    #     doc = re.sub('("value_with_tax": \d+.\d+)', '"value_with_tax": ' + str("{:.2f}".format(new_price)), str(doc))
+        doc = json.dumps(body, sort_keys=False, indent=2)
+    else:
+        doc = re.sub('("currency": "\w+")', '"currency": "' + currency + '"', str(doc))
+        if currency != "USD":
+            price = re.search('"value_with_tax": \d+.\d+', doc).group()
+            price = price[price.find(": ") + 2:len(price)]
+            new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+            doc = re.sub('("value_with_tax": \d+.\d+)', '"value_with_tax": ' + str("{:.2f}".format(new_price)), str(doc))
 
-    doc = json.dumps(body, sort_keys=False, indent=2)
     return doc
 
 
@@ -102,91 +104,91 @@ def change_marketplace(fname, mktplc, is_patch):
         doc = re.sub('("\w\w_\w\w")', '"en_GB"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1F83G8C2ARO7P"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "GBP")
+            doc = change_price_details(doc, "GBP", is_patch)
         t_code = "en"
     elif mktplc == Marketplaces.US:
         doc = re.sub('("\w\w_\w\w")', '"en_US"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "ATVPDKIKX0DER"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "USD")
+            doc = change_price_details(doc, "USD", is_patch)
         t_code = "en"
     elif mktplc == Marketplaces.DE:
         doc = re.sub('("\w\w_\w\w")', '"de_DE"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1PA6795UKMFR9"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "EUR")
+            doc = change_price_details(doc, "EUR", is_patch)
         t_code = "de"
     elif mktplc == Marketplaces.FR:
         doc = re.sub('("\w\w_\w\w")', '"fr_FR"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A13V1IB3VIYZZH"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "EUR")
+            doc = change_price_details(doc, "EUR", is_patch)
         t_code = "fr"
     elif mktplc == Marketplaces.IT:
         doc = re.sub('("\w\w_\w\w")', '"it_IT"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "APJ6JRA9NG5V4"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "EUR")
+            doc = change_price_details(doc, "EUR", is_patch)
         t_code = "it"
     elif mktplc == Marketplaces.ES:
         doc = re.sub('("\w\w_\w\w")', '"es_ES"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1RKKUPIHCS9HS"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "EUR")
+            doc = change_price_details(doc, "EUR", is_patch)
         t_code = "es"
     elif mktplc == Marketplaces.PL:
         doc = re.sub('("\w\w_\w\w")', '"pl_PL"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1C3SOZRARQ6R3"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "PLN")
+            doc = change_price_details(doc, "PLN", is_patch)
         t_code = "pl"
     elif mktplc == Marketplaces.SE:
         doc = re.sub('("\w\w_\w\w")', '"sv_SE"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A2NODRKZP88ZB9"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "SEK")
+            doc = change_price_details(doc, "SEK", is_patch)
         t_code = "sv"
     elif mktplc == Marketplaces.NL:
         doc = re.sub('("\w\w_\w\w")', '"nl_NL"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1805IZSGTT6HS"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "EUR")
+            doc = change_price_details(doc, "EUR", is_patch)
         t_code = "nl"
     elif mktplc == Marketplaces.AU:
         doc = re.sub('("\w\w_\w\w")', '"en_AU"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A39IBJ37TRP1C6"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "AUD")
+            doc = change_price_details(doc, "AUD", is_patch)
         t_code = "en"
     elif mktplc == Marketplaces.CA:
         doc = re.sub('("\w\w_\w\w")', '"en_CA"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A2EUQ1WTGCTBG2"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "CAD")
+            doc = change_price_details(doc, "CAD", is_patch)
         t_code = "en"
     elif mktplc == Marketplaces.MX:
         doc = re.sub('("\w\w_\w\w")', '"es_MX"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1AM78C64UM0Y8"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "MXN")
+            doc = change_price_details(doc, "MXN", is_patch)
         t_code = "es"
     elif mktplc == Marketplaces.TR:
         doc = re.sub('("\w\w_\w\w")', '"tr_TR"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A33AVAJ2PDY3EV"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "TRY")
+            doc = change_price_details(doc, "TRY", is_patch)
         t_code = "tr"
     elif mktplc == Marketplaces.SG:
         doc = re.sub('("\w\w_\w\w")', '"en_SG"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A19VAU5U5O7RUS"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "SGD")
+            doc = change_price_details(doc, "SGD", is_patch)
         t_code = "en"
     elif mktplc == Marketplaces.JP:
         doc = re.sub('("\w\w_\w\w")', '"ja_JP"', str(doc))
         doc = re.sub('("marketplace_id": "\w+")', '"marketplace_id": "A1VC38T7YXB528"', str(doc))
         if '"currency":' in doc:
-            doc = change_price_details(doc, "JPY")
+            doc = change_price_details(doc, "JPY", is_patch)
         t_code = "ja"
 
     if is_patch:
@@ -257,12 +259,24 @@ def patch_uk(mktplc, f_name, sku_pattern, csv_file):
             with open(f_name, "r+", encoding="utf-8") as file:
                 body = json.load(file)
 
-            body['patches'][0]['value'][0]['value'] = row['size']
+            for i in ups_codes:
+                if mktplc in ups_codes[i]:
+                    if mktplc == Marketplaces.US or mktplc == Marketplaces.CA:
+                        if 'value_with_tax' in body['patches'][0]['value'][0]:
+                            body['patches'][0]['value'][0].pop('value_with_tax')
+                        body['patches'][0]['value'][0]['value'] = float(row[i])
+                        body['patches'][1]['value'][0]['our_price'][0]['schedule'][0]['value_with_tax'] = float(row[i])
+                    else:
+                        if 'value' in body['patches'][0]['value'][0]:
+                            body['patches'][0]['value'][0].pop('value')
+                        body['patches'][0]['value'][0]['value_with_tax'] = float(row[i])
+                        body['patches'][1]['value'][0]['our_price'][0]['schedule'][0]['value_with_tax'] = float(row[i])
 
             with open(f_name, "w", encoding="utf-8") as file:
                 file.write(json.dumps(body, sort_keys=False, indent=2))
             body = json.loads(change_marketplace(f_name, mktplc, True))
 
+            # print(json.dumps(body, sort_keys=False, indent=2))
             print(body)
             ###############Send Request################
             resp = listing.patch_listings_item(sellerId=s_id, sku=sku, body=body,
@@ -456,4 +470,4 @@ def add_item_uk(mktplc, f_name):
 
 # get_attributes("", Marketplaces.UK)
 
-patch_uk(mktplc=Marketplaces.IT, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPR-SHPA-", csv_file="csvs/sehpa.csv")
+patch_uk(mktplc=Marketplaces.IT, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPP-PILW-", csv_file="csvs/pillow.csv")

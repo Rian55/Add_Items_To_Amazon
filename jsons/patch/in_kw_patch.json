@@ -1,13 +1,32 @@
 {
-  "productType": "TABLE",
+  "productType": "PRODUCT",
   "patches": [
     {
       "op": "replace",
-      "path": "/attributes/size",
+      "path": "/attributes/list_price",
       "value": [
         {
-          "value": "30x30x40",
-          "marketplace_id": "A1VC38T7YXB528"
+          "currency": "USD",
+          "marketplace_id": "A1VC38T7YXB528",
+          "value_with_tax": 75.0
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/attributes/purchasable_offer",
+      "value": [
+        {
+          "currency": "USD",
+          "our_price": [
+            {
+              "schedule": [
+                {
+                  "value_with_tax": 75.0
+                }
+              ]
+            }
+          ]
         }
       ]
     }
