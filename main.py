@@ -272,7 +272,7 @@ def patch_uk(mktplc, f_name, sku_pattern, csv_file):
                         body['patches'][0]['value'][0]['value_with_tax'] = float(row[i])
                         body['patches'][1]['value'][0]['our_price'][0]['schedule'][0]['value_with_tax'] = float(row[i])
 
-            body['patches'][2]['value'][0]['value'] = row['piece']
+            # body['patches'][2]['value'][0]['value'] = int(row['piece'])
 
             with open(f_name, "w", encoding="utf-8") as file:
                 file.write(json.dumps(body, sort_keys=False, indent=2))
@@ -472,4 +472,4 @@ def add_item_uk(mktplc, f_name):
 
 # get_attributes("PILLOW", Marketplaces.UK)
 
-patch_uk(mktplc=Marketplaces.IT, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPP-PILW-", csv_file="csvs/pillow.csv")
+patch_uk(mktplc=Marketplaces.IT, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPD-MIRR-", csv_file="csvs/mirror.csv")
