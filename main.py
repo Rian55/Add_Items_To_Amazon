@@ -98,10 +98,8 @@ def change_price_details(doc, currency, is_patch):
     return doc
 
 
-def change_marketplace(fname, mktplc, is_patch):
+def change_marketplace(doc, mktplc, is_patch):
     t_code = ""
-    with open(fname, "r", encoding="utf-8") as file:
-        doc = file.read()
 
     if mktplc == Marketplaces.UK:
         doc = re.sub('("\w\w_\w\w")', '"en_GB"', str(doc))
@@ -292,7 +290,7 @@ def patch_uk(mktplc, f_name, sku_pattern, csv_file):
             ###########################################
 
 
-def add_item_uk(mktplc, f_name):
+def add_item_uk(mktplc, f_name, start_at=0):
     csv_file = "csvs/wall_art.csv"
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
@@ -421,10 +419,6 @@ def add_item_uk(mktplc, f_name):
                         body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0]['value'] = float(
                             prices[int(i)])
 
-            with open(f_name, "w", encoding="utf-8") as file:
-                file.write(json.dumps(body, sort_keys=False, indent=2))
-
-            body = json.loads(change_marketplace(f_name, mktplc, False))
             sku_pattern = "EWPR-WART-"
 
             for i in range(len(images)):
@@ -467,9 +461,6 @@ def add_item_uk(mktplc, f_name):
             sku += str(count)
             # body['attributes']['model_number'][0]['value'] = sku[10:13]
             # body['attributes']['model_name'][0]['value'] = sku
-            # print(json.dumps(body, sort_keys=False, indent=2))
-            print(sku)
-            print(body)
             if has_variation:
                 for i in range(len(sizes) + 1):
                     if i == 0:
@@ -479,6 +470,8 @@ def add_item_uk(mktplc, f_name):
                             {"child_relationship_type": "variation", "marketplace_id": Marketplaces.CA.marketplace_id}]
                         var_sku = sku + "-PAR"
                     else:
+                        body['attributes']['size'] = [
+                            {"value": sizes[i-1], "marketplace_id": Marketplaces.CA.marketplace_id}]
                         size_code = sizes[i-1]
                         size_code = size_code.lower()
                         if size_code.count("x") > 0:
@@ -493,10 +486,17 @@ def add_item_uk(mktplc, f_name):
                         body['attributes']['variation_theme'] = [
                             {"name": "SIZE"}]
                         var_sku = sku + "CD" + str(i)
+
+                    body = json.loads(change_marketplace(json.dumps(body, sort_keys=False, indent=2), mktplc, False))
+                    print(body)
                     resp = listing.put_listings_item(sellerId=s_id, sku=var_sku, body=body,
                                                      marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
                     print(resp)
             else:
+                body = json.loads(change_marketplace(json.dumps(body, sort_keys=False, indent=2), mktplc, False))
+                # print(json.dumps(body, sort_keys=False, indent=2))
+                print(sku)
+                print(body)
                 resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
                                                  marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
                 print(resp)
