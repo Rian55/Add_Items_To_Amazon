@@ -25,7 +25,7 @@
     "list_price": [
       {
         "currency": "USD",
-        "value_with_tax": 123.0,
+        "value_with_tax": 107.0,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -36,7 +36,7 @@
           {
             "schedule": [
               {
-                "value_with_tax": 123.0
+                "value_with_tax": 107.0
               }
             ]
           }
@@ -149,7 +149,7 @@
     ],
     "recommended_browse_nodes": [
       {
-        "value": 9757039011,
+        "value": 731697031,
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
