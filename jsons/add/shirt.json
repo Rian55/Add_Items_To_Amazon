@@ -1,0 +1,338 @@
+{
+  "productType": "SHIRT",
+  "requirements": "LISTING",
+  "attributes": {
+    "condition_type": [
+      {
+        "value": "new_new",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "value": "Skin And Mouth Cleaning Mask And Cream Set Of 6",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "generic_keyword": [
+      {
+        "value": "organic; cleanser; make up; moisturizing; quick; practical; portable; beauty; skin; care; hand; female; body; mask; shampoo; liquid; gel; softness; tooth paste; garlic; cucumber",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value_with_tax": 91.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "purchasable_offer": [
+      {
+        "currency": "USD",
+        "our_price": [
+          {
+            "schedule": [
+              {
+                "value_with_tax": 91.0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "product_tax_code": [
+      {
+        "value": "A_GEN_TAX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "main_product_image_locator": [
+      {
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/EWPR-APLK-31,8.jpg",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fulfillment_availability": [
+      {
+        "fulfillment_channel_code": "DEFAULT",
+        "quantity": 10
+      }
+    ],
+    "country_of_origin": [
+      {
+        "value": "TR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "value": 18,
+          "unit": "centimeters"
+        },
+        "width": {
+          "value": 12,
+          "unit": "centimeters"
+        },
+        "height": {
+          "value": 31,
+          "unit": "centimeters"
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_name": [
+      {
+        "value": "Body Care, Personal Care, Face Care",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "value": "<p>Dermokil Cucumber Extract Gel Face Mask 15 ml<br \\><br \\>Dermokil Cucumber Gel Mask, which consists of natural combinations of Cucumber, Aloe Vera and Chamomile extracts, contributes to the shrinkage of enlarged pores on the skin thanks to its astringent effect. It helps to reduce acne spots and sun spots on the skin. From the first application, it contributes shine and moisture to the skin, while helping to smooth out wrinkles. It provides a refreshing and relaxing effect to the skin.<br \\><br \\>Dermokil Hemp Seed Oily Hand and Body Cream<br \\><br \\> It deeply cares for your skin, which is most exposed to harmful external factors. By meeting your skin's moisture need, it protects against drying, wear and premature aging. Thanks to the herbal extracts and clay in its formula, it keeps the skin moist and soft without drying it and deeply cares for the skin. Its permanent effect protects against external factors all day long.<br \\><br \\>Dermokil Mango Extract Hand and Body Cream<br \\><br \\>It deeply cares for your skin, which is most exposed to harmful external factors. By meeting your skin's moisture need, it protects against drying, wear and premature aging. Thanks to the herbal extracts and clay in its formula, it keeps the skin moist and soft without drying it and deeply cares for the skin. Its permanent effect protects against external factors all day long.<br \\><br \\>Dermokil Vegan Coconut Extract Herbal Shampoo 400 ml<br \\><br \\>Coconut oil in Dermokil Coconut Extract Shampoo is the most popular oil of recent times. With its rich content, coconut oil helps the hair to be nourished and grow healthy. Coconut oil also contains vitamins E, K and iron. These vitamins provide the moisture needed by the skin and hair to a large extent. Coconut oil also helps prevent damage from combing and brushing. Coconut oil is used for a fresh, healthy scalp and radiant hair that shines in the sunlight. This natural, tropical wonder is packed with vitamin E and fatty acids that nourish and protect the hair and scalp. Coconut oil helps clear sebum inside the hair follicles, which makes your hair look healthier overall.<br \\><br \\>Dkdent Mint Extract Natural Fluoride Free Toothpaste 100 ml & Dkdent Propolis Fluoride Free Natural Toothpaste 100 ml<br \\><br \\>The common features of our Dk Dent Toothpaste products are that they do not contain fluoride, sles, gluten and artificial sweetener. It is not harmful if swallowed.<br \\><br \\>It contains micronized fine and sterile natural white clay.<br \\><br \\>When used regularly, it ensures the natural whiteness of the teeth. Thanks to the substances in its content that do not harm the tooth enamel, it provides natural whiteness and moistness in your teeth. It whitens your tooth enamel without eroding it.</p>",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "value": "eworldpartner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": 8883299546433,
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 6,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "value": "Natural plant extracts moisturize the skin. ",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " Softens and shines hair. ",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": " Toothpaste cleans teeth without damaging them.",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "value": "Breathable",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "Lightweight",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gift_options": [
+      {
+        "can_be_messaged": true,
+        "can_be_wrapped": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "age_range_description": [
+      {
+        "value": "Adult",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "value": "Adult",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "value": "colorless",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_gender": [
+      {
+        "value": "unisex",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "department": [
+      {
+        "value": "Unisex",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_browse_nodes": [
+      {
+        "value": 20638045031,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_material_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "closure": [
+      {
+        "type": [
+          {
+            "value": "Pull On",
+            "language_tag": "en_US"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "value": "Wash in machine",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "value": "12x6x25",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fabric_type": [
+      {
+        "value": "none",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_size_type": [
+      {
+        "value": "Standard",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "collar_style": [
+      {
+        "value": "Standard",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_weight": [
+      {
+        "value": 400,
+        "unit": "grams",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "value": 500,
+        "unit": "grams",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "import_designation": [
+      {
+        "value": "Imported",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fit_type": [
+      {
+        "value": "Imported",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "outer": [
+      {
+        "material": [
+          {
+            "value": "none",
+            "language_tag": "en_US"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "water_resistance_level": [
+      {
+        "value": "not_water_resistant",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "weave_type": [
+      {
+        "value": "Plain",
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "value": false,
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  }
+}

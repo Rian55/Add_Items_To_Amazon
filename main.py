@@ -6,8 +6,10 @@ from sp_api.api import ProductTypeDefinitions
 import re
 from forex_python.converter import CurrencyRates
 import ean13
+import requests
 from googletrans import Translator
 import csv
+from time import sleep
 
 trans = Translator()
 CURR_RATES = CurrencyRates()
@@ -67,24 +69,33 @@ def get_creds(mktplc):
 
 
 def change_price_details(doc, currency, is_patch):
+    #https://v6.exchangerate-api.com/v6/78bb8f48bee6c7ee8064d8cf/latest/USD
     if is_patch is False:
         body = json.loads(doc)
-        body['attributes']['list_price'][0]['currency'] = currency
-        body['attributes']['purchasable_offer'][0]['currency'] = currency
-        if currency != "USD":
+        if body['attributes']['list_price'][0]['currency'] == "USD":
             if "value_with_tax" in body['attributes']['list_price'][0]:
                 price = body['attributes']['list_price'][0]['value_with_tax']
-                new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+                new_price = int
+                try:
+                    new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+                except:
+                    response = requests.get("https://v6.exchangerate-api.com/v6/78bb8f48bee6c7ee8064d8cf/latest/USD")
+                    new_price = float(price) * response.json()['conversion_rates'][currency] * 1.01
+                print(new_price)
+                new_price = int(new_price) + 1 - 0.01
                 body['attributes']['list_price'][0]['value_with_tax'] = str("{:.2f}".format(new_price))
                 body['attributes']['purchasable_offer'][0]["our_price"][0]["schedule"][0]["value_with_tax"] = str(
                     "{:.2f}".format(new_price))
             else:
                 price = body['attributes']['list_price'][0]['value']
                 new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+                new_price = int(new_price) + 1 - 0.01
                 body['attributes']['list_price'][0]['value'] = str("{:.2f}".format(new_price))
                 body['attributes']['purchasable_offer'][0]["our_price"][0]["schedule"][0]["value"] = str(
                     "{:.2f}".format(new_price))
 
+        body['attributes']['list_price'][0]['currency'] = currency
+        body['attributes']['purchasable_offer'][0]['currency'] = currency
         doc = json.dumps(body, sort_keys=False, indent=2)
     else:
         doc = re.sub('("currency": "\w+")', '"currency": "' + currency + '"', str(doc))
@@ -290,27 +301,33 @@ def patch_uk(mktplc, f_name, sku_pattern, csv_file):
             ###########################################
 
 
-def add_item_uk(mktplc, f_name, start_at=0):
-    csv_file = "csvs/wall_art.csv"
+def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=100000):
     credentials, s_id = get_creds(mktplc)
     listing = ListingsItems(credentials=credentials, marketplace=mktplc)
 
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  # reads csv file
-        print(csv_file)
-        random = 993456425165  # this number should be changed for every product type and consist of 12 digits
+        random = 993456426165  # this number should be changed for every product type and consist of 12 digits
         count = 0
 
         for row in reader:
+            if start_at > 0:
+                count += 1
+                random += 1
+                start_at -= 1
+                continue
+            if stop_at == count:
+                break
+
             sizes = []
             has_variation = False
             for x in row['size'].split(','):
                 if "x" not in x:
                     has_variation = True
                 sizes.append(x.split("x"))
-            package_size = row['package size'].split('x')
+            # package_size = row['package size'].split('x')
             images = row['images'].split(",")
-            item_count = int(row['piece'])
+            item_count = int(row['unit_count'])
             colors = row['colors']
             title = row['title']
             # desi = row['desi']
@@ -322,6 +339,9 @@ def add_item_uk(mktplc, f_name, start_at=0):
             prices = []
             for i in range(9):
                 prices.append(row[str(i)])
+
+            title = title.replace("- ", " ")
+            title = title.replace("– ", " ")
             #############Edit Attributes#############
             # this part should be changed for every new product type
             # non existing attributes should be deleted and variating attributes should be added
@@ -343,9 +363,9 @@ def add_item_uk(mktplc, f_name, start_at=0):
                     if int(sizes[i][2]) > max_z:
                         max_z = int(sizes[i][2])
 
-            body['attributes']['item_package_dimensions'][0]['length']['value'] = package_size[0]
-            body['attributes']['item_package_dimensions'][0]['width']['value'] = package_size[1]
-            body['attributes']['item_package_dimensions'][0]['height']['value'] = package_size[2]
+            body['attributes']['item_package_dimensions'][0]['length']['value'] = 20
+            body['attributes']['item_package_dimensions'][0]['width']['value'] = 20
+            body['attributes']['item_package_dimensions'][0]['height']['value'] = 3
 
             # body['attributes']['item_dimensions'][0]['length']['value'] = max_x
             # body['attributes']['item_dimensions'][0]['width']['value'] = max_y
@@ -354,8 +374,8 @@ def add_item_uk(mktplc, f_name, start_at=0):
             # body['attributes']['item_width_height'][0]['width']['value'] = max_x
             # body['attributes']['item_width_height'][0]['height']['value'] = max_z
 
-            body['attributes']['item_length_width'][0]['width']['value'] = max_x
-            body['attributes']['item_length_width'][0]['length']['value'] = max_y
+            # body['attributes']['item_length_width'][0]['width']['value'] = max_x
+            # body['attributes']['item_length_width'][0]['length']['value'] = max_y
 
             # body['attributes']['item_depth_width_height'][0]['depth']['value'] = max_z - 1
             # body['attributes']['item_depth_width_height'][0]['width']['value'] = max_x
@@ -369,14 +389,22 @@ def add_item_uk(mktplc, f_name, start_at=0):
             body['attributes']['color'][0]['value'] = colors
             body['attributes']['generic_keyword'][0]['value'] = keywords
 
-            # body['attributes']['target_audience_keyword'][0]['value'] = keywords
-            # body['attributes']['manufacturer'][0]['value'] = manufacturer
-            # body['attributes']['item_type_name'][0]['value'] = item_type
+            body['attributes']['manufacturer'][0]['value'] = manufacturer
+            body['attributes']['item_type_name'][0]['value'] = item_type
 
             body['attributes']['size'][0]['value'] = row['size']
             body['attributes']['material'][0]['value'] = row['material']
             # body['attributes']['item_shape'][0]['value'] = row['shape']
-            # body['attributes']['fabric_type'][0]['value'] = row['material']
+            body['attributes']['fabric_type'][0]['value'] = row['material']
+            body['attributes']['style'][0]['value'] = row['style']
+            body['attributes']['fit_type'][0]['value'] = row['style']
+            body['attributes']['collar_style'][0]['value'] = row['collar_type']
+            if row['gender'] == "man":
+                body['attributes']['target_gender'][0]['value'] = "male"
+            else:
+                body['attributes']['target_gender'][0]['value'] = "female"
+            body['attributes']['department'][0]['value'] = row['gender'].replace("man", 'men').title()+"'s"
+            body['attributes']['closure'][0]['type'][0]['value'] = row['closure']
             # body['attributes']['material_composition'][0]['value'] = "100% " + row['material']
 
             body['attributes']['bullet_point'] = []
@@ -410,16 +438,14 @@ def add_item_uk(mktplc, f_name, start_at=0):
             # this part is okay dont touch it
             for i in ups_codes:
                 if mktplc in ups_codes[i]:
+                    price = float(prices[int(i)].replace(",", "."))
                     if "value_with_tax" in body['attributes']['list_price'][0]:
-                        body['attributes']['list_price'][0]['value_with_tax'] = float(prices[int(i)])
+                        body['attributes']['list_price'][0]['value_with_tax'] = price
                         body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0][
-                            'value_with_tax'] = float(prices[int(i)])
+                            'value_with_tax'] = price
                     else:
-                        body['attributes']['list_price'][0]['value'] = float(prices[int(i)])
-                        body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0]['value'] = float(
-                            prices[int(i)])
-
-            sku_pattern = "EWPR-WART-"
+                        body['attributes']['list_price'][0]['value'] = price
+                        body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0]['value'] = price
 
             for i in range(len(images)):
                 img_id = sku_pattern  # here should be changed
@@ -444,7 +470,7 @@ def add_item_uk(mktplc, f_name, start_at=0):
                 body['attributes']['list_price'][0]['value'] = value_with_tax
                 body['attributes']['item_type_keyword'] = [
                     {"value": row['US item_type_keyword'], "marketplace_id": Marketplaces.US.marketplace_id}]
-                # body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.US.marketplace_id}]
+                body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.US.marketplace_id}]
             elif mktplc == Marketplaces.CA:
                 value_with_tax = body['attributes']['list_price'][0]['value_with_tax']
                 body['attributes']['list_price'][0].pop("value_with_tax", None)
@@ -452,9 +478,17 @@ def add_item_uk(mktplc, f_name, start_at=0):
                 body['attributes']['contains_liquid_contents'] = [{"value": False, "marketplace_id": Marketplaces.CA.marketplace_id}]
                 body['attributes']['warranty_description'] = [
                     {"value": "none", "marketplace_id": Marketplaces.CA.marketplace_id}]
-                # body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.CA.marketplace_id}]
+                body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.CA.marketplace_id}]
                 body['attributes']['manufacturer_contact_information'] = [{"value": "eworldpartner", "marketplace_id": Marketplaces.CA.marketplace_id}]
 
+            if mktplc == Marketplaces.US or mktplc == Marketplaces.CA or mktplc == Marketplaces.MX:
+                body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_NA"
+            elif mktplc == Marketplaces.AU or mktplc == Marketplaces.SG or mktplc == Marketplaces.JP:
+                body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_JP"
+            else:
+                body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_EU"
+
+            only_parent = False
             sku = sku_pattern  # here should be changed
             for i in range(3 - len(str(count))):
                 sku += "0"
@@ -464,30 +498,56 @@ def add_item_uk(mktplc, f_name, start_at=0):
             if has_variation:
                 for i in range(len(sizes) + 1):
                     if i == 0:
+                        if not only_parent:
+                            continue
                         body['attributes']['parentage_level'] = [
                             {"value": "parent", "marketplace_id": Marketplaces.CA.marketplace_id}]
                         body['attributes']['child_parent_sku_relationship'] = [
                             {"child_relationship_type": "variation", "marketplace_id": Marketplaces.CA.marketplace_id}]
+                        body['attributes']['variation_theme'] = [
+                            {"name": "SIZE"}]
                         var_sku = sku + "-PAR"
                     else:
+                        if only_parent:
+                            break
                         body['attributes']['size'] = [
-                            {"value": sizes[i-1], "marketplace_id": Marketplaces.CA.marketplace_id}]
+                            {"value": sizes[i-1][0], "marketplace_id": Marketplaces.CA.marketplace_id}]
                         size_code = sizes[i-1]
-                        size_code = size_code.lower()
-                        if size_code.count("x") > 0:
+                        size_code = size_code[0].lower()
+                        num_of_x = size_code.count("x")
+                        if num_of_x > 0:
                             size_code = size_code.replace("x", "")
-                            size_code += str(size_code.count("x")) + "x_" + size_code
+                            if num_of_x == 1:
+                                size_code = "x_" + size_code
+                            elif num_of_x == 2:
+                                size_code = "xx_" + size_code
+                            else:
+                                size_code = str(num_of_x) + "x_" + size_code
+                        size_system = ""
+                        if mktplc == Marketplaces.IT:
+                            size_system = "as6"
+                        elif mktplc == Marketplaces.FR or mktplc == Marketplaces.ES:
+                            size_system = "as4"
+                        elif mktplc == Marketplaces.DE or mktplc == Marketplaces.NL or mktplc == Marketplaces.SE or mktplc == Marketplaces.PL:
+                            size_system = "as3"
+                        elif mktplc == Marketplaces.UK:
+                            size_system = "as8"
+                        else:
+                            size_system = "as1"
+
                         body['attributes']['shirt_size'] = [
-                            {"size_system": "as8", "size_class": "alpha", "size": size_code, "marketplace_id": Marketplaces.CA.marketplace_id}]
+                            {"size_system": size_system, "size_class": "alpha", "size": size_code,
+                             "body_type": "regular", "height_type": "regular", "marketplace_id": Marketplaces.CA.marketplace_id}]
                         body['attributes']['parentage_level'] = [
                             {"value": "child", "marketplace_id": Marketplaces.CA.marketplace_id}]
                         body['attributes']['child_parent_sku_relationship'] = [
                             {"child_relationship_type": "variation", "marketplace_id": Marketplaces.CA.marketplace_id, "parent_sku": sku + "-PAR"}]
                         body['attributes']['variation_theme'] = [
                             {"name": "SIZE"}]
-                        var_sku = sku + "CD" + str(i)
+                        var_sku = sku + "-CD" + str(i)
 
                     body = json.loads(change_marketplace(json.dumps(body, sort_keys=False, indent=2), mktplc, False))
+                    # print(json.dumps(body, sort_keys=False, indent=2))
                     print(body)
                     resp = listing.put_listings_item(sellerId=s_id, sku=var_sku, body=body,
                                                      marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
@@ -497,16 +557,15 @@ def add_item_uk(mktplc, f_name, start_at=0):
                 # print(json.dumps(body, sort_keys=False, indent=2))
                 print(sku)
                 print(body)
-                resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
-                                                 marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
-                print(resp)
-                random = random
+                # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+                #                                  marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
+                # print(resp)
             #########################################
             random += 1
 
 
-add_item_uk(Marketplaces.IT, "jsons/add/wall_art.json")
+add_item_uk(mktplc=Marketplaces.UK, f_name="jsons/add/shirt.json", csv_file="csvs/shirts.csv", sku_pattern="EWPR-SHRT-", stop_at=4)
 
-# get_attributes("SHIRT", Marketplaces.UK)
+#get_attributes("SHIRT", Marketplaces.UK)
 
 # patch_uk(mktplc=Marketplaces.SG, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPF-FEED-", csv_file="csvs/petfeeder.csv")
