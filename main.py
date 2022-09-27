@@ -9,7 +9,7 @@ import ean13
 import requests
 from googletrans import Translator
 import csv
-from time import sleep
+from datetime import date
 
 trans = Translator()
 CURR_RATES = CurrencyRates()
@@ -69,19 +69,21 @@ def get_creds(mktplc):
 
 
 def change_price_details(doc, currency, is_patch):
-    #https://v6.exchangerate-api.com/v6/78bb8f48bee6c7ee8064d8cf/latest/USD
+    #https://v6.exchangerate-api.com/v6/5b60fdb0b56d2d427abb6af4/latest/USD
     if is_patch is False:
         body = json.loads(doc)
         if body['attributes']['list_price'][0]['currency'] == "USD":
             if "value_with_tax" in body['attributes']['list_price'][0]:
                 price = body['attributes']['list_price'][0]['value_with_tax']
                 new_price = int
-                try:
-                    new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
-                except:
-                    response = requests.get("https://v6.exchangerate-api.com/v6/78bb8f48bee6c7ee8064d8cf/latest/USD")
-                    new_price = float(price) * response.json()['conversion_rates'][currency] * 1.01
-                print(new_price)
+                with open("currency_rates.json", "r") as file:
+                    currency_rates = json.load(file)
+                if int(currency_rates['time_last_update_utc'][5:7]) < int(date.today().day):
+                    response = requests.get("https://v6.exchangerate-api.com/v6/5b60fdb0b56d2d427abb6af4/latest/USD")
+                    with open("currency_rates.json", "w") as file:
+                        file.write(json.dumps(response.json(), sort_keys=False, indent=2))
+                    currency_rates = response.json()
+                new_price = float(price) * currency_rates['conversion_rates'][currency] * 1.01
                 new_price = int(new_price) + 1 - 0.01
                 body['attributes']['list_price'][0]['value_with_tax'] = str("{:.2f}".format(new_price))
                 body['attributes']['purchasable_offer'][0]["our_price"][0]["schedule"][0]["value_with_tax"] = str(
@@ -307,7 +309,7 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
 
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  # reads csv file
-        random = 993456426165  # this number should be changed for every product type and consist of 12 digits
+        random = 993456426377  # this number should be changed for every product type and consist of 12 digits
         count = 0
 
         for row in reader:
@@ -481,14 +483,14 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
                 body['attributes']['cpsia_cautionary_statement'] = [{"value": "no_warning_applicable", "marketplace_id": Marketplaces.CA.marketplace_id}]
                 body['attributes']['manufacturer_contact_information'] = [{"value": "eworldpartner", "marketplace_id": Marketplaces.CA.marketplace_id}]
 
-            if mktplc == Marketplaces.US or mktplc == Marketplaces.CA or mktplc == Marketplaces.MX:
-                body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_NA"
-            elif mktplc == Marketplaces.AU or mktplc == Marketplaces.SG or mktplc == Marketplaces.JP:
-                body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_JP"
-            else:
-                body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_EU"
+            # if mktplc == Marketplaces.US or mktplc == Marketplaces.CA or mktplc == Marketplaces.MX:
+            #     body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_NA"
+            # elif mktplc == Marketplaces.AU or mktplc == Marketplaces.SG or mktplc == Marketplaces.JP:
+            #     body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_JP"
+            # else:
+            #     body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_EU"
 
-            only_parent = False
+            only_parent = True
             sku = sku_pattern  # here should be changed
             for i in range(3 - len(str(count))):
                 sku += "0"
@@ -535,6 +537,8 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
                         else:
                             size_system = "as1"
 
+                        body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(
+                            random+300)
                         body['attributes']['shirt_size'] = [
                             {"size_system": size_system, "size_class": "alpha", "size": size_code,
                              "body_type": "regular", "height_type": "regular", "marketplace_id": Marketplaces.CA.marketplace_id}]
@@ -552,20 +556,21 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
                     resp = listing.put_listings_item(sellerId=s_id, sku=var_sku, body=body,
                                                      marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
                     print(resp)
+                    random += 1
             else:
                 body = json.loads(change_marketplace(json.dumps(body, sort_keys=False, indent=2), mktplc, False))
                 # print(json.dumps(body, sort_keys=False, indent=2))
                 print(sku)
                 print(body)
-                # resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
-                #                                  marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
-                # print(resp)
+                resp = listing.put_listings_item(sellerId=s_id, sku=sku, body=body,
+                                                 marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
+                print(resp)
+                random += 1
             #########################################
-            random += 1
 
 
-add_item_uk(mktplc=Marketplaces.UK, f_name="jsons/add/shirt.json", csv_file="csvs/shirts.csv", sku_pattern="EWPR-SHRT-", stop_at=4)
+add_item_uk(mktplc=Marketplaces.UK, f_name="jsons/add/shirt.json", csv_file="csvs/shirts.csv", sku_pattern="EWPR-SHRT-")
 
-#get_attributes("SHIRT", Marketplaces.UK)
+# get_attributes("SHIRT", Marketplaces.UK)
 
 # patch_uk(mktplc=Marketplaces.SG, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPF-FEED-", csv_file="csvs/petfeeder.csv")

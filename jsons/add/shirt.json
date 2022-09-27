@@ -58,7 +58,7 @@
     "fulfillment_availability": [
       {
         "fulfillment_channel_code": "DEFAULT",
-        "quantity": 10
+        "quantity": 20
       }
     ],
     "country_of_origin": [
@@ -329,7 +329,7 @@
     ],
     "manufacturer": [
       {
-        "value": false,
+        "value": "xx",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
