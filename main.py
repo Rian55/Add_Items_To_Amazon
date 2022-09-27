@@ -70,19 +70,18 @@ def get_creds(mktplc):
 
 def change_price_details(doc, currency, is_patch):
     #https://v6.exchangerate-api.com/v6/5b60fdb0b56d2d427abb6af4/latest/USD
+    with open("currency_rates.json", "r") as file:
+        currency_rates = json.load(file)
+    if int(currency_rates['time_last_update_utc'][5:7]) < int(date.today().day):
+        response = requests.get("https://v6.exchangerate-api.com/v6/5b60fdb0b56d2d427abb6af4/latest/USD")
+        with open("currency_rates.json", "w") as file:
+            file.write(json.dumps(response.json(), sort_keys=False, indent=2))
+        currency_rates = response.json()
     if is_patch is False:
         body = json.loads(doc)
         if body['attributes']['list_price'][0]['currency'] == "USD":
             if "value_with_tax" in body['attributes']['list_price'][0]:
                 price = body['attributes']['list_price'][0]['value_with_tax']
-                new_price = int
-                with open("currency_rates.json", "r") as file:
-                    currency_rates = json.load(file)
-                if int(currency_rates['time_last_update_utc'][5:7]) < int(date.today().day):
-                    response = requests.get("https://v6.exchangerate-api.com/v6/5b60fdb0b56d2d427abb6af4/latest/USD")
-                    with open("currency_rates.json", "w") as file:
-                        file.write(json.dumps(response.json(), sort_keys=False, indent=2))
-                    currency_rates = response.json()
                 new_price = float(price) * currency_rates['conversion_rates'][currency] * 1.01
                 new_price = int(new_price) + 1 - 0.01
                 body['attributes']['list_price'][0]['value_with_tax'] = str("{:.2f}".format(new_price))
@@ -90,7 +89,7 @@ def change_price_details(doc, currency, is_patch):
                     "{:.2f}".format(new_price))
             else:
                 price = body['attributes']['list_price'][0]['value']
-                new_price = float(price) * CURR_RATES.get_rate('USD', currency) * 1.01
+                new_price = float(price) * currency_rates['conversion_rates'][currency] * 1.01
                 new_price = int(new_price) + 1 - 0.01
                 body['attributes']['list_price'][0]['value'] = str("{:.2f}".format(new_price))
                 body['attributes']['purchasable_offer'][0]["our_price"][0]["schedule"][0]["value"] = str(
@@ -490,7 +489,7 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
             # else:
             #     body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_EU"
 
-            only_parent = True
+            only_parent = False
             sku = sku_pattern  # here should be changed
             for i in range(3 - len(str(count))):
                 sku += "0"
