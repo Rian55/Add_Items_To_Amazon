@@ -489,7 +489,7 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
             # else:
             #     body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_EU"
 
-            only_parent = False
+            only_parent = True
             sku = sku_pattern  # here should be changed
             for i in range(3 - len(str(count))):
                 sku += "0"
@@ -508,6 +508,8 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
                         body['attributes']['variation_theme'] = [
                             {"name": "SIZE"}]
                         var_sku = sku + "-PAR"
+                        body = json.loads(
+                            change_marketplace(json.dumps(body, sort_keys=False, indent=2), mktplc, False))
                     else:
                         if only_parent:
                             break
@@ -541,15 +543,17 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
                         body['attributes']['shirt_size'] = [
                             {"size_system": size_system, "size_class": "alpha", "size": size_code,
                              "body_type": "regular", "height_type": "regular", "marketplace_id": Marketplaces.CA.marketplace_id}]
-                        body['attributes']['parentage_level'] = [
-                            {"value": "child", "marketplace_id": Marketplaces.CA.marketplace_id}]
-                        body['attributes']['child_parent_sku_relationship'] = [
-                            {"child_relationship_type": "variation", "marketplace_id": Marketplaces.CA.marketplace_id, "parent_sku": sku + "-PAR"}]
-                        body['attributes']['variation_theme'] = [
-                            {"name": "SIZE"}]
-                        var_sku = sku + "-CD" + str(i)
+                        if i == 1:
+                            body['attributes']['parentage_level'] = [
+                                {"value": "child", "marketplace_id": Marketplaces.CA.marketplace_id}]
+                            body['attributes']['child_parent_sku_relationship'] = [
+                                {"child_relationship_type": "variation", "marketplace_id": Marketplaces.CA.marketplace_id, "parent_sku": sku + "-PAR"}]
+                            body['attributes']['variation_theme'] = [
+                                {"name": "SIZE"}]
+                            var_sku = sku + "-CD" + str(i)
+                            body = json.loads(
+                                change_marketplace(json.dumps(body, sort_keys=False, indent=2), mktplc, False))
 
-                    body = json.loads(change_marketplace(json.dumps(body, sort_keys=False, indent=2), mktplc, False))
                     # print(json.dumps(body, sort_keys=False, indent=2))
                     print(body)
                     resp = listing.put_listings_item(sellerId=s_id, sku=var_sku, body=body,
@@ -568,8 +572,13 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
             #########################################
 
 
-add_item_uk(mktplc=Marketplaces.UK, f_name="jsons/add/shirt.json", csv_file="csvs/shirts.csv", sku_pattern="EWPR-SHRT-")
+# add_item_uk(mktplc=Marketplaces.UK, f_name="jsons/add/shirt.json", csv_file="csvs/shirts.csv", sku_pattern="EWPR-SHRT-")
 
 # get_attributes("SHIRT", Marketplaces.UK)
 
 # patch_uk(mktplc=Marketplaces.SG, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPF-FEED-", csv_file="csvs/petfeeder.csv")
+
+eu = [Marketplaces.DE, Marketplaces.FR, Marketplaces.IT, Marketplaces.SE, Marketplaces.ES, Marketplaces.PL, Marketplaces.NL]
+for marketplace in eu:
+    add_item_uk(mktplc=marketplace, f_name="jsons/add/shirt.json", csv_file="csvs/shirts.csv",
+                sku_pattern="EWPR-SHRT-")
