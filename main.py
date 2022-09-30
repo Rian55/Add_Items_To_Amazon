@@ -308,7 +308,7 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
 
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  # reads csv file
-        random = 993456426377  # this number should be changed for every product type and consist of 12 digits
+        random = 993456436377  # this number should be changed for every product type and consist of 12 digits
         count = 0
 
         for row in reader:
@@ -331,7 +331,6 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
             item_count = int(row['unit_count'])
             colors = row['colors']
             title = row['title']
-            # desi = row['desi']
             description = row['description']
             item_type = row['item type name']
             bullet_points = row['bullet'].split("=")
@@ -399,13 +398,13 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
             body['attributes']['fabric_type'][0]['value'] = row['material']
             body['attributes']['style'][0]['value'] = row['style']
             body['attributes']['fit_type'][0]['value'] = row['style']
-            body['attributes']['collar_style'][0]['value'] = row['collar_type']
-            if row['gender'] == "man":
-                body['attributes']['target_gender'][0]['value'] = "male"
-            else:
-                body['attributes']['target_gender'][0]['value'] = "female"
-            body['attributes']['department'][0]['value'] = row['gender'].replace("man", 'men').title()+"'s"
-            body['attributes']['closure'][0]['type'][0]['value'] = row['closure']
+            # body['attributes']['collar_style'][0]['value'] = row['collar_type']
+            # if row['gender'] == "man":
+            #     body['attributes']['target_gender'][0]['value'] = "male"
+            # else:
+            #     body['attributes']['target_gender'][0]['value'] = "female"
+            # body['attributes']['department'][0]['value'] = row['gender'].replace("man", 'men').title()+"'s"
+            # body['attributes']['closure'][0]['type'][0]['value'] = row['closure']
             # body['attributes']['material_composition'][0]['value'] = "100% " + row['material']
 
             body['attributes']['bullet_point'] = []
@@ -489,7 +488,7 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
             # else:
             #     body['attributes']['fulfillment_availability'][0]['fulfillment_channel_code'] = "AMAZON_EU"
 
-            only_parent = True
+            global only_parent
             sku = sku_pattern  # here should be changed
             for i in range(3 - len(str(count))):
                 sku += "0"
@@ -502,9 +501,9 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
                         if not only_parent:
                             continue
                         body['attributes']['parentage_level'] = [
-                            {"value": "parent", "marketplace_id": Marketplaces.CA.marketplace_id}]
+                            {"value": "parent", "marketplace_id": mktplc.marketplace_id}]
                         body['attributes']['child_parent_sku_relationship'] = [
-                            {"child_relationship_type": "variation", "marketplace_id": Marketplaces.CA.marketplace_id}]
+                            {"child_relationship_type": "variation", "marketplace_id": mktplc.marketplace_id}]
                         body['attributes']['variation_theme'] = [
                             {"name": "SIZE"}]
                         var_sku = sku + "-PAR"
@@ -514,7 +513,7 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
                         if only_parent:
                             break
                         body['attributes']['size'] = [
-                            {"value": sizes[i-1][0], "marketplace_id": Marketplaces.CA.marketplace_id}]
+                            {"value": sizes[i-1][0], "language_tag": "en_US", "marketplace_id": mktplc.marketplace_id}]
                         size_code = sizes[i-1]
                         size_code = size_code[0].lower()
                         num_of_x = size_code.count("x")
@@ -540,21 +539,21 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
 
                         body['attributes']['externally_assigned_product_identifier'][0]['value'] = ean13.calculate_ean(
                             random+300)
-                        body['attributes']['shirt_size'] = [
+                        body['attributes']['apparel_size'] = [
                             {"size_system": size_system, "size_class": "alpha", "size": size_code,
-                             "body_type": "regular", "height_type": "regular", "marketplace_id": Marketplaces.CA.marketplace_id}]
+                             "body_type": "regular", "height_type": "regular", "marketplace_id": mktplc.marketplace_id}]
                         if i == 1:
                             body['attributes']['parentage_level'] = [
-                                {"value": "child", "marketplace_id": Marketplaces.CA.marketplace_id}]
+                                {"value": "child", "marketplace_id": mktplc.marketplace_id}]
                             body['attributes']['child_parent_sku_relationship'] = [
-                                {"child_relationship_type": "variation", "marketplace_id": Marketplaces.CA.marketplace_id, "parent_sku": sku + "-PAR"}]
+                                {"child_relationship_type": "variation", "marketplace_id": mktplc.marketplace_id, "parent_sku": sku + "-PAR"}]
                             body['attributes']['variation_theme'] = [
                                 {"name": "SIZE"}]
-                            var_sku = sku + "-CD" + str(i)
                             body = json.loads(
                                 change_marketplace(json.dumps(body, sort_keys=False, indent=2), mktplc, False))
-
+                        var_sku = sku + "-CD" + str(i)
                     # print(json.dumps(body, sort_keys=False, indent=2))
+                    print(var_sku)
                     print(body)
                     resp = listing.put_listings_item(sellerId=s_id, sku=var_sku, body=body,
                                                      marketplaceIds=[mktplc.marketplace_id], issueLocale="en_US")
@@ -572,13 +571,15 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
             #########################################
 
 
-# add_item_uk(mktplc=Marketplaces.UK, f_name="jsons/add/shirt.json", csv_file="csvs/shirts.csv", sku_pattern="EWPR-SHRT-")
+only_parent = True
 
-# get_attributes("SHIRT", Marketplaces.UK)
+# add_item_uk(mktplc=Marketplaces.UK, f_name="jsons/add/sweatshirt.json", csv_file="csvs/sweatshirt.csv", sku_pattern="EWPR-SSRT-")
+
+# get_attributes()
 
 # patch_uk(mktplc=Marketplaces.SG, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPF-FEED-", csv_file="csvs/petfeeder.csv")
 
-eu = [Marketplaces.DE, Marketplaces.FR, Marketplaces.IT, Marketplaces.SE, Marketplaces.ES, Marketplaces.PL, Marketplaces.NL]
+eu = [Marketplaces.UK, Marketplaces.DE, Marketplaces.FR, Marketplaces.IT, Marketplaces.SE, Marketplaces.ES, Marketplaces.NL, Marketplaces.PL]
+us = [Marketplaces.AU, Marketplaces.SG, Marketplaces.US, Marketplaces.CA, Marketplaces.MX]
 for marketplace in eu:
-    add_item_uk(mktplc=marketplace, f_name="jsons/add/shirt.json", csv_file="csvs/shirts.csv",
-                sku_pattern="EWPR-SHRT-")
+    add_item_uk(mktplc=Marketplaces.UK, f_name="jsons/add/sweatshirt.json", csv_file="csvs/sweatshirt.csv", sku_pattern="EWPR-SSRT-")

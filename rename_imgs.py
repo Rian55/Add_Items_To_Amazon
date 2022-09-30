@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 
-folder_name = r"C:/Users/Yenip/Downloads/grimelange/"
+folder_name = r"C:/Users/90531/Downloads/sweatshirt/"
 count = 0
 
 for path in os.listdir(folder_name):
@@ -11,7 +11,7 @@ for i in range(1, count+10):
     old_name = folder_name + rf"{i}.jpg"
     image = Image.open(old_name)
     image.thumbnail((1100, 1100))
-    new_name = folder_name + r"EWPR-SHRT-"
+    new_name = folder_name + r"EWPR-SSRT-"
     for j in range(3 - int(len(str(i)))):
         new_name += "0"
     new_name += str(i) + ".jpg"

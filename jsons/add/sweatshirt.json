@@ -1,5 +1,5 @@
 {
-  "productType": "SHIRT",
+  "productType": "SWEATSHIRT",
   "requirements": "LISTING",
   "attributes": {
     "condition_type": [
@@ -51,7 +51,7 @@
     ],
     "main_product_image_locator": [
       {
-        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/EWPR-APLK-31,8.jpg",
+        "media_location": "https://seller-central-storage.s3.eu-central-1.amazonaws.com/EWPR-APLK-31.jpg",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -181,13 +181,13 @@
     ],
     "target_gender": [
       {
-        "value": "unisex",
+        "value": "male",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
     "department": [
       {
-        "value": "Unisex",
+        "value": "Adult male",
         "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
@@ -256,13 +256,6 @@
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
-    "collar_style": [
-      {
-        "value": "Standard",
-        "language_tag": "en_US",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
     "item_weight": [
       {
         "value": 400,
@@ -274,13 +267,6 @@
       {
         "value": 500,
         "unit": "grams",
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
-    "import_designation": [
-      {
-        "value": "Imported",
-        "language_tag": "en_US",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
@@ -297,16 +283,16 @@
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ],
-    "skip_offer": [
-      {
-        "value": true,
-        "marketplace_id": "ATVPDKIKX0DER"
-      }
-    ],
     "weave_type": [
       {
         "value": "Plain",
         "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "value": "eWorldPartner",
         "marketplace_id": "ATVPDKIKX0DER"
       }
     ]
