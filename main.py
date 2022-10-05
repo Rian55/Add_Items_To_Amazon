@@ -10,6 +10,7 @@ import requests
 from googletrans import Translator
 import csv
 from datetime import date
+from json_viewer import view_json
 
 trans = Translator()
 CURR_RATES = CurrencyRates()
@@ -40,7 +41,8 @@ def get_attributes(product_type="", mktplc=Marketplaces.UK):
         product_type = xd.payload['productTypes'][int(choice) - 1]['name']
 
     xdxd = types.get_definitions_product_type(productType=product_type, marketplaceIds=[mktplc.marketplace_id])
-    print(xdxd)
+    attributes_json = xdxd.payload['schema']['link']['resource']
+    view_json(requests.get(attributes_json).json()['properties'])
     # attributes = []
     # for i in xdxd.payload['propertyGroups']:
     #     prop_names = xdxd.payload['propertyGroups'][i]['propertyNames']
@@ -389,7 +391,7 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
             body['attributes']['color'][0]['value'] = colors
             body['attributes']['generic_keyword'][0]['value'] = keywords
 
-            body['attributes']['manufacturer'][0]['value'] = manufacturer
+            # body['attributes']['manufacturer'][0]['value'] = manufacturer
             body['attributes']['item_type_name'][0]['value'] = item_type
 
             body['attributes']['size'][0]['value'] = row['size']
@@ -448,7 +450,7 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
                         body['attributes']['purchasable_offer'][0]['our_price'][0]['schedule'][0]['value'] = price
 
             for i in range(len(images)):
-                img_id = sku_pattern  # here should be changed
+                img_id = sku_pattern
                 for j in range(3 - len(images[i])):
                     img_id += "0"
                 img_id += images[i]
@@ -571,15 +573,15 @@ def add_item_uk(mktplc, f_name, csv_file, sku_pattern, start_at=0, stop_at=10000
             #########################################
 
 
-only_parent = True
+only_parent = False
 
 # add_item_uk(mktplc=Marketplaces.UK, f_name="jsons/add/sweatshirt.json", csv_file="csvs/sweatshirt.csv", sku_pattern="EWPR-SSRT-")
 
-# get_attributes()
+get_attributes("SHIRT")
 
 # patch_uk(mktplc=Marketplaces.SG, f_name="jsons/patch/in_kw_patch.json", sku_pattern="EWPF-FEED-", csv_file="csvs/petfeeder.csv")
 
-eu = [Marketplaces.UK, Marketplaces.DE, Marketplaces.FR, Marketplaces.IT, Marketplaces.SE, Marketplaces.ES, Marketplaces.NL, Marketplaces.PL]
-us = [Marketplaces.AU, Marketplaces.SG, Marketplaces.US, Marketplaces.CA, Marketplaces.MX]
-for marketplace in eu:
-    add_item_uk(mktplc=Marketplaces.UK, f_name="jsons/add/sweatshirt.json", csv_file="csvs/sweatshirt.csv", sku_pattern="EWPR-SSRT-")
+# eu = [Marketplaces.UK, Marketplaces.FR, Marketplaces.IT, Marketplaces.SE, Marketplaces.ES]
+# us = [Marketplaces.AU, Marketplaces.SG, Marketplaces.US, Marketplaces.CA, Marketplaces.MX]
+# for marketplace in eu:
+#     add_item_uk(mktplc=marketplace, f_name="jsons/add/sweatshirt.json", csv_file="csvs/sweatshirt.csv", sku_pattern="EWPR-SSRT-")

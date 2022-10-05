@@ -295,6 +295,23 @@
         "value": "eWorldPartner",
         "marketplace_id": "ATVPDKIKX0DER"
       }
+    ],
+    "outer": [
+      {
+        "material": [
+          {
+            "value": "Cotton",
+            "language_tag": "en_US"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "water_resistance_level": [
+      {
+        "value": "not_water_resistant",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
     ]
   }
 }
